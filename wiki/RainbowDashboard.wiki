@@ -47,7 +47,4 @@ For more, see:
   * [Commands]
   * PixelFormat
   * [Animation]
-  * [Fields]
-  * [Bases]
-  * [Palettes]
   * HostPrograms
