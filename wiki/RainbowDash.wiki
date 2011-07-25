@@ -1,5 +1,4 @@
-#summary The RainbowDash directory contains the main attraction, the RainbowDashboard
-firmware itself.
+#summary The RainbowDash directory contains the main attraction, the RainbowDashboard firmware itself.
 
 The RainbowDash directory contains the main attraction, the RainbowDashboard
 firmware itself. See RainbowDashboard.
