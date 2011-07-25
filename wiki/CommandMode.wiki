@@ -1,0 +1,23 @@
+#summary CommandMode is a rewrite of the standard command-mode firmware.
+
+CommandMode is a rewrite of the standard command-mode firmware.
+
+Commands have the following format:
+
+|| `52` || the header, an ASCII 'R' ||
+|| `cc` || the command number ||
+|| `sr` || the column number; the red channel ||
+|| `gb` || the green channel; the blue channel ||
+|| `ii` || the image number, ASCII value, or row number ||
+
+The following commands are supported:
+
+|| `52 01 s0 00 ii` || `SHOW_IMAGE` || Displays a hard-coded image. ||
+|| `52 02 sr gb ii` || `SHOW_CHARACTER` || Displays an 8x8 ASCII character. ||
+|| `52 03 0r gb 00` || `SHOW_COLOR` || Displays a solid color. ||
+|| `52 04 sr gb ii` || `SHOW_PIXEL` || Sets an individual pixel on the display. ||
+
+CommandMode has all the same restrictions as the standard firmware:
+only five built-in images, only letters and digits, and only the commands
+listed above. The only extra is the `SHOW_PIXEL` command, as it is a common
+modification, and the Rainbowduino is close to useless without it.
