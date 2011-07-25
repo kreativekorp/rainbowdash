@@ -1,0 +1,15 @@
+#summary RainbowDashboard is a third-party firmware for the Rainbowduino by Seeed Studio.
+
+= Introduction =
+
+RainbowDashboard is a third-party firmware for the Rainbowduino
+by Seeed Studio. Among its features:
+
+  * Clean, maintainable code base.
+  * Compatible with standard firmware.
+  * Supports UART mode (no Arduino host needed - talk to Rainbowduino directly).
+  * Double-buffered graphics operations.
+  * Software real-time clock.
+  * Animation driven by the Rainbowduino itself.
+  * Full Windows ANSI (CP1252) character set.
+  * High-level command set.
