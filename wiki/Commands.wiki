@@ -1,0 +1,50 @@
+#summary RainbowDashboard has 32 commands, listed below in both short and long formats.
+
+RainbowDashboard has 32 commands, listed below in both short and long formats.
+
+All commands that set pixels operate on a temporary buffer to eliminate
+flicker. `SHOW_IMAGE`, `SHOW_CHARACTER`, `SHOW_COLOR`, and `SHOW_PIXEL` will
+immediately switch buffers, so their effects will be immediately visible.
+Other commands, however, will not switch buffers, so their effects will
+not be visible until you send the `SWAP_BUFFER` command.
+
+|| `52 00 00 00 00` || `72 00 00 00 00 00 00 00` || `NO_OP` || Does nothing. (Command number 0 is guaranteed to be ignored.) ||
+|| `52 01 x0 00 ii` || `72 01 xx yy ii 00 00 00` || `SHOW_IMAGE` || Displays a hard-coded image, with wrap-around. ||
+|| `52 02 xr gb ii` || `72 02 xx yy ii rr gg bb` || `SHOW_CHARACTER` || Displays an 8x8 ASCII character (erasing any existing image). ||
+|| `52 03 0r gb 00` || `72 03 00 00 cc rr gg bb` || `SHOW_COLOR` || Displays a solid color or pixel value. See PixelFormat. ||
+|| `52 04 xr gb yy` || `72 04 xx yy cc rr gg bb` || `SHOW_PIXEL` || Sets an individual pixel on the display. See PixelFormat. ||
+|| `52 05 x0 00 ii` || `72 05 xx yy ii 00 00 00` || `DRAW_IMAGE` || Draws a hard-coded image, without wrap-around. ||
+|| `52 06 xr gb ii` || `72 06 xx yy ii rr gg bb` || `DRAW_CHAR_8x8` || Draws an 8x8 ASCII character (on top of an existing image). ||
+|| `52 07 xr gb ii` || `72 07 xx yy ii rr gg bb` || `DRAW_CHAR_4x4` || Draws a 4x4 ASCII character (on top of an existing image). ||
+|| `52 08 0r gb 00` || `72 08 00 00 cc rr gg bb` || `SET_ALL_COLOR` || Sets the pixel values of all pixels. See PixelFormat. ||
+|| `52 09 0r gb yy` || `72 09 00 yy cc rr gg bb` || `SET_ROW_COLOR` || Sets the pixel values of all pixels in a row. See PixelFormat. ||
+|| `52 0A xr gb 00` || `72 0A xx 00 cc rr gg bb` || `SET_COLUMN_COLOR` || Sets the pixel values of all pixels in a column. See PixelFormat. ||
+|| `52 0B xr gb yy` || `72 0B xx yy cc rr gg bb` || `SET_PIXEL_COLOR` || Sets the pixel value of a single pixel. See PixelFormat. ||
+|| `52 0C 0r gb 00` || `72 0C 00 00 cc rr gg bb` || `SET_ALL_BITMAP` || Sets the colors of all pixels according to a one-bit-per-channel bitmap. ||
+|| `52 0D 0r gb yy` || `72 0D 00 yy cc rr gg bb` || `SET_ROW_COLOR` || Sets the colors of a row according to a one-bit-per-channel bitmap. ||
+|| `52 0E xr gb 00` || `72 0E xx 00 cc rr gg bb` || `SET_COLUMN_COLOR` || Sets the colors of a column according to a one-bit-per-channel bitmap. ||
+|| `52 0F xr gb yy` || `72 0F xx yy cc rr gg bb` || `SET_PIXEL_COLOR` || Sets the color of one pixel according to a one-bit-per-channel bitmap. ||
+|| `(no short ver)` || `72 10 00 00 vv vv vv vv` || `SET_CLOCK_ADJUST` || Adjusts the speed of the software clock to compensate for an inaccurate timer. See ClockTest. ||
+|| `(no short ver)` || `72 11 00 00 vv vv vv vv` || `SET_CLOCK_DATE_D` || Sets the date (in days since January 1, 1970, UTC) and resets the time. ||
+|| `(no short ver)` || `72 12 00 00 vv vv vv vv` || `SET_CLOCK_DATE_P` || Sets the date (in days since January 1, 1970, UTC) without resetting the time. ||
+|| `(no short ver)` || `72 13 00 00 vv vv vv vv` || `SET_CLOCK_TIME` || Sets the time (in milliseconds since midnight, UTC). ||
+|| `(no short ver)` || `72 14 00 00 vv vv vv vv` || `SET_CLOCK_ZONE` || Sets the time zone (in milliseconds added to UTC). ||
+|| `(no short ver)` || `72 15 00 00 vv vv vv vv` || `SET_CLOCK_DST` || Sets daylight saving time (in milliseconds added to standard time). ||
+|| `(no short ver)` || `72 16 00 ii vv vv vv vv` || `SET_REGISTER` || Sets a user-defined register value. See PixelFormat. ||
+|| `(no short ver)` || `72 17 00 ss aa ll oo dd` || `SET_ANIM_INFO` || Sets up an animation slot. See [Animation]. ||
+|| `(no short ver)` || `72 18 00 aa v1 00 00 00` || `SET_ANIM_DATA_1` || Sets 1 byte of animation data. See [Animation]. ||
+|| `(no short ver)` || `72 19 00 aa v1 v2 00 00` || `SET_ANIM_DATA_2` || Sets 2 bytes of animation data. See [Animation]. ||
+|| `(no short ver)` || `72 1A 00 aa v1 v2 v3 00` || `SET_ANIM_DATA_3` || Sets 3 bytes of animation data. See [Animation]. ||
+|| `(no short ver)` || `72 1B 00 aa v1 v2 v3 v4` || `SET_ANIM_DATA_4` || Sets 4 bytes of animation data. See [Animation]. ||
+|| `(no short ver)` || `72 1C 00 ll gg 00 00 00` || `SET_GAMMA` || Sets the gamma for a particular brightness level. ||
+|| `(no short ver)` || `72 1D 00 ff dd ww 00 00` || `SET_BUFFER` || If ff is 1 or 3, sets buffer number dd to be the display buffer. If ff is 2 or 3, sets buffer number ww to be the working buffer. ||
+|| `52 1E 00 00 00` || `72 1E 00 00 00 00 00 00` || `COPY_BUFFER` || Copies the display buffer into the working buffer. ||
+|| `52 1F 00 00 00` || `72 1F 00 00 00 00 00 00` || `SWAP_BUFFER` || Swaps the display and working buffers. ||
+
+RainbowDashboard includes a complete Windows ANSI (CP1252) character set
+in both 4x4 and 8x8 font sizes, displayed using the `SHOW_CHARACTER`,
+`DRAW_CHAR_8x8`, and `DRAW_CHAR_4x4` commands. It also includes eight built-in
+images displayed using the `SHOW_IMAGE` and `DRAW_IMAGE` commands, the first
+five of which are identical to the built-in images provided by the standard
+firmware. Image number 6 is particularly useful when determining desired
+gamma levels to be set with the `SET_GAMMA` command.
