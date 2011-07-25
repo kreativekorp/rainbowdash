@@ -1,0 +1,7 @@
+#summary DirectMode is a rewrite of the standard direct-mode firmware.
+
+DirectMode is a rewrite of the standard direct-mode firmware.
+
+Write 96 bytes of raw pixel data to show an image on the LED display.
+The data is organized channel-by-channel in green, red, blue order;
+row-by-row; then column-by-column, with one byte per two columns.
