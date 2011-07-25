@@ -1,7 +1,5 @@
 #summary RainbowDashboard is a third-party firmware for the Rainbowduino by Seeed Studio.
 
-= Introduction =
-
 RainbowDashboard is a third-party firmware for the Rainbowduino
 by Seeed Studio. Among its features:
 
@@ -13,3 +11,43 @@ by Seeed Studio. Among its features:
   * Animation driven by the Rainbowduino itself.
   * Full Windows ANSI (CP1252) character set.
   * High-level command set.
+
+RainbowDashboard operates similarly to CommandMode, but
+supports four types of commands instead of just one.
+
+Short commands have the same format as standard command mode:
+
+|| `52` || the header, an ASCII 'R' ||
+|| `cc` || the command number ||
+|| `sr` || the column number; the red channel ||
+|| `gb` || the green channel; the blue channel ||
+|| `ii` || the image number, ASCII value, or row number ||
+
+Long commands have the following format:
+
+|| `72` || the header, an ASCII 'r' ||
+|| `cc` || the command number ||
+|| `xx` || the column number ||
+|| `yy` || the row number (typically) ||
+|| `zz` || the picture number, ASCII value, or control channel (typically) ||
+|| `rr` || the red channel (typically) ||
+|| `gg` || the green channel (typically) ||
+|| `bb` || the blue channel (typically) ||
+
+Short direct-mode commands have the format of an ASCII uppercase 'D' followed
+by 96 bytes of raw Rainbowduino buffer data in the format used by DirectMode.
+
+Long direct-mode commands have the format of an ASCII lowercase 'd' followed
+by 256 bytes of raw RainbowDashboard buffer data. The data is organized
+channel-by-channel in control, red, green, blue order; row-by-row; then
+column-by-column, with one byte per one column.
+
+For more, see:
+
+  * [Commands]
+  * PixelFormat
+  * [Animation]
+  * [Fields]
+  * [Bases]
+  * [Palettes]
+  * HostPrograms
