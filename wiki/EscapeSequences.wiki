@@ -1,0 +1,55 @@
+#summary The following escape sequences are recognized by the becho and aecho utilities.
+
+The following escape sequences are recognized by the [becho] and [aecho]
+utilities. Your shell may require you to escape the backslash itself.
+
+
+|| `\'` || apostrophe ||
+|| `\"` || quotation mark ||
+|| `\\` || backslash ||
+|| `\a` || bell/alert ||
+|| `\b` || backspace ||
+|| `\c`_X_ || control-_X_ ||
+|| `\d` || delete ||
+|| `\e` || escape ||
+|| `\f` || form feed ||
+|| `\i` || shift in ||
+|| `\l` || crlf ||
+|| `\n` || newline ||
+|| `\o` || shift out ||
+|| `\r` || return ||
+|| `\t` || tab ||
+|| `\u`_XXXX_ || Unicode character U+_XXXX_ (UTF-8) ||
+|| `\v` || vertical tab ||
+|| `\w`_XXXXXX_ || Unicode character U+_XXXXXX_ (UTF-8) ||
+|| `\x`_XX_ || byte value in hex ||
+|| `\z` || MS-DOS EOF ||
+|| `\0`_XXX_ || byte value in octal ||
+|| `\`_XXX_ || byte value in decimal ||
+
+|| `\A` || apostrophe ||
+|| `\B` || backslash ||
+|| `\C` || colon ||
+|| `\D` || dollar sign ||
+|| `\E` || equals sign ||
+|| `\F` || slash ||
+|| `\G` || greater than ||
+|| `\H` || question mark ||
+|| `\I` || opening parenthesis ||
+|| `\J` || closing parenthesis ||
+|| `\K` || semicolon ||
+|| `\L` || less than ||
+|| `\M` || ampersand ||
+|| `\N` || plus sign ||
+|| `\O` || pound sign ||
+|| `\P` || percent sign ||
+|| `\Q` || quotation mark ||
+|| `\R` || caret ||
+|| `\S` || asterisk ||
+|| `\T` || tilde ||
+|| `\U` || underscore ||
+|| `\V` || vertical bar ||
+|| `\W` || backtick ||
+|| `\X` || exclamation mark ||
+|| `\Y` || opening brace ||
+|| `\Z` || closing brace ||
