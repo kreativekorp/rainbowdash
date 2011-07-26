@@ -3,3 +3,6 @@
 A background process that updates the Rainbowduino's clock every hour.
 The [rainbowd] process must already be running. You can use this as a
 template for your own background process.
+
+|| `-f` _path_ || Specifies the path to the named pipe used for input to `rainbowd`. Defaults to `/tmp/rainbowduino`. Can also be specified with the environment variable `RAINBOWD_PIPE`. ||
+|| `-l` _msec_ || Adds the specified number of milliseconds to the current time when setting the Rainbowduino's clock. This should be the amount of time it takes for the clock-setting commands to reach the Rainbowduino. Can also be specified with the environment variable `RAINBOWD_LATENCY`. ||
