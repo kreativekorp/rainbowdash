@@ -1,0 +1,22 @@
+#summary Animations are accomplished using two additional separate data areas.
+
+Animations are accomplished using two additional separate data areas.
+
+The Animation Data area contains 256 actual frame-by-frame color levels.
+To set these levels, the `SET_ANIM_DATA_1`, `2`, `3`, and `4` commands are used:
+
+|| `SET_ANIM_DATA_1` || `72 18 00 aa v1 00 00 00` || `aa` is the address where `v1` will be stored. ||
+|| `SET_ANIM_DATA_2` || `72 19 00 aa v1 v2 00 00` || `aa` is the address where `v1` will be stored; `v2` will be stored at the following address. ||
+|| `SET_ANIM_DATA_3` || `72 1A 00 aa v1 v2 v3 00` || `aa` is the address where `v1` will be stored; `v2` will be stored at the following address, and `v3` after that. ||
+|| `SET_ANIM_DATA_4` || `72 1B 00 aa v1 v2 v3 v4` || `aa` is the address where `v1` will be stored; `v2` will be stored at the following address, then `v3`, then `v4`. ||
+
+The Animation Info area contains 64 animation slots, each of which
+determines the address of the animation loop within the Animation Data
+area, the number of frames in the loop, the offset to the first frame
+(relative to the address), and the duration of each frame. An animation
+slot is set using the `SET_ANIM_INFO` command:
+
+|| `SET_ANIM_INFO` || `72 17 00 ss aa ll oo dd` || `ss` is the slot number. `aa` is the address. `ll` is the number of frames. `oo` is the offset of frame 1. `dd` is the duration of a frame. ||
+
+The duration of a frame is expressed in hundredths of a second; the longest
+possible duration is 2.55 seconds.
