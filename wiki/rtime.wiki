@@ -6,10 +6,10 @@ in milliseconds; and daylight saving time offset from UTC
 in milliseconds. These four values define the current time
 as kept by the software real-time clock in RainbowDashboard.
 
-|| -d || Prints the four values as decimal integers; the default. ||
-|| -h || Prints the four values as 8-digit hexadecimal integers. ||
-|| -b || Outputs the four values as 32-bit big-endian binary data. ||
-|| -r || Outputs the four values as a series of RainbowDashboard commands that set the clock on the Rainbowduino. ||
+|| `-d` || Prints the four values as decimal integers; the default. ||
+|| `-h` || Prints the four values as 8-digit hexadecimal integers. ||
+|| `-b` || Outputs the four values as 32-bit big-endian binary data. ||
+|| `-r` || Outputs the four values as a series of RainbowDashboard commands that set the clock on the Rainbowduino. ||
 
 You can set the clock on the Rainbowduino by simply redirecting
 the output of `rtime -r` to the Rainbowduino's serial port using
