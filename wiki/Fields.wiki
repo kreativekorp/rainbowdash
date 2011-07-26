@@ -1,0 +1,70 @@
+#summary When the high bit of the control channel is set, the control channel is treated as a field number.
+
+When the high bit of the control channel is set, the control channel is
+treated as a field number. Fields 64-127 are determined by user-controlled
+registers. Fields 0-63 are the following time values:
+
+||  0 || `0x00` || milliseconds since 1970-1-1 UTC ||
+||  1 || `0x01` || ticks (60ths of a second) since 1970-1-1 UTC ||
+||  2 || `0x02` || 16ths of a second since 1970-1-1 UTC ||
+||  3 || `0x03` || seconds since 1970-1-1 UTC ||
+||  4 || `0x04` || minutes since 1970-1-1 UTC ||
+||  5 || `0x05` || hours since 1970-1-1 UTC ||
+||  6 || `0x06` || days since 1970-1-1 UTC ||
+||  7 || `0x07` || weeks since 1970-1-1 UTC ||
+||  8 || `0x08` || 0 for BCE, 1 for CE ||
+||  9 || `0x09` || 1 for BCE, 2 for CE ||
+|| 10 || `0x0A` || 0 for a non-leap year, 1 for a leap year ||
+|| 11 || `0x0B` || 1 for a non-leap year, 2 for a leap year ||
+|| 12 || `0x0C` || year number ||
+|| 13 || `0x0D` || month number from 0 to 11, alternating between 11 and 12 in Dec. ||
+|| 14 || `0x0E` || month number from 0 to 11 ||
+|| 15 || `0x0F` || month number from 1 to 12 ||
+|| 16 || `0x10` || ISO week number from 0 to 51/52 ||
+|| 17 || `0x11` || ISO week number from 1 to 52/53 ||
+|| 18 || `0x12` || week number within the current month, from 0 to 3/4/5 ||
+|| 19 || `0x13` || week number within the current month, from 1 to 4/5/6 ||
+|| 20 || `0x14` || day of month from 0 to 27/28/29/30 ||
+|| 21 || `0x15` || day of month from 1 to 28/29/30/31 ||
+|| 22 || `0x16` || day of year from 0 to 364/365 ||
+|| 23 || `0x17` || day of year from 1 to 365/366 ||
+|| 24 || `0x18` || day of week from 0 on Sunday to 6 on Saturday ||
+|| 25 || `0x19` || day of week from 1 on Sunday to 7 on Saturday ||
+|| 26 || `0x1A` || day of week from 0 on Monday to 6 on Sunday ||
+|| 27 || `0x1B` || day of week from 1 on Monday to 7 on Sunday ||
+|| 28 || `0x1C` || number of this day of week in this month from 0 to 3/4/5 ||
+|| 29 || `0x1D` || number of this day of week in this month from 1 to 4/5/6 ||
+|| 30 || `0x1E` || number of days in this month ||
+|| 31 || `0x1F` || number of days in this year ||
+|| 32 || `0x20` || 0 for AM, 1 for PM ||
+|| 33 || `0x21` || 1 for AM, 2 for PM ||
+|| 34 || `0x22` || hour from 0 to 11 ||
+|| 35 || `0x23` || hour from 1 to 12 ||
+|| 36 || `0x24` || hour from 0 to 23 ||
+|| 37 || `0x25` || hour from 1 to 24 ||
+|| 38 || `0x26` || minute from 0 to 59 ||
+|| 39 || `0x27` || second from 0 to 59 ||
+|| 40 || `0x28` || tick from 0 to 59 ||
+|| 41 || `0x29` || millisecond from 0 to 999 ||
+|| 42 || `0x2A` || time zone offset from UTC, in minutes ||
+|| 43 || `0x2B` || time zone offset from UTC, in seconds ||
+|| 44 || `0x2C` || time zone offset from UTC, in milliseconds ||
+|| 45 || `0x2D` || daylight saving offset in minutes ||
+|| 46 || `0x2E` || daylight saving offset in seconds ||
+|| 47 || `0x2F` || daylight saving offset in milliseconds ||
+|| 48 || `0x30` || milliseconds since midnight (local) ||
+|| 49 || `0x31` || ticks since midnight (local) ||
+|| 50 || `0x32` || sixteenths since midnight (local) ||
+|| 51 || `0x33` || seconds since midnight (local) ||
+|| 52 || `0x34` || minutes since midnight (local) ||
+|| 53 || `0x35` || hours since midnight (local) ||
+|| 54 || `0x36` || days since 1970-1-1 (local) ||
+|| 55 || `0x37` || weeks since 1970-1-1 (local) ||
+|| 56 || `0x38` || number of cycles (1 cycle = 400 years) since 1970-1-1 (local) ||
+|| 57 || `0x39` || number of cycles since 1970-1-1 (local), plus one ||
+|| 58 || `0x3A` || number of year within cycle, from 0 to 399 ||
+|| 59 || `0x3B` || number of year within cycle, from 1 to 400 ||
+|| 60 || `0x3C` || number of day within cycle, from 0 to 146096 ||
+|| 61 || `0x3D` || number of day within cycle, from 1 to 146097 ||
+|| 62 || `0x3E` || ISO week year number ||
+|| 63 || `0x3F` || number of weeks in this year ||
