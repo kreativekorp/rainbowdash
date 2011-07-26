@@ -1,0 +1,81 @@
+#summary Each pixel in the RainbowDashboard buffer has a control channel, a red channel, a green channel, and a blue channel.
+
+Each pixel in the RainbowDashboard buffer has a control channel, a red
+channel, a green channel, and a blue channel. A pixel may have any of
+the following formats:
+
+|| `00000000` || `rrrrrrrr` || `gggggggg` || `bbbbbbbb` || A solid color. ||
+
+|| `00000rgb` || `rrrrrrrr` || `gggggggg` || `bbbbbbbb` || An animation. ||
+
+The control channel determines whether each other channel is a fixed
+color value (0) or an animation slot number (1). See [Animation].
+
+|| `1fffffff` || `00bbbbbb` || `dddd0000` || `pppppppp` || An indexed color. ||
+
+The control channel determines the field number, with fields 0-63 being
+clock values and fields 64-127 being user-defined register values.
+See [Fields].
+
+The red channel determines the base and the green channel determines
+the digit. See [Bases]. The blue channel determines which palette is used.
+The value of the field is divided by (base^digit) and then used as an
+index into the specified palette. See [Palettes].
+
+|| `1fffffff` || `01bbbbbb` || `ddddr0r1` || `g0g1b0b1` || A gradient. ||
+
+The control channel determines the field number, with fields 0-63 being
+clock values and fields 64-127 being user-defined register values.
+See [Fields].
+
+The red channel determines the base and the upper half of the green
+channel determines the digit. See [Bases].
+
+The lower half of the green channel actually determines the *red* values
+of the two endpoints of the gradient. The upper half of the blue channel
+determines the green values, and the lower half of the blue channel
+determines the blue values.
+
+The value of the field is divided by (base^digit) and then put on a
+scale between 0 and base-1, with 0 corresponding to r0g0b0 and base-1
+corresponding to r1g1b1.
+
+|| `1fffffff` || `10bbbbbb` || `ddddr0r1` || `g0g1b0b1` || A 4x4 character display. ||
+
+The control channel determines the field number, with fields 0-63 being
+clock values and fields 64-127 being user-defined register values.
+See [Fields].
+
+The red channel determines the base and the upper half of the green
+channel determines the digit. See [Bases].
+
+The lower half of the green channel actually determines the *red* values
+of the background and foreground. The upper half of the blue channel
+determines the green values, and the lower half of the blue channel
+determines the blue values.
+
+The value of the field is divided by (base^digit) and then displayed as
+a 4x4 character with background color r0g0b0 and foreground color r1g1b1.
+
+The same pixel value must be applied to a 4x4 area in the upper left,
+upper right, lower left, or lower right to get the whole display.
+
+|| `1fffffff` || `11bbbbbb` || `ddddr0r1` || `g0g1b0b1` || An 8x8 character display. ||
+
+The control channel determines the field number, with fields 0-63 being
+clock values and fields 64-127 being user-defined register values.
+See [Fields].
+
+The red channel determines the base and the upper half of the green
+channel determines the digit. See [Bases].
+
+The lower half of the green channel actually determines the *red* values
+of the background and foreground. The upper half of the blue channel
+determines the green values, and the lower half of the blue channel
+determines the blue values.
+
+The value of the field is divided by (base^digit) and then displayed as
+an 8x8 character with background color r0g0b0 and foreground color r1g1b1.
+
+The same pixel value must be applied to the entire 8x8 LED matrix to
+get the whole display.
