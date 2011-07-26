@@ -1,0 +1,12 @@
+#summary The Host directory contains programs that run on a host PC that communicate with the Rainbowduino, or that are otherwise useful when communicating with a Rainbowduino.
+
+The Host directory contains programs that run on a host PC
+that communicate with the Rainbowduino, or that are otherwise
+useful when communicating with a Rainbowduino.
+
+  * [becho]: A general-purpose utility that simply writes its arguments back to standard output.
+  * [aecho]: A utility similar to becho that instead writes its output to a serial port.
+  * [rtime]: Prints the current time as the four values that define the current time as kept by the software real-time clock in RainbowDashboard.
+  * [clocktest]: Used to determine the accuracy of the Rainbowduino's clock.
+  * [rainbowd]: A background process that creates a named pipe and copies anything written to the pipe to the Rainbowduino's serial port.
+  * [rainbowclock]: A background process that updates the Rainbowduino's clock every hour.
