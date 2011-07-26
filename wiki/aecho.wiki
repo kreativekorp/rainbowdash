@@ -1,0 +1,24 @@
+#summary A utility similar to becho that instead writes its output to a serial port.
+
+A utility similar to `becho` that instead writes its output
+to a serial port. Unlike `becho`, `aecho` takes options:
+
+|| `-p` _path_ || Specifies the path to the serial port device. Can also be specified with the environment variable `ARDUINO_PORT`. ||
+|| `-b` _baud_ || Specifies the baud or bit rate used to communicate with the serial port. Defaults to 9600. Can also be specified with the environment variable `ARDUINO_BITRATE`. ||
+|| `-m` _num_ _str_ || Writes the specified string the specified number of times. ||
+|| `-i` || Writes standard input to the serial port. ||
+|| `-f` _path_ || Writes the contents of a file to the serial port. ||
+|| `-rl` || Reads data back from the serial port until a newline and writes it back to standard output. ||
+|| `-rm` || Reads data back from the serial port until a carriage return and writes it back to standard output. ||
+|| `-rn` || Reads data back from the serial port until a null byte and writes it back to standard output. ||
+|| `-ra` || Reads any and all data back from the serial port and writes it back to standard output. ||
+|| `-rf` _len_ || Reads the specified number of bytes back from the serial port and writes it back to standard output. ||
+|| `-rb` || Reads a single byte back from the serial port and writes it back to standard output. ||
+|| `-d` _msec_ || Waits the specified number of milliseconds before processing the next argument. ||
+|| `-o` || Opens the serial port before anything has been written. ||
+|| `-c` || Closes the serial port before all arguments have been processed. ||
+|| `-n` || If nothing has been written, exit immediately instead of writing standard input to the serial port. ||
+
+If no data is written to the serial port using the arguments to
+`aecho`, standard input will be written instead, unless the `-n` option
+is specified. The 'a' in `aecho` stands for 'arduino.'
