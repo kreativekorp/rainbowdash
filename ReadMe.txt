@@ -664,6 +664,11 @@ rainbowd:
   Or, you can create your own programs that write to /tmp/rainbowduino
   without the need to mess with serial ports.
 
+rainbowclock:
+  A background process that updates the Rainbowduino's clock every hour.
+  The rainbowd process must already be running. You can use this as a
+  template for your own background process.
+
 
 
 
