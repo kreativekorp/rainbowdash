@@ -1,0 +1,17 @@
+#summary Used to determine the accuracy of the Rainbowduino's clock.
+
+Used to determine the accuracy of the Rainbowduino's clock.
+Every 10 seconds, `clocktest` will tell you how long it took to send
+a message and get a response, and how much the Rainbowduino's clock
+has shifted relative to the PC's clock.
+
+This information can be used with the `SET_CLOCK_ADJUST` command
+to give more accurate time. The `SET_CLOCK_ADJUST` command takes
+the number of milliseconds it takes for the Rainbowduino to lose
+or gain a millisecond. If your Rainbowduino's clock is running
+fast, a negative number will slow the clock down; if the clock is
+running slow, a positive number will speed the clock up.
+
+|| `-p` _path_ || Specifies the path to the serial port device. Can also be specified with the environment variable `ARDUINO_PORT`. ||
+|| `-b` _baud_ || Specifies the baud or bit rate used to communicate with the serial port. Defaults to 9600. Can also be specified with the environment variable `ARDUINO_BITRATE`. ||
+|| `-c` _msec_ || Runs the clock test with the specified value for `SET_CLOCK_ADJUST`. ||
