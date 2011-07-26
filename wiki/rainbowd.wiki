@@ -1,0 +1,27 @@
+#summary A background process that creates a named pipe and copies anything written to the pipe to the Rainbowduino's serial port.
+
+A background process that creates a named pipe and copies
+anything written to the pipe to the Rainbowduino's serial port.
+
+If you write directly to the Rainbowduino's serial port using
+[aecho] or another program, you might notice that the Rainbowduino
+resets every time the serial port is opened. Using `rainbowd`,
+you can open and close the named pipe at will without closing
+the serial port.
+
+When `rainbowd` starts, it will set the Rainbowduino's clock,
+print a message on the Rainbowduino, then create the named pipe
+and listen for input.
+
+|| `-f` _path_ || Specifies the path to the named pipe used for input to `rainbowd`. Defaults to `/tmp/rainbowduino`. Can also be specified with the environment variable `RAINBOWD_PIPE`. ||
+|| `-p` _path_ || Specifies the path to the serial port device. Can also be specified with the environment variable `ARDUINO_PORT`. ||
+|| `-b` _baud_ || Specifies the baud or bit rate used to communicate with the serial port. Defaults to 9600. Can also be specified with the environment variable `ARDUINO_BITRATE`. ||
+|| `-s` || Do not set the Rainbowduino's clock (standard firmware). ||
+|| `-a` || Set the Rainbowduino's clock (advanced firmware). ||
+|| `-l` _msec_ || Adds the specified number of milliseconds to the current time when setting the Rainbowduino's clock. This should be the amount of time it takes for the clock-setting commands to reach the Rainbowduino. Can also be specified with the environment variable `RAINBOWD_LATENCY`. ||
+|| `-c` _msec_ || Sends a `SET_CLOCK_ADJUST` command. The `SET_CLOCK_ADJUST` command takes the number of milliseconds it takes for the Rainbowduino to lose or gain a millisecond. If your Rainbowduino's clock is running fast, a negative number will slow the clock down; if the clock is running slow, a positive number will speed the clock up. Can also be specified with the environment variable `RAINBOWD_CLOCK_ADJUST`. ||
+
+Using `rainbowd`, you can simply copy files to `/tmp/rainbowduino` to
+execute RainbowDashboard commands. A few such files are included.
+Or, you can create your own programs that write to `/tmp/rainbowduino`
+without the need to mess with serial ports.
