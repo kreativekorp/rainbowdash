@@ -1,0 +1,10 @@
+#summary A general-purpose utility that simply writes its arguments back to standard output.
+
+A general-purpose utility that simply writes its arguments
+back to standard output. Escape sequences (with a backslash)
+are decoded (see EscapeSequences), but otherwise
+arguments are left untouched. No options are supported for
+this command; they end up written to standard output just like
+all other arguments. No spaces are written between arguments,
+and no newlines are written at the end. The 'b' in `becho`
+stands for 'binary.'
