@@ -4,6 +4,8 @@
 #include <fcntl.h>
 #include <time.h>
 #include <sys/time.h>
+#include <signal.h>
+#include <sys/mman.h>
 
 #define isdec(x) (((x) >= '0') && ((x) <= '9'))
 #define decval(x) ((((x) >= '0') && ((x) <= '9')) ? ((x) - '0') : 0)
@@ -79,20 +81,40 @@ int parseint(char * s) {
 	}
 }
 
+char * path = "/tmp/rainbowduino";
+char * spath = "/tmp/rainbowspectrum";
+int fd = -1;
+int sfd = -1;
+char * mem = 0;
+
+void killed(int signum) {
+	if (mem) munmap(mem, 8);
+	if (sfd >= 0) close(sfd);
+	if (fd >= 0) close(fd);
+	exit(0);
+}
+
 int usage(void) {
-	printf("Usage: rainbowclock [[-f] pipe-path] [-l latency]\n");
+	printf("Usage: rainbowspectrum [[-f] pipe-path] [[-m] mmap-path] [-l latency]\n");
 	return 1;
 }
 
 int main(int argc, char ** argv) {
-	char * path = "/tmp/rainbowduino";
 	int clock_lat = 0;
-	int fd;
 	char * s;
 	int argi = 1;
+	int counter = 0;
+	int i;
+	char buf[8];
+	
+	signal(SIGTERM, killed);
+	signal(SIGINT, killed);
+	signal(SIGQUIT, killed);
 	
 	s = getenv("RAINBOWD_PIPE");
 	if (s) path = s;
+	s = getenv("RAINBOWSPECTRUM_MMAP");
+	if (s) spath = s;
 	s = getenv("RAINBOWD_LATENCY");
 	if (s) clock_lat = parseint(s);
 	
@@ -103,6 +125,13 @@ int main(int argc, char ** argv) {
 			case 'f':
 				if (argi < argc) {
 					path = argv[argi++];
+					break;
+				} else {
+					return usage();
+				}
+			case 'm':
+				if (argi < argc) {
+					spath = argv[argi++];
 					break;
 				} else {
 					return usage();
@@ -119,11 +148,16 @@ int main(int argc, char ** argv) {
 			}
 		} else if (!path) {
 			path = arg;
+		} else if (!spath) {
+			spath = arg;
 		} else {
 			return usage();
 		}
 	}
 	if (!path) {
+		return usage();
+	}
+	if (!spath) {
 		return usage();
 	}
 	
@@ -132,10 +166,28 @@ int main(int argc, char ** argv) {
 		fprintf(stderr, "Could not open pipe.\n");
 		return 2;
 	}
+	sfd = open(spath, O_CREAT | O_RDWR, 0600);
+	if (sfd < 0) {
+		fprintf(stderr, "Could not open mmap.\n");
+		return 2;
+	}
+	for (i = 0; i < 8; i++) buf[i] = 0;
+	write(sfd, buf, 8);
+	mem = (char *)mmap(0, 8, PROT_READ | PROT_WRITE, MAP_SHARED, sfd, 0);
 	
+	buf[0] = 'r';
+	buf[1] = 0x16;
 	for (;;) {
-		set_rainbowduino_clock(fd, clock_lat);
-		usleep(1000 * 1000 * 60 * 30);
-		usleep(1000 * 1000 * 60 * 30);
+		if ((counter++) >= 36000) {
+			set_rainbowduino_clock(fd, clock_lat);
+			usleep(50000);
+			counter = 0;
+		}
+		for (i = 0; i < 8; i++) {
+			buf[3] = i;
+			buf[7] = mem[i];
+			write(fd, buf, 8);
+			usleep(12500);
+		}
 	}
 }
