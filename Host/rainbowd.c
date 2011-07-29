@@ -303,6 +303,7 @@ int main(int argc, char ** argv) {
 			char ch;
 			while (read(infd, &ch, 1) > 0) {
 				write(outfd, &ch, 1);
+				usleep(1000);
 			}
 			close(infd);
 		}
