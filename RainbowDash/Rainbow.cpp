@@ -1,5 +1,6 @@
 #include "Rainbow.h"
 #include <avr/pgmspace.h>
+#include <WProgram.h>
 
 // Shift Register Ports and Bit Values
 
@@ -105,25 +106,27 @@ void timer2_isr(void) {
 		level++;
 		if (level >= 16) {
 			level = 0;
-			if (nextbuf) {
-				buf = nextbuf;
-				nextbuf = 0;
-			}
+			buf = nextbuf;
 		}
 	}
 }
 
 // External API
 
-void init_sh(void) {
+void init_rainbow(unsigned char * buffer) {
+	cli();
+	
+	/* init_sh */
 	DDRD = 0xFF;
 	DDRC = 0xFF;
 	DDRB = 0xFF;
 	PORTD = 0;
 	PORTB = 0;
-}
-
-void init_timer2(void) {
+	
+	/* set_buffer */
+	buf = nextbuf = buffer;
+	
+	/* init_timer2 */
 	TCCR2A |= (1 << WGM21) | (1 << WGM20);
 	TCCR2B |= (1 << CS22 );
 	TCCR2B &= ~((1 << CS21 ) | (1 << CS20 ));
@@ -131,15 +134,20 @@ void init_timer2(void) {
 	ASSR |= (0 << AS2);
 	TIMSK2 |= (1 << TOIE2) | (0 << OCIE2B);
 	TCNT2 = gamma[0];
+	
+	sei();
 }
 
 void set_buffer(unsigned char * buffer) {
-	nextbuf = 0;
-	buf = buffer;
+	cli();
+	buf = nextbuf = buffer;
+	sei();
 }
 
 void set_next_buffer(unsigned char * buffer) {
+	cli();
 	nextbuf = buffer;
+	sei();
 }
 
 unsigned char get_gamma(unsigned char level) {

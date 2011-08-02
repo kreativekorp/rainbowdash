@@ -146,8 +146,7 @@ static unsigned char * external_next_buffer = 0;
 // External API
 
 void video_set_buffer(unsigned char * buffer) {
-	external_next_buffer = 0;
-	external_buffer = buffer;
+	external_buffer = external_next_buffer = buffer;
 }
 
 void video_set_next_buffer(unsigned char * buffer) {
@@ -155,11 +154,7 @@ void video_set_next_buffer(unsigned char * buffer) {
 }
 
 void video_setup(void) {
-	cli();
-	init_sh();
-	set_buffer(internal_buffer[0]);
-	init_timer2();
-	sei();
+	init_rainbow(internal_buffer[0]);
 }
 
 void video_loop(void) {
@@ -180,10 +175,7 @@ void video_loop(void) {
 			set_next_buffer(internal_buffer[internal_workingbuf]);
 			internal_workingbuf ^= 1;
 			internal_bufpos = 0;
-			if (external_next_buffer) {
-				external_buffer = external_next_buffer;
-				external_next_buffer = 0;
-			}
+			external_buffer = external_next_buffer;
 			first_anim = 1;
 			first_clock = 1;
 		}
