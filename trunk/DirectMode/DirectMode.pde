@@ -36,11 +36,7 @@ unsigned char whichbuf = 1;
 unsigned char bufpos = 0;
 
 void setup() {
-	cli();
-	init_sh();
-	set_buffer(buffer[0]);
-	init_timer2();
-	sei();
+	init_rainbow(buffer[0]);
 	Serial.begin(9600);
 }
 
