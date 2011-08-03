@@ -1,0 +1,52 @@
+#!/bin/bash
+cd "`dirname "$BASH_SOURCE"`"
+
+start_server() {
+	killall -s rainbowd &> /dev/null
+	if [ $? -ne 0 ]; then
+		./rainbowd &
+		sleep 10
+	fi
+}
+
+stop_clients() {
+	killall rainbowspectrum 2> /dev/null
+	sleep .1
+	killall rainbowclock 2> /dev/null
+	sleep .1
+}
+
+stop_server() {
+	killall rainbowd 2> /dev/null
+	sleep .1
+}
+
+if [ "$1" = "start" ]; then
+	start_server
+elif [ "$1" = "restart" ]; then
+	stop_clients
+	stop_server
+	start_server
+elif [ "$1" = "stop" ]; then
+	stop_clients
+	stop_server
+elif [ "$1" = "display" ]; then
+	stop_clients
+	start_server
+	cp "$2" "$RAINBOWD_PIPE"
+	sleep 2
+elif [ "$1" = "clock" ]; then
+	stop_clients
+	start_server
+	cp "$2" "$RAINBOWD_PIPE"
+	sleep 2
+	./rainbowclock &
+elif [ "$1" = "spectrum" ]; then
+	stop_clients
+	start_server
+	cp spectrum.rbd "$RAINBOWD_PIPE"
+	sleep 2
+	./rainbowspectrum &
+else
+	echo "Usage: rainbowctl (start | restart | stop | display <file> | clock <file> | spectrum)"
+fi
