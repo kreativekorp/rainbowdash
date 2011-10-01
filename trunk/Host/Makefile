@@ -11,7 +11,7 @@ aecho: aecho.c
 	gcc -O3 -Wall -ansi -pedantic -o aecho aecho.c
 
 rtime: rtime.c
-	gcc -O3 -Wall -ansi -pedantic -o rtime rtime.c
+	gcc -O3 -Wall -o rtime rclock.c rtime.c
 
 rtime.class: rtime.java
 	javac rtime.java
