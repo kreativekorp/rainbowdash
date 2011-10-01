@@ -98,7 +98,7 @@ column-by-column, with one byte per one column.
 
 RainbowDashboard Commands
 
-RainbowDashboard has 32 commands, listed below in both short and long formats.
+RainbowDashboard has 48 commands, listed below in both short and long formats.
 
 All commands that set pixels operate on a temporary buffer to eliminate
 flicker. SHOW_IMAGE, SHOW_CHARACTER, SHOW_COLOR, and SHOW_PIXEL will
@@ -203,6 +203,59 @@ not be visible until you send the SWAP_BUFFER command.
 
   52 1F 00 00 00          - SWAP_BUFFER: Swaps the display and
   72 1F 00 00 00 00 00 00 - working buffers.
+
+  52 20 xr gb yy          - SCROLL_BUFFER: Scrolls the display x pixels
+  72 20 xx yy cc rr gg bb - horizontally and y pixels vertically, filling
+                          - empty pixels with a color.
+
+  52 21 xr gb yy          - SCROLL_ROW: Scrolls a row (row y) x pixels
+  72 21 xx yy cc rr gg bb - horizontally, filling empty pixels with a color.
+
+  52 22 xr gb yy          - SCROLL_COLUMN: Scrolls a column (column x) y pixels
+  72 22 xx yy cc rr gg bb - vertically, filling empty pixels with a color.
+
+  52 23 x0 00 yy          - ROLL_BUFFER: Scrolls the display x pixels
+  72 23 xx yy 00 00 00 00 - horizontally and y pixels vertically with
+                          - wraparound.
+
+  52 24 x0 00 yy          - ROLL_ROW: Scrolls a row (row y) x pixels
+  72 24 xx yy 00 00 00 00 - horizontally with wraparound.
+
+  52 25 x0 00 yy          - ROLL_COLUMN: Scrolls a column (column x) y pixels
+  72 25 xx yy 00 00 00 00 - vertically with wraparound.
+
+  52 26 x0 00 yy          - FLIP_BUFFER: Flips the entire display horizontally
+  72 26 xx yy 00 00 00 00 - (if x is nonzero) and/or vertically (if y is
+                          - nonzero).
+
+  52 27 00 00 yy          - FLIP_ROW: Flips a row
+  72 27 00 yy 00 00 00 00 - horizontally.
+
+  52 28 x0 00 00          - FLIP_COLUMN: Flips a column
+  72 28 xx 00 00 00 00 00 - vertically.
+
+  52 29 00 00 00          - INVERT_BUFFER: Inverts the display
+  72 29 00 00 00 00 00 00 - (black becomes white and vice versa).
+
+  52 2A 00 00 yy          - INVERT_ROW: Inverts a row
+  72 2A 00 yy 00 00 00 00 - (black becomes white and vice versa).
+
+  52 2B x0 00 00          - INVERT_COLUMN: Inverts a column
+  72 2B xx 00 00 00 00 00 - (black becomes white and vice versa).
+
+  (no short ver)          - DRAW_IMAGE_ROW: Draws a single row of a hard-coded
+  72 2C dd ss ii 00 00 00 - image. Row s of the image is drawn on row d.
+
+  (no short ver)          - DRAW_IMAGE_COLUMN: Draws a single column of a
+  72 2D dd ss ii 00 00 00 - hard-coded image. Column s of the image is drawn
+                          - on column d.
+
+  (no short ver)          - DRAW_CHAR_ROW: Draws a single row of an 8x8 ASCII
+  72 2E dd ss ii rr gg bb - character. Row s of the character is drawn on row d.
+
+  (no short ver)          - DRAW_CHAR_COLUMN: Draws a single column of an 8x8
+  72 2F dd ss ii rr gg bb - ASCII character. Column s of the character is drawn
+                          - on column d.
 
 RainbowDashboard includes a complete Windows ANSI (CP1252) character set
 in both 4x4 and 8x8 font sizes, displayed using the SHOW_CHARACTER,
