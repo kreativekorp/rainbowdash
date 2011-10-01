@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <time.h>
-#include <sys/time.h>
+#include "rclock.h"
 
 #define DECIMAL 0
 #define HEX     1
 #define BINARY  2
 #define COMMAND 3
+#define FIELDS  4
 
 void write_int(int v) {
 	char buf[4];
@@ -17,12 +17,6 @@ void write_int(int v) {
 }
 
 int main(int argc, char ** argv) {
-	struct timeval tp;
-	struct timezone tzp;
-	time_t rawtime;
-	struct tm * timeinfo;
-	
-	long int millis;
 	long int days;
 	long int msec;
 	long int tzn;
@@ -46,25 +40,23 @@ int main(int argc, char ** argv) {
 			case 'r':
 				format = COMMAND;
 				break;
+			case 'f':
+				format = FIELDS;
+				break;
 			default:
-				printf("Usage: rtime [-d|-h|-b|-r]\n");
+				printf("Usage: rtime [-d|-h|-b|-r|-f]\n");
 				return 1;
 			}
 		} else {
-			printf("Usage: rtime [-d|-h|-b|-r]\n");
+			printf("Usage: rtime [-d|-h|-b|-r|-f]\n");
 			return 1;
 		}
 	}
 	
-	gettimeofday(&tp, &tzp);
-	time(&rawtime);
-	timeinfo = localtime(&rawtime);
-	
-	millis = tp.tv_sec * 1000 + tp.tv_usec / 1000;
-	days = millis / 86400000;
-	msec = millis % 86400000;
-	tzn = tzp.tz_minuteswest * -60000;
-	dst = timeinfo->tm_isdst ? (timeinfo->tm_gmtoff * 1000 - tzn) : 0;
+	days = get_clock_hi(1);
+	msec = get_clock_lo(0);
+	tzn = get_clock_tzn(0);
+	dst = get_clock_dst(0);
 	
 	switch(format) {
 	case DECIMAL:
@@ -96,6 +88,11 @@ int main(int argc, char ** argv) {
 		write_int(0x72150000);
 		write_int((int)dst);
 		fflush(stdout);
+		break;
+	case FIELDS:
+		for (argi = 0; argi < 64; argi++) {
+			printf("%2d: %d\n", argi, (int)get_clock(0, argi));
+		}
 		break;
 	}
 	
