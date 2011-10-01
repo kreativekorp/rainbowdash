@@ -161,7 +161,7 @@ signed long get_clock(unsigned char first, unsigned char field) {
 	signed long tmp;
 	if (first || !time_inited) update_clock();
 	switch (field) {
-		// counters in UTC
+		/* counters in UTC */
 		case CF_MILLISECONDS: return days_since_1970_1_1 * MSEC_PER_DAY + msec_since_midnight;
 		case CF_TICKS:        return days_since_1970_1_1 * TICK_PER_DAY + msec_to_tick(msec_since_midnight);
 		case CF_SIXTEENTHS:   return days_since_1970_1_1 * SNTH_PER_DAY + msec_to_snth(msec_since_midnight);
@@ -170,18 +170,18 @@ signed long get_clock(unsigned char first, unsigned char field) {
 		case CF_HOURS:        return days_since_1970_1_1 * HOUR_PER_DAY + msec_to_hour(msec_since_midnight);
 		case CF_DAYS:         return days_since_1970_1_1;
 		case CF_WEEKS:        return days_since_1970_1_1 / 7;
-		// TZ/DST offset from UTC
+		/* TZ/DST offset from UTC */
 		case CF_ZONE_OFFSET_MINUTES:      return msec_to_mins(msec_tzn_offset);
 		case CF_ZONE_OFFSET_SECONDS:      return msec_to_secs(msec_tzn_offset);
 		case CF_ZONE_OFFSET_MILLISECONDS: return msec_tzn_offset;
 		case CF_DST_OFFSET_MINUTES:       return msec_to_mins(msec_dst_offset);
 		case CF_DST_OFFSET_SECONDS:       return msec_to_secs(msec_dst_offset);
 		case CF_DST_OFFSET_MILLISECONDS:  return msec_dst_offset;
-		// everything else requires local time
+		/* everything else requires local time */
 		default:
 			if (!local_inited) update_local();
 			switch (field) {
-				// time units smaller than a day
+				/* time units smaller than a day */
 				case CF_AM_PM_FROM_0: return (msec_to_hour(local_msec) / 12);
 				case CF_AM_PM_FROM_1: return (msec_to_hour(local_msec) / 12) + 1;
 				case CF_HOUR_0_TO_11: return msec_to_hour(local_msec) % 12;
@@ -192,7 +192,7 @@ signed long get_clock(unsigned char first, unsigned char field) {
 				case CF_SECOND:       return msec_to_secs(local_msec) % 60;
 				case CF_TICK:         return msec_to_tick(local_msec % 1000);
 				case CF_MILLISECOND:  return local_msec % 1000;
-				// counters in local time
+				/* counters in local time */
 				case CF_MILLISECOND_OF_DAY: return local_msec;
 				case CF_TICK_OF_DAY:        return msec_to_tick(local_msec);
 				case CF_SIXTEENTH_OF_DAY:   return msec_to_snth(local_msec);
@@ -201,11 +201,11 @@ signed long get_clock(unsigned char first, unsigned char field) {
 				case CF_HOUR_OF_DAY:        return msec_to_hour(local_msec);
 				case CF_DAYS_SINCE_EPOCH:   return local_days;
 				case CF_WEEKS_SINCE_EPOCH:  return local_days / 7;
-				// everything else requires fields
+				/* everything else requires fields */
 				default:
 					if (!fields_inited) update_fields();
 					switch (field) {
-						// years
+						/* years */
 						case CF_ERA_FROM_0:       return ((EPOCH + field_cycle * CYCLE_YEARS + field_year) > 0);
 						case CF_ERA_FROM_1:       return ((EPOCH + field_cycle * CYCLE_YEARS + field_year) > 0) + 1;
 						case CF_LEAP_YEAR_FROM_0: return is_leap_year(EPOCH + field_year);
@@ -216,21 +216,21 @@ signed long get_clock(unsigned char first, unsigned char field) {
 							if (field_month ==  0 && get_week_of_year() > 26) return tmp - 1;
 							if (field_month == 11 && get_week_of_year() < 26) return tmp + 1;
 							return tmp;
-						// months
+						/* months */
 						case CF_MONTH_FROM_0: return field_month;
 						case CF_MONTH_FROM_1: return field_month + 1;
 						case CF_MONTH_ALT:
 							tmp = field_month;
 							if (tmp == 11 && (msec_to_secs(local_msec) & 1)) tmp++;
 							return tmp;
-						// weeks
+						/* weeks */
 						case CF_WEEK_OF_YEAR_FROM_0:         return get_week_of_year() - 1;
 						case CF_WEEK_OF_YEAR_FROM_1:         return get_week_of_year();
 						case CF_WEEK_OF_MONTH_FROM_0:        return get_week_of_month() - 1;
 						case CF_WEEK_OF_MONTH_FROM_1:        return get_week_of_month();
 						case CF_DAY_OF_WEEK_IN_MONTH_FROM_0: return (field_day_in_month / 7);
 						case CF_DAY_OF_WEEK_IN_MONTH_FROM_1: return (field_day_in_month / 7) + 1;
-						// days
+						/* days */
 						case CF_DAY_OF_MONTH_FROM_0:     return field_day_in_month;
 						case CF_DAY_OF_MONTH_FROM_1:     return field_day_in_month + 1;
 						case CF_DAY_OF_YEAR_FROM_0:      return field_day_in_year;
@@ -239,18 +239,18 @@ signed long get_clock(unsigned char first, unsigned char field) {
 						case CF_DAY_OF_WEEK_1_SUN_7_SAT: return ((field_day_in_cycle + 4) % 7) + 1;
 						case CF_DAY_OF_WEEK_0_MON_6_SUN: return ((field_day_in_cycle + 3) % 7);
 						case CF_DAY_OF_WEEK_1_MON_7_SUN: return ((field_day_in_cycle + 3) % 7) + 1;
-						// lengths
+						/* lengths */
 						case CF_DAYS_IN_MONTH: return field_days_in_month;
 						case CF_DAYS_IN_YEAR:  return field_days_in_year;
 						case CF_WEEKS_IN_YEAR: return get_weeks_in_year();
-						// cycles
+						/* cycles */
 						case CF_CYCLE_FROM_0:         return field_cycle;
 						case CF_CYCLE_FROM_1:         return field_cycle + 1;
 						case CF_YEAR_OF_CYCLE_FROM_0: return field_year;
 						case CF_YEAR_OF_CYCLE_FROM_1: return field_year + 1;
 						case CF_DAY_OF_CYCLE_FROM_0:  return field_day_in_cycle;
 						case CF_DAY_OF_CYCLE_FROM_1:  return field_day_in_cycle + 1;
-						// anything else, we dunno
+						/* anything else, we dunno */
 						default: return 0;
 					}
 			}
