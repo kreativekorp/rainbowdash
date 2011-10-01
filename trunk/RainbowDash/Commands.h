@@ -40,6 +40,27 @@
 #define CM_COPY_BUFFER        30
 #define CM_SWAP_BUFFER        31
 
+#define CM_SCROLL_BUFFER      32
+#define CM_SCROLL_ROW         33
+#define CM_SCROLL_COLUMN      34
+
+#define CM_ROLL_BUFFER        35
+#define CM_ROLL_ROW           36
+#define CM_ROLL_COLUMN        37
+
+#define CM_FLIP_BUFFER        38
+#define CM_FLIP_ROW           39
+#define CM_FLIP_COLUMN        40
+
+#define CM_INVERT_BUFFER      41
+#define CM_INVERT_ROW         42
+#define CM_INVERT_COLUMN      43
+
+#define CM_DRAW_IMAGE_ROW     44
+#define CM_DRAW_IMAGE_COLUMN  45
+#define CM_DRAW_CHAR_ROW      46
+#define CM_DRAW_CHAR_COLUMN   47
+
 void do_short_command(
 		unsigned char * buffers,
 		unsigned char * display_whichbuf,
