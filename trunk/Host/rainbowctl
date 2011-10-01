@@ -30,6 +30,11 @@ elif [ "$1" = "restart" ]; then
 elif [ "$1" = "stop" ]; then
 	stop_clients
 	stop_server
+elif [ "$1" = "flush" ]; then
+	stop_clients
+	start_server
+	dd if=/dev/zero of="$RAINBOWD_PIPE" count=1 2> /dev/null
+	sleep .5
 elif [ "$1" = "display" ]; then
 	stop_clients
 	start_server
