@@ -218,7 +218,7 @@ void echo(int fd, char * str) {
 			case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
 				ch = decval(ch);
 				if (isdec(str[i])) {
-					while (isoct(str[i])) {
+					while (isdec(str[i])) {
 						ch *= 10; ch += decval(str[i]); i++;
 					}
 				}
