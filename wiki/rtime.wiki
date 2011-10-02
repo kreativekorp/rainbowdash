@@ -10,6 +10,7 @@ as kept by the software real-time clock in RainbowDashboard.
 || `-h` || Prints the four values as 8-digit hexadecimal integers. ||
 || `-b` || Outputs the four values as 32-bit big-endian binary data. ||
 || `-r` || Outputs the four values as a series of RainbowDashboard commands that set the clock on the Rainbowduino. ||
+|| `-f` || Outputs the current values of all 64 individual clock fields. See [Fields]. ||
 
 You can set the clock on the Rainbowduino by simply redirecting
 the output of `rtime -r` to the Rainbowduino's serial port using
