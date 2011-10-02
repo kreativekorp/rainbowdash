@@ -12,6 +12,8 @@ start_server() {
 stop_clients() {
 	killall rainbowspectrum 2> /dev/null
 	sleep .1
+	killall rainbowmarquee 2> /dev/null
+	sleep .1
 	killall rainbowclock 2> /dev/null
 	sleep .1
 }
@@ -46,6 +48,11 @@ elif [ "$1" = "clock" ]; then
 	cp "$2" "$RAINBOWD_PIPE"
 	sleep 2
 	./rainbowclock &
+elif [ "$1" = "marquee" ]; then
+	stop_clients
+	start_server
+	shift 1
+	./rainbowmarquee "$@" &
 elif [ "$1" = "spectrum" ]; then
 	stop_clients
 	start_server

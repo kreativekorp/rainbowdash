@@ -1,7 +1,7 @@
-all: becho aecho rtime clocktest rainbowd rainbowclock rainbowspectrum
+all: becho aecho rtime clocktest rainbowd rainbowclock rainbowmarquee rainbowspectrum
 
 clean:
-	rm -f becho aecho rtime clocktest rainbowd rainbowclock rainbowspectrum
+	rm -f becho aecho rtime clocktest rainbowd rainbowclock rainbowmarquee rainbowspectrum
 	rm -f *.class
 
 becho: becho.c
@@ -24,6 +24,9 @@ rainbowd: rainbowd.c
 
 rainbowclock: rainbowclock.c
 	gcc -O3 -Wall -ansi -pedantic -o rainbowclock rainbowclock.c
+
+rainbowmarquee: rainbowmarquee.c
+	gcc -O3 -Wall -ansi -pedantic -o rainbowmarquee rclock.c rainbowmarquee.c
 
 rainbowspectrum: rainbowspectrum.c
 	gcc -O3 -Wall -ansi -pedantic -o rainbowspectrum rainbowspectrum.c
