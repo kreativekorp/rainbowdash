@@ -10,3 +10,4 @@ useful when communicating with a Rainbowduino.
   * [clocktest]: Used to determine the accuracy of the Rainbowduino's clock.
   * [rainbowd]: A background process that creates a named pipe and copies anything written to the pipe to the Rainbowduino's serial port.
   * [rainbowclock]: A background process that updates the Rainbowduino's clock every hour.
+  * [rainbowmarquee]: A background process that drives a scrolling message display on the Rainbowduino.
