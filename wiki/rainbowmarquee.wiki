@@ -8,7 +8,7 @@ is passed in as the command's arguments.
 || `-c` _cols_ || Specifies the number of Rainbowduinos chained together. ||
 || `-s` _speed_ || Specifies the number of milliseconds per frame. ||
 || `-A` _code_ || Adds a character to the message string using its CP1252 code point. ||
-|| `-F` _field_ _base_ _digit_ || Adds a field to the message string. The value of the field is divided by (base^digit) and then displayed as a single ASCII character. ||
+|| `-F` _field_ _base_ _digit_ || Adds a field to the message string. See [Fields]. The value of the field is divided by (base^digit) and then displayed as a single ASCII character. ||
 || `-B` _color_ || Sets the background color of any following characters. ||
 || `-C` _color_ || Sets the foreground color of any following characters. ||
 || `-M` _weight_ || Sets the font weight of any following characters. A weight of 1 is normal; a weight of 2 is bold. ||
