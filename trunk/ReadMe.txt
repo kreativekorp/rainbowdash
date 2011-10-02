@@ -642,6 +642,8 @@ rtime:
     -r    Outputs the four values as a series of RainbowDashboard
           commands that set the clock on the Rainbowduino.
 
+    -f    Outputs the current values of all 64 individual clock fields.
+
   You can set the clock on the Rainbowduino by simply redirecting
   the output of rtime -r to the Rainbowduino's serial port using
   aecho or rainbowd. The 'r' in rtime stands for 'Rainbowduino.'
@@ -721,6 +723,52 @@ rainbowclock:
   A background process that updates the Rainbowduino's clock every hour.
   The rainbowd process must already be running. You can use this as a
   template for your own background process.
+
+    -f <path>    Specifies the path to the named pipe used for input to
+                 rainbowd. Defaults to /tmp/rainbowduino. Can also be
+                 specified with the environment variable RAINBOWD_PIPE.
+
+    -l <msec>    Adds the specified number of milliseconds to the current
+                 time when setting the Rainbowduino's clock. This should
+                 be the amount of time it takes for the clock-setting
+                 commands to reach the Rainbowduino. Can also be specified
+                 with the environment variable RAINBOWD_LATENCY.
+
+rainbowmarquee:
+  A background process that drives a scrolling message display on the
+  Rainbowduino. The rainbowd process must be running. The message to display
+  is passed in as the command's arguments.
+
+    -f <path>    Specifies the path to the named pipe used for input to
+                 rainbowd. Defaults to /tmp/rainbowduino. Can also be
+                 specified with the environment variable RAINBOWD_PIPE.
+
+    -c <cols>    Specifies the number of Rainbowduinos chained together.
+
+    -s <speed>   Specifies the number of milliseconds per frame.
+
+    -A <code>    Adds a character to the message string using its CP1252
+                 code point.
+
+    -F <field>   Adds a field to the message string. The value of the field
+       <base>    is divided by (base^digit) and then displayed as a single
+       <digit>   ASCII character.
+
+    -B <color>   Sets the background color of any following characters.
+
+    -C <color>   Sets the foreground color of any following characters.
+
+    -M <weight>  Sets the font weight of any following characters.
+                 A weight of 1 is normal; a weight of 2 is bold.
+
+    -W <width>   Sets the advance width of any following characters;
+                 in other words, the number of pixels between the start
+                 of one character and the start of the next character.
+
+    -T           Adds a number of spaces at the end of the message string
+                 equal to the number of Rainbowduinos chained together,
+                 allowing the end of the message to disappear before the
+                 beginning of the message reappears.
 
 
 
