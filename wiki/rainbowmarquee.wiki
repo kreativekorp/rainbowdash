@@ -1,0 +1,16 @@
+#summary A background process that drives a scrolling message display on the Rainbowduino.
+
+A background process that drives a scrolling message display on the
+Rainbowduino. The [rainbowd] process must be running. The message to display
+is passed in as the command's arguments.
+
+|| `-f` _path_ || Specifies the path to the named pipe used for input to `rainbowd`. Defaults to `/tmp/rainbowduino`. Can also be specified with the environment variable `RAINBOWD_PIPE`. ||
+|| `-c` _cols_ || Specifies the number of Rainbowduinos chained together. ||
+|| `-s` _speed_ || Specifies the number of milliseconds per frame. ||
+|| `-A` _code_ || Adds a character to the message string using its CP1252 code point. ||
+|| `-F` _field_ _base_ _digit_ || Adds a field to the message string. The value of the field is divided by (base^digit) and then displayed as a single ASCII character. ||
+|| `-B` _color_ || Sets the background color of any following characters. ||
+|| `-C` _color_ || Sets the foreground color of any following characters. ||
+|| `-M` _weight_ || Sets the font weight of any following characters. A weight of 1 is normal; a weight of 2 is bold. ||
+|| `-W` _width_ || Sets the advance width of any following characters; in other words, the number of pixels between the start of one character and the start of the next character. ||
+|| `-T` || Adds a number of spaces at the end of the message string equal to the number of Rainbowduinos chained together, allowing the end of the message to disappear before the beginning of the message reappears. ||
