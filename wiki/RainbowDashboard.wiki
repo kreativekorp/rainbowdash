@@ -9,7 +9,7 @@ by Seeed Studio. Among its features:
   * Double-buffered graphics operations.
   * Software real-time clock.
   * Animation driven by the Rainbowduino itself.
-  * Full Windows ANSI (CP1252) character set.
+  * Full Windows ANSI (CP1252) character set. (Technically [http://www.kreativekorp.com/charset/encoding.php?file=superlatin.kte Kreative SuperLatin], a superset.)
   * High-level command set.
 
 RainbowDashboard operates similarly to CommandMode, but
