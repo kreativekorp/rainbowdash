@@ -57,7 +57,7 @@ not be visible until you send the `SWAP_BUFFER` command.
 || `(no short ver)` || `72 2E dd ss ii rr gg bb` || `DRAW_CHAR_ROW` || Draws a single row of an 8x8 ASCII character. Row s of the character is drawn on row d. ||
 || `(no short ver)` || `72 2F dd ss ii rr gg bb` || `DRAW_CHAR_COLUMN` || Draws a single column of an 8x8 ASCII character. Column s of the character is drawn on column d. ||
 
-RainbowDashboard includes a complete Windows ANSI (CP1252) character set
+RainbowDashboard includes a complete Windows ANSI (CP1252) character set (technically [http://www.kreativekorp.com/charset/encoding.php?file=superlatin.kte Kreative SuperLatin], a superset)
 in both 4x4 and 8x8 font sizes, displayed using the `SHOW_CHARACTER`,
 `DRAW_CHAR_8x8`, and `DRAW_CHAR_4x4` commands. It also includes eight built-in
 images displayed using the `SHOW_IMAGE` and `DRAW_IMAGE` commands, the first
