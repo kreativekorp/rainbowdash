@@ -14,6 +14,8 @@ stop_clients() {
 	sleep .1
 	killall rainbowmarquee 2> /dev/null
 	sleep .1
+	killall rainbowmoodlight 2> /dev/null
+	sleep .1
 	killall rainbowclock 2> /dev/null
 	sleep .1
 }
@@ -48,6 +50,10 @@ elif [ "$1" = "clock" ]; then
 	cp "$2" "$RAINBOWD_PIPE"
 	sleep 2
 	./rainbowclock &
+elif [ "$1" = "moodlight" ]; then
+	stop_clients
+	start_server
+	./rainbowmoodlight &
 elif [ "$1" = "marquee" ]; then
 	stop_clients
 	start_server
@@ -60,5 +66,5 @@ elif [ "$1" = "spectrum" ]; then
 	sleep 2
 	./rainbowspectrum &
 else
-	echo "Usage: rainbowctl (start | restart | stop | display <file> | clock <file> | spectrum)"
+	echo "Usage: rainbowctl (start | restart | stop | display <file> | clock <file> | moodlight | spectrum)"
 fi

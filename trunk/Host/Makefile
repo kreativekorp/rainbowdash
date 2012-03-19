@@ -25,6 +25,9 @@ rainbowd: rainbowd.c
 rainbowclock: rainbowclock.c
 	gcc -O3 -Wall -ansi -pedantic -o rainbowclock rainbowclock.c
 
+rainbowmoodlight: rainbowmoodlight.c
+	gcc -O3 -Wall -ansi -pedantic -o rainbowmoodlight rainbowmoodlight.c
+
 rainbowmarquee: rainbowmarquee.c
 	gcc -O3 -Wall -ansi -pedantic -o rainbowmarquee rclock.c rainbowmarquee.c
 
