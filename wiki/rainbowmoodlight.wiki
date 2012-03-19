@@ -1,0 +1,6 @@
+#summary A background process that drives a constantly-changing display of random colors on the Rainbowduino.
+
+A background process that drives a constantly-changing display of random
+colors on the Rainbowduino. The [rainbowd] process must be running.
+
+|| `-f` _path_ || Specifies the path to the named pipe used for input to `rainbowd`. Defaults to `/tmp/rainbowduino`. Can also be specified with the environment variable `RAINBOWD_PIPE`. ||
