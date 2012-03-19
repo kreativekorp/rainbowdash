@@ -734,6 +734,14 @@ rainbowclock:
                  commands to reach the Rainbowduino. Can also be specified
                  with the environment variable RAINBOWD_LATENCY.
 
+rainbowmoodlight:
+  A background process that drives a constantly-changing display of random
+  colors on the Rainbowduino. The rainbowd process must be running.
+
+    -f <path>    Specifies the path to the named pipe used for input to
+                 rainbowd. Defaults to /tmp/rainbowduino. Can also be
+                 specified with the environment variable RAINBOWD_PIPE.
+
 rainbowmarquee:
   A background process that drives a scrolling message display on the
   Rainbowduino. The rainbowd process must be running. The message to display
