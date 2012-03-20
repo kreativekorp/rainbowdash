@@ -1,7 +1,7 @@
-all: becho aecho rtime clocktest rainbowd rainbowclock rainbowmarquee rainbowspectrum
+all: becho aecho rtime clocktest rainbowd rainbowclock rainbowmoodlight rainbowmarquee rainbowspectrum
 
 clean:
-	rm -f becho aecho rtime clocktest rainbowd rainbowclock rainbowmarquee rainbowspectrum
+	rm -f becho aecho rtime clocktest rainbowd rainbowclock rainbowmoodlight rainbowmarquee rainbowspectrum
 	rm -f *.class
 
 becho: becho.c
