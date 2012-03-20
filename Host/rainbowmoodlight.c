@@ -8,6 +8,44 @@
 #define MAX_TRX_TIME 100
 #define RANDOM_TRX_TIME (MIN_TRX_TIME + (rand() % (MAX_TRX_TIME - MIN_TRX_TIME)))
 
+#define RAND_COLOR_AND 0x3F
+#define RAND_COLOR_OR 0xC0
+
+void random_color(unsigned char * buf) {
+	switch (rand() % 6) {
+	case 0:
+		buf[0] = rand();
+		buf[64] = rand() & RAND_COLOR_AND;
+		buf[128] = rand() | RAND_COLOR_OR;
+		break;
+	case 1:
+		buf[0] = rand();
+		buf[64] = rand() | RAND_COLOR_OR;
+		buf[128] = rand() & RAND_COLOR_AND;
+		break;
+	case 2:
+		buf[0] = rand() & RAND_COLOR_AND;
+		buf[64] = rand();
+		buf[128] = rand() | RAND_COLOR_OR;
+		break;
+	case 3:
+		buf[0] = rand() & RAND_COLOR_AND;
+		buf[64] = rand() | RAND_COLOR_OR;
+		buf[128] = rand();
+		break;
+	case 4:
+		buf[0] = rand() | RAND_COLOR_OR;
+		buf[64] = rand();
+		buf[128] = rand() & RAND_COLOR_AND;
+		break;
+	case 5:
+		buf[0] = rand() | RAND_COLOR_OR;
+		buf[64] = rand() & RAND_COLOR_AND;
+		buf[128] = rand();
+		break;
+	}
+}
+
 int usage(void) {
 	printf("Usage: rainbowmoodlight [[-f] pipe-path]\n");
 	return 1;
@@ -60,10 +98,12 @@ int main(int argc, char ** argv) {
 	}
 	
 	srand(time(NULL));
-	for (i = 0; i < 192; i++) initial[i] = rand();
-	for (i = 0; i < 192; i++) final[i] = rand();
-	for (i = 0; i < 64; i++) step[i] = 0;
-	for (i = 0; i < 64; i++) steps[i] = RANDOM_TRX_TIME;
+	for (i = 0; i < 64; i++) {
+		random_color(&initial[i]);
+		random_color(&final[i]);
+		step[i] = 0;
+		steps[i] = RANDOM_TRX_TIME;
+	}
 	buffer[0] = 'D';
 	
 	for (;;) {
@@ -84,9 +124,7 @@ int main(int argc, char ** argv) {
 				initial[i] = final[i];
 				initial[i+64] = final[i+64];
 				initial[i+128] = final[i+128];
-				final[i] = rand();
-				final[i+64] = rand();
-				final[i+128] = rand();
+				random_color(&final[i]);
 				step[i] = 0;
 				steps[i] = RANDOM_TRX_TIME;
 			}
