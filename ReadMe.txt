@@ -2,7 +2,7 @@ R a i n b o w D a s h b o a r d
 
 advanced rainbowduino firmware
 
-(c) 2011 Kreative Software
+(c) 2011-2012 Kreative Software
 
 
 
@@ -22,13 +22,23 @@ by Seeed Studio. Among its features:
 
 
 
-DirectMode
+DirectMode / DirectMode3
 
-DirectMode is a rewrite of the standard direct-mode firmware.
+DirectMode is a rewrite of the standard direct-mode firmware provided
+for Rainbowduino 2.0. It works only with Rainbowduino 2.0.
 
-Write 96 bytes of raw pixel data to show an image on the LED display.
-The data is organized channel-by-channel in green, red, blue order;
-row-by-row; then column-by-column, with one byte per two columns.
+DirectMode3 is similar firmware for Rainbowduino 3.0. It works only
+with Rainbowduino 3.0 and is incompatible with original DirectMode.
+
+Running original DirectMode, write 96 bytes of raw pixel data to show
+an image on the LED display. The data is organized channel-by-channel
+in green, red, blue order; row-by-row; then column-by-column, with one
+byte per two columns.
+
+Running DirectMode3, write 192 bytes of raw pixel data to show an image
+on the LED display. The data is organized channel-by-channel in blue,
+green, red order; row-by-row; then column-by-column, with one byte per
+one column.
 
 
 
