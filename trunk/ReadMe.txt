@@ -43,9 +43,14 @@ one column.
 
 
 
-CommandMode
+CommandMode / CommandMode3
 
-CommandMode is a rewrite of the standard command-mode firmware.
+CommandMode is a rewrite of the standard command-mode firmware provided
+for Rainbowduino 2.0. It works only with Rainbowduino 2.0.
+
+CommandMode3 is similar firmware for Rainbowduino 3.0. It works only
+with Rainbowduino 3.0. CommandMode3 and original CommandMode use the
+same command format and are compatible with each other.
 
 Commands have the following format:
 
@@ -62,10 +67,11 @@ The following commands are supported:
   52 03 0r gb 00 - SHOW_COLOR: Displays a solid color.
   52 04 sr gb ii - SHOW_PIXEL: Sets an individual pixel on the display.
 
-CommandMode has all the same restrictions as the standard firmware:
-only five built-in images, only letters and digits, and only the commands
-listed above. The only extra is the SHOW_PIXEL command, as it is a common
-modification, and the Rainbowduino is close to useless without it.
+CommandMode and CommandMode3 have all the same restrictions the standard
+firmware provided for Rainbowduino 2.0 had: only five built-in images,
+only letters and digits, and only the commands listed above. The only
+extra is the SHOW_PIXEL command, as it is a common modification, and
+the Rainbowduino is close to useless without it.
 
 
 
@@ -155,13 +161,13 @@ not be visible until you send the SWAP_BUFFER command.
   52 0C 0r gb 00          - SET_ALL_BITMAP: Sets the colors of all pixels
   72 0C 00 00 cc rr gg bb - according to a one-bit-per-channel bitmap.
 
-  52 0D 0r gb yy          - SET_ROW_COLOR: Sets the colors of a row
+  52 0D 0r gb yy          - SET_ROW_BITMAP: Sets the colors of a row
   72 0D 00 yy cc rr gg bb - according to a one-bit-per-channel bitmap.
 
-  52 0E xr gb 00          - SET_COLUMN_COLOR: Sets the colors of a column
+  52 0E xr gb 00          - SET_COLUMN_BITMAP: Sets the colors of a column
   72 0E xx 00 cc rr gg bb - according to a one-bit-per-channel bitmap.
 
-  52 0F xr gb yy          - SET_PIXEL_COLOR: Sets the color of one pixel
+  52 0F xr gb yy          - SET_PIXEL_BITMAP: Sets the color of one pixel
   72 0F xx yy cc rr gg bb - according to a one-bit-per-channel bitmap.
 
   (no short ver)          - SET_CLOCK_ADJUST: Adjusts the speed of the software

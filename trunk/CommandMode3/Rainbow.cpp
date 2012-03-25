@@ -1,113 +1,123 @@
 #include "Rainbow.h"
+#include <Arduino.h>
 #include <avr/pgmspace.h>
-#include <WProgram.h>
 
-// Shift Register Ports and Bit Values
+// MY9221 Ports and Bit Values
 
-#define SH_DIR_OE    DDRC
-#define SH_DIR_SDI   DDRC
-#define SH_DIR_CLK   DDRC
-#define SH_DIR_LE    DDRC
+#define DDR_DATA   DDRB
+#define DDR_CLK    DDRB
+#define DDR_LINES  DDRD
 
-#define SH_BIT_OE    0x08
-#define SH_BIT_SDI   0x01
-#define SH_BIT_CLK   0x02
-#define SH_BIT_LE    0x04
+#define PORT_DATA  PORTB
+#define PORT_CLK   PORTB
+#define PORT_LINES PORTD
 
-#define SH_PORT_OE   PORTC
-#define SH_PORT_SDI  PORTC
-#define SH_PORT_CLK  PORTC
-#define SH_PORT_LE   PORTC
+#define BIT_DATA   0x01
+#define BIT_CLK    0x02
+#define BIT_LINES  0xF0
 
-// Shift Register Control
+// MY9221 Control
 
-#define clk_rising   { SH_PORT_CLK &= ~SH_BIT_CLK; SH_PORT_CLK |= SH_BIT_CLK; }
-#define le_high      { SH_PORT_LE  |=  SH_BIT_LE;  }
-#define le_low       { SH_PORT_LE  &= ~SH_BIT_LE;  }
-#define enable_oe    { SH_PORT_OE  &= ~SH_BIT_OE;  }
-#define disable_oe   { SH_PORT_OE  |=  SH_BIT_OE;  }
-#define shift_data_1 { SH_PORT_SDI |=  SH_BIT_SDI; }
-#define shift_data_0 { SH_PORT_SDI &= ~SH_BIT_SDI; }
-
-// Line Control
-
-#define open_line0     { PORTB = 0x04; }
-#define open_line1     { PORTB = 0x02; }
-#define open_line2     { PORTB = 0x01; }
-#define open_line3     { PORTD = 0x80; }
-#define open_line4     { PORTD = 0x40; }
-#define open_line5     { PORTD = 0x20; }
-#define open_line6     { PORTD = 0x10; }
-#define open_line7     { PORTD = 0x08; }
-#define close_all_line { PORTD &= ~0xF8; PORTB &= ~0x07; }
+#define switch_off_drive { PORT_LINES &= ~0x80; }
 
 // State
-
-static unsigned char gamma[16] = {
-	0xE7, 0xE7, 0xE7, 0xE7, 0xE7, 0xE7, 0xE7, 0xE7,
-	0xE7, 0xE7, 0xE7, 0xE7, 0xE7, 0xE7, 0xE7, 0xE7
-};
 
 static unsigned char * buf = 0;
 static unsigned char * nextbuf = 0;
 static unsigned char line = 0;
-static unsigned char level = 0;
 
 // Internal API
 
-static void shift_1_bit(unsigned char ls) {
-	if (ls) { shift_data_1; }
-	else    { shift_data_0; }
-	clk_rising;
-}
-
-static void shift_24_bit(unsigned char * buf, unsigned char line, unsigned char level) {
-	unsigned char color, column, data;
-	le_high;
-	for (color = 0; color < 3; color++) {
-		for (column = 0; column < 4; column++) {
-			data = buf[(color << 5) | (line << 2) | column];
-			shift_1_bit((data >> 4) > level);
-			shift_1_bit((data & 0x0F) > level);
-		}
-	}
-	le_low;
-}
-
-static void open_line(unsigned char line) {
-	switch (line) {
-		case 0: { open_line0; break; }
-		case 1: { open_line1; break; }
-		case 2: { open_line2; break; }
-		case 3: { open_line3; break; }
-		case 4: { open_line4; break; }
-		case 5: { open_line5; break; }
-		case 6: { open_line6; break; }
-		case 7: { open_line7; break; }
+static void send_16bit_data(unsigned int data) {
+	unsigned char i;
+	for (i = 0; i < 16; i++) {
+		if (data & 0x8000) { PORT_DATA |=  BIT_DATA; }
+		else               { PORT_DATA &= ~BIT_DATA; }
+		PORT_CLK ^= BIT_CLK;
+		data <<= 1;
 	}
 }
 
-static void flash_next_line(unsigned char * buf, unsigned char line, unsigned char level) {
-	disable_oe;
-	close_all_line;
-	open_line(line);
-	shift_24_bit(buf, line, level);
-	enable_oe;
+static void latch_data(void) {
+	unsigned char i;
+	PORT_DATA &= ~BIT_DATA;
+	delayMicroseconds(10);
+	switch_off_drive;
+	for (i = 0; i < 8; i++) {
+		PORT_DATA ^= BIT_DATA;
+	}
+}
+
+static void switch_on_drive(unsigned char line) {
+	PORT_LINES &= ~BIT_LINES;
+	PORT_LINES |= (line << 4);
+	PORT_LINES |= 0x80;
+}
+
+static void clear_display(void) {
+	unsigned char i;
+	
+	send_16bit_data(0);
+	PORT_DATA &= ~BIT_DATA;
+	for (i = 0; i < 192; i++) {
+		PORT_CLK ^= BIT_CLK;
+	}
+	
+	send_16bit_data(0);
+	PORT_DATA &= ~BIT_DATA;
+	for (i = 0; i < 192; i++) {
+		PORT_CLK ^= BIT_CLK;
+	}
+	
+	latch_data();
 }
 
 // Interrupt Handler
 
-void timer2_isr(void) {
-	TCNT2 = gamma[level];
-	flash_next_line(buf, line, level);
+void timer1_isr(void) {
+	unsigned char li = line << 3;
+	
+	clear_display();
+	
+	send_16bit_data(0);
+	
+	send_16bit_data(buf[  0 | li | 7]);
+	send_16bit_data(buf[  0 | li | 6]);
+	send_16bit_data(buf[  0 | li | 5]);
+	send_16bit_data(buf[  0 | li | 4]);
+	send_16bit_data(buf[  0 | li | 3]);
+	send_16bit_data(buf[  0 | li | 2]);
+	send_16bit_data(buf[  0 | li | 1]);
+	send_16bit_data(buf[  0 | li | 0]);
+	
+	send_16bit_data(buf[ 64 | li | 7]);
+	send_16bit_data(buf[ 64 | li | 6]);
+	send_16bit_data(buf[ 64 | li | 5]);
+	send_16bit_data(buf[ 64 | li | 4]);
+	
+	send_16bit_data(0);
+	
+	send_16bit_data(buf[ 64 | li | 3]);
+	send_16bit_data(buf[ 64 | li | 2]);
+	send_16bit_data(buf[ 64 | li | 1]);
+	send_16bit_data(buf[ 64 | li | 0]);
+	
+	send_16bit_data(buf[128 | li | 7]);
+	send_16bit_data(buf[128 | li | 6]);
+	send_16bit_data(buf[128 | li | 5]);
+	send_16bit_data(buf[128 | li | 4]);
+	send_16bit_data(buf[128 | li | 3]);
+	send_16bit_data(buf[128 | li | 2]);
+	send_16bit_data(buf[128 | li | 1]);
+	send_16bit_data(buf[128 | li | 0]);
+	
+	latch_data();
+	switch_on_drive(line);
+	PORTD &= ~0x04;
 	line++;
 	if (line >= 8) {
 		line = 0;
-		level++;
-		if (level >= 16) {
-			level = 0;
-			buf = nextbuf;
-		}
+		buf = nextbuf;
 	}
 }
 
@@ -116,24 +126,29 @@ void timer2_isr(void) {
 void init_rainbow(unsigned char * buffer) {
 	cli();
 	
-	/* init_sh */
-	DDRD = 0xFF;
-	DDRC = 0xFF;
-	DDRB = 0xFF;
-	PORTD = 0;
-	PORTB = 0;
+	/* init */
+	DDR_LINES  |=  BIT_LINES;
+	PORT_LINES &= ~BIT_LINES;
+	DDRD |= 0x04;
+	DDR_DATA  |=  BIT_DATA;
+	DDR_CLK   |=  BIT_CLK;
+	PORT_DATA &= ~BIT_DATA;
+	PORT_CLK  &= ~BIT_CLK;
+	DDRB |= 0x20;
 	
 	/* set_buffer */
 	buf = nextbuf = buffer;
 	
-	/* init_timer2 */
-	TCCR2A |= (1 << WGM21) | (1 << WGM20);
-	TCCR2B |= (1 << CS22 );
-	TCCR2B &= ~((1 << CS21 ) | (1 << CS20 ));
-	TCCR2B &= ~((1 << WGM21) | (1 << WGM20));
-	ASSR |= (0 << AS2);
-	TIMSK2 |= (1 << TOIE2) | (0 << OCIE2B);
-	TCNT2 = gamma[0];
+	/* init (cont.) */
+	clear_display();
+	
+	/* init_timer1 */
+	TCCR1A = 0;
+	TCCR1B = _BV(WGM13);
+	ICR1 = 10000;
+	TIMSK1 = _BV(TOIE1);
+	TCNT1 = 0;
+	TCCR1B |= _BV(CS10);
 	
 	sei();
 }
@@ -148,12 +163,4 @@ void set_next_buffer(unsigned char * buffer) {
 	cli();
 	nextbuf = buffer;
 	sei();
-}
-
-unsigned char get_gamma(unsigned char level) {
-	return gamma[level];
-}
-
-void set_gamma(unsigned char level, unsigned char value) {
-	gamma[level] = value;
 }
