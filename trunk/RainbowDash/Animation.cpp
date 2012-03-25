@@ -1,5 +1,5 @@
 #include "Animation.h"
-#include <WProgram.h>
+#include <Arduino.h>
 
 static unsigned char animation_info[4][ANIMATION_COUNT];
 static unsigned char animation_data[256];

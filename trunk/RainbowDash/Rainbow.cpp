@@ -1,6 +1,6 @@
 #include "Rainbow.h"
+#include <Arduino.h>
 #include <avr/pgmspace.h>
-#include <WProgram.h>
 
 // Shift Register Ports and Bit Values
 

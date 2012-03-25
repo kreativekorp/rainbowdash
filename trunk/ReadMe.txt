@@ -416,12 +416,10 @@ Fields
 When the high bit of the control channel is set, the
 control channel is treated as a field number.
 
-Fields 64-127 are determined by user-controlled registers. In the
-Rainbowduino 2.0 version of RainbowDashboard, all 64 registers are
-unique. In the Rainbowduino 3.0 version of RainbowDashboard, the
-first 32 registers are equivalent to the last 32 registers. (The
-last 32 registers had to be removed to make room for the larger
-buffers used by the Rainbowduino 3.0.)
+Fields 64-127 are determined by 32 user-controlled registers.
+Fields 64-95 are equivalent to fields 96-127. (Earlier versions
+of RainbowDashboard had 64 registers, but newer versions have
+only 32 because of increasing memory requirements.)
 
 Fields 0-63 are the following time values:
 
