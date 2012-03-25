@@ -38,6 +38,10 @@ Short direct-mode commands have the format of an ASCII uppercase 'D' followed
 by 96 bytes of raw Rainbowduino buffer data in the format used by the
 Rainbowduino 2.0 version of DirectMode (in the DirectMode directory).
 
+Medium direct-mode commands have the format of an ASCII digit '3' followed
+by 192 bytes of raw Rainbowduino buffer data in the format used by the
+Rainbowduino 3.0 version of DirectMode (in the !DirectMode3 directory).
+
 Long direct-mode commands have the format of an ASCII lowercase 'd' followed
 by 256 bytes of raw RainbowDashboard buffer data. The data is organized
 channel-by-channel in control, red, green, blue order; row-by-row; then
