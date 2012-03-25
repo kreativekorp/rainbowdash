@@ -21,9 +21,9 @@ not be visible until you send the `SWAP_BUFFER` command.
 || `52 0A xr gb 00` || `72 0A xx 00 cc rr gg bb` || `SET_COLUMN_COLOR` || Sets the pixel values of all pixels in a column. See PixelFormat. ||
 || `52 0B xr gb yy` || `72 0B xx yy cc rr gg bb` || `SET_PIXEL_COLOR` || Sets the pixel value of a single pixel. See PixelFormat. ||
 || `52 0C 0r gb 00` || `72 0C 00 00 cc rr gg bb` || `SET_ALL_BITMAP` || Sets the colors of all pixels according to a one-bit-per-channel bitmap. ||
-|| `52 0D 0r gb yy` || `72 0D 00 yy cc rr gg bb` || `SET_ROW_COLOR` || Sets the colors of a row according to a one-bit-per-channel bitmap. ||
-|| `52 0E xr gb 00` || `72 0E xx 00 cc rr gg bb` || `SET_COLUMN_COLOR` || Sets the colors of a column according to a one-bit-per-channel bitmap. ||
-|| `52 0F xr gb yy` || `72 0F xx yy cc rr gg bb` || `SET_PIXEL_COLOR` || Sets the color of one pixel according to a one-bit-per-channel bitmap. ||
+|| `52 0D 0r gb yy` || `72 0D 00 yy cc rr gg bb` || `SET_ROW_BITMAP` || Sets the colors of a row according to a one-bit-per-channel bitmap. ||
+|| `52 0E xr gb 00` || `72 0E xx 00 cc rr gg bb` || `SET_COLUMN_BITMAP` || Sets the colors of a column according to a one-bit-per-channel bitmap. ||
+|| `52 0F xr gb yy` || `72 0F xx yy cc rr gg bb` || `SET_PIXEL_BITMAP` || Sets the color of one pixel according to a one-bit-per-channel bitmap. ||
 || `(no short ver)` || `72 10 00 00 vv vv vv vv` || `SET_CLOCK_ADJUST` || Adjusts the speed of the software clock to compensate for an inaccurate timer. See [clocktest]. ||
 || `(no short ver)` || `72 11 00 00 vv vv vv vv` || `SET_CLOCK_DATE_D` || Sets the date (in days since January 1, 1970, UTC) and resets the time. ||
 || `(no short ver)` || `72 12 00 00 vv vv vv vv` || `SET_CLOCK_DATE_P` || Sets the date (in days since January 1, 1970, UTC) without resetting the time. ||
