@@ -1,4 +1,8 @@
 #summary The RainbowDash directory contains the main attraction, the RainbowDashboard firmware itself.
 
-The RainbowDash directory contains the main attraction, the RainbowDashboard
-firmware itself. See RainbowDashboard.
+The RainbowDash and !RainbowDash3 directories contain the main attraction,
+the RainbowDashboard firmware itself. RainbowDash works only with
+Rainbowduino 2.0, while !RainbowDash3 works only with Rainbowduino 3.0.
+Both versions use the same command format and are compatible with each other.
+
+See RainbowDashboard.
