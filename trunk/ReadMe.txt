@@ -76,10 +76,14 @@ the Rainbowduino is close to useless without it.
 
 
 
-RainbowDash
+RainbowDash / RainbowDash3
 
-The RainbowDash directory contains the main attraction, the RainbowDashboard
-firmware itself. RainbowDashboard operates similarly to command mode, but
+The RainbowDash and RainbowDash3 directories contain the main attraction,
+the RainbowDashboard firmware itself. RainbowDash works only with
+Rainbowduino 2.0, while RainbowDash3 works only with Rainbowduino 3.0.
+Both versions use the same command format and are compatible with each other.
+
+RainbowDashboard operates similarly to command mode, but
 supports four types of commands instead of just one.
 
 Short commands have the same format as standard command mode:
@@ -102,7 +106,8 @@ Long commands have the following format:
   bb - the blue channel (typically)
 
 Short direct-mode commands have the format of an ASCII uppercase 'D' followed
-by 96 bytes of raw Rainbowduino buffer data in the format used by DirectMode.
+by 96 bytes of raw Rainbowduino buffer data in the format used by the
+Rainbowduino 2.0 version of DirectMode (in the DirectMode directory).
 
 Long direct-mode commands have the format of an ASCII lowercase 'd' followed
 by 256 bytes of raw RainbowDashboard buffer data. The data is organized
@@ -208,7 +213,8 @@ not be visible until you send the SWAP_BUFFER command.
   72 1B 00 aa v1 v2 v3 v4 - See the Animation section.
 
   (no short ver)          - SET_GAMMA: Sets the gamma for a particular
-  72 1C 00 ll gg 00 00 00 - brightness level.
+  72 1C 00 ll gg 00 00 00 - brightness level. (Rainbowduino 2.0 only.
+                            This command is ignored on Rainbowduino 3.0.)
 
   (no short ver)          - SET_BUFFER: If ff is 1 or 3, sets buffer number
   72 1D 00 ff dd ww 00 00 - dd to be the display buffer. If ff is 2 or 3,
@@ -407,9 +413,17 @@ possible duration is 2.55 seconds.
 
 Fields
 
-When the high bit of the control channel is set, the control channel is
-treated as a field number. Fields 64-127 are determined by user-controlled
-registers. Fields 0-63 are the following time values:
+When the high bit of the control channel is set, the
+control channel is treated as a field number.
+
+Fields 64-127 are determined by user-controlled registers. In the
+Rainbowduino 2.0 version of RainbowDashboard, all 64 registers are
+unique. In the Rainbowduino 3.0 version of RainbowDashboard, the
+first 32 registers are equivalent to the last 32 registers. (The
+last 32 registers had to be removed to make room for the larger
+buffers used by the Rainbowduino 3.0.)
+
+Fields 0-63 are the following time values:
 
    0 / 0x00 - milliseconds since 1970-1-1 UTC
    1 / 0x01 - ticks (60ths of a second) since 1970-1-1 UTC

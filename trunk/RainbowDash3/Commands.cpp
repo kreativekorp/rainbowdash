@@ -1,6 +1,5 @@
 #include "Commands.h"
 #include "Rainboom.h"
-#include "Rainbow.h"
 #include "Pictures.h"
 #include "Fonts.h"
 #include "Clock.h"
@@ -805,7 +804,7 @@ void do_long_command(
 		set_animation_data(y, z);
 		break;
 	case CM_SET_GAMMA:
-		set_gamma(y, z);
+		// ignored
 		break;
 	case CM_SET_BUFFER:
 		if (y & 1) {
