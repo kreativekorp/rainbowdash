@@ -13,7 +13,7 @@ by Seeed Studio. Among its features:
   * High-level command set.
 
 RainbowDashboard operates similarly to CommandMode, but
-supports four types of commands instead of just one.
+supports five types of commands instead of just one.
 
 Short commands have the same format as standard command mode:
 
