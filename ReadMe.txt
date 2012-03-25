@@ -84,7 +84,7 @@ Rainbowduino 2.0, while RainbowDash3 works only with Rainbowduino 3.0.
 Both versions use the same command format and are compatible with each other.
 
 RainbowDashboard operates similarly to command mode, but
-supports four types of commands instead of just one.
+supports five types of commands instead of just one.
 
 Short commands have the same format as standard command mode:
 
@@ -108,6 +108,10 @@ Long commands have the following format:
 Short direct-mode commands have the format of an ASCII uppercase 'D' followed
 by 96 bytes of raw Rainbowduino buffer data in the format used by the
 Rainbowduino 2.0 version of DirectMode (in the DirectMode directory).
+
+Medium direct-mode commands have the format of an ASCII digit '3' followed
+by 192 bytes of raw Rainbowduino buffer data in the format used by the
+Rainbowduino 3.0 version of DirectMode (in the DirectMode3 directory).
 
 Long direct-mode commands have the format of an ASCII lowercase 'd' followed
 by 256 bytes of raw RainbowDashboard buffer data. The data is organized
