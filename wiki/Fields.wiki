@@ -1,8 +1,16 @@
 #summary When the high bit of the control channel is set, the control channel is treated as a field number.
 
-When the high bit of the control channel is set, the control channel is
-treated as a field number. Fields 64-127 are determined by user-controlled
-registers. Fields 0-63 are the following time values:
+When the high bit of the control channel is set, the
+control channel is treated as a field number.
+
+Fields 64-127 are determined by user-controlled registers. In the
+Rainbowduino 2.0 version of RainbowDashboard, all 64 registers are
+unique. In the Rainbowduino 3.0 version of RainbowDashboard, the
+first 32 registers are equivalent to the last 32 registers. (The
+last 32 registers had to be removed to make room for the larger
+buffers used by the Rainbowduino 3.0.)
+
+Fields 0-63 are the following time values:
 
 ||  0 || `0x00` || milliseconds since 1970-1-1 UTC ||
 ||  1 || `0x01` || ticks (60ths of a second) since 1970-1-1 UTC ||
