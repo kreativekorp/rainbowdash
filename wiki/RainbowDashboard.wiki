@@ -35,7 +35,8 @@ Long commands have the following format:
 || `bb` || the blue channel (typically) ||
 
 Short direct-mode commands have the format of an ASCII uppercase 'D' followed
-by 96 bytes of raw Rainbowduino buffer data in the format used by DirectMode.
+by 96 bytes of raw Rainbowduino buffer data in the format used by the
+Rainbowduino 2.0 version of DirectMode (in the DirectMode directory).
 
 Long direct-mode commands have the format of an ASCII lowercase 'd' followed
 by 256 bytes of raw RainbowDashboard buffer data. The data is organized
