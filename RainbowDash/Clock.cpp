@@ -1,5 +1,5 @@
 #include "Clock.h"
-#include <WProgram.h>
+#include <Arduino.h>
 
 #define MSEC_PER_DAY 86400000
 #define TICK_PER_DAY 5184000

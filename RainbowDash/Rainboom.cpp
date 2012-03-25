@@ -5,8 +5,8 @@
 #include "RegisterFile.h"
 #include "Palettes.h"
 #include "Fonts.h"
+#include <Arduino.h>
 #include <avr/pgmspace.h>
-#include <WProgram.h>
 
 // Calculating Colors
 
