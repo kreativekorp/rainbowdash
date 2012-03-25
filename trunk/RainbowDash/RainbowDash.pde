@@ -144,6 +144,27 @@ void loop() {
 				}
 			}
 			break;
+		case '3':
+			while (Serial.available() > 0) {
+				unsigned char i = Serial.read();
+				if (bufpos < 64) {
+					buffer[working_whichbuf][(bufpos & 0x3F)] = 0;
+					buffer[working_whichbuf][0xC0 | (bufpos & 0x3F)] = i;
+				} else if (bufpos < 128) {
+					buffer[working_whichbuf][0x80 | (bufpos & 0x3F)] = i;
+				} else {
+					buffer[working_whichbuf][0x40 | (bufpos & 0x3F)] = i;
+				}
+				bufpos++;
+				if (bufpos >= 192) {
+					video_set_next_buffer(buffer[working_whichbuf]);
+					display_whichbuf = working_whichbuf;
+					working_whichbuf ^= 1;
+					cmdbuf[0] = 0;
+					break;
+				}
+			}
+			break;
 		case 'd':
 			while (Serial.available() > 0) {
 				buffer[working_whichbuf][bufpos++] = Serial.read();
