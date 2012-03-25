@@ -3,17 +3,20 @@
 #include <avr/pgmspace.h>
 
 static void DispshowPicture(unsigned char * buf, unsigned char pi, unsigned char shift) {
-	unsigned char plane, row, column, temp, fir, sec;
+	unsigned char plane, pli, row, column, temp, fir, sec;
 	for (plane = 0; plane < 3; plane++) {
+		pli = (plane >= 2) ? 0 : ((plane+1) << 6);
 		for (row = 0; row < 8; row++) {
 			for (column = 0; column < 4; column++) {
 				temp = column + (shift >> 1);
 				fir = get_prefab(pi, plane, row, (temp < 4) ? temp : (temp-4));
 				if (shift & 0x01) {
 					sec = get_prefab(pi, plane, row, (temp < 3) ? (temp+1) : (temp-3));
-					buf[(plane << 5) | (row << 2) | column] = (fir << 4) | (sec >> 4);
+					buf[pli | (row << 3) | (column << 1)] = (fir << 4) | (fir & 0x0F);
+					buf[pli | (row << 3) | (column << 1) | 1] = (sec >> 4) | (sec & 0xF0);
 				} else {
-					buf[(plane << 5) | (row << 2) | column] = fir;
+					buf[pli | (row << 3) | (column << 1)] = (fir >> 4) | (fir & 0xF0);
+					buf[pli | (row << 3) | (column << 1) | 1] = (fir << 4) | (fir & 0x0F);
 				}
 			}
 		}
@@ -25,19 +28,14 @@ static void DispshowChar(unsigned char * buf, unsigned char ascii, unsigned char
 	index = asc_to_idx(ascii);
 	if (index != (unsigned char)(-1)) {
 		for (plane = 0; plane < 3; plane++) {
-			color = (plane == 0) ? green : (plane == 1) ? red : (plane == 2) ? blue : 0;
+			color = (plane == 0) ? blue : (plane == 1) ? green : (plane == 2) ? red : 0;
+			color = (color | (color << 4));
 			for (row = 0; row < 8; row++) {
 				chrow = get_font(index, row);
 				chrow = (shift < 7) ? (chrow << shift) : (chrow >> (shift-8));
-				for (column = 0; column < 4; column++) {
-					chcolumn = 0;
-					if ((chrow << (column << 1)) & 0x80) {
-						chcolumn |= (color << 4);
-					}
-					if ((chrow << ((column << 1) | 1)) & 0x80) {
-						chcolumn |= color;
-					}
-					buf[(plane << 5) | (row << 2) | column] = chcolumn;
+				for (column = 0; column < 8; column++) {
+					chcolumn = (((chrow << column) & 0x80) ? color : 0);
+					buf[(plane << 6) | (row << 3) | column] = chcolumn;
 				}
 			}
 		}
@@ -47,27 +45,20 @@ static void DispshowChar(unsigned char * buf, unsigned char ascii, unsigned char
 static void DispshowColor(unsigned char * buf, unsigned char red, unsigned char green, unsigned char blue) {
 	unsigned char plane, color, i;
 	for (plane = 0; plane < 3; plane++) {
-		color = (plane == 0) ? green : (plane == 1) ? red : (plane == 2) ? blue : 0;
+		color = (plane == 0) ? blue : (plane == 1) ? green : (plane == 2) ? red : 0;
 		color = (color | (color << 4));
-		for (i = 0; i < 32; i++) {
-			buf[(plane << 5) | i] = color;
+		for (i = 0; i < 64; i++) {
+			buf[(plane << 6) | i] = color;
 		}
 	}
 }
 
 static void DispshowPixel(unsigned char * buf, unsigned char row, unsigned char column, unsigned char red, unsigned char green, unsigned char blue) {
-	unsigned char plane, color, data;
+	unsigned char plane, color;
 	for (plane = 0; plane < 3; plane++) {
-		color = (plane == 0) ? green : (plane == 1) ? red : (plane == 2) ? blue : 0;
-		data = buf[(plane << 5) | (row << 2) | (column >> 1)];
-		if (column & 0x01) {
-			data &= 0xF0;
-			data |= color;
-		} else {
-			data &= 0x0F;
-			data |= (color << 4);
-		}
-		buf[(plane << 5) | (row << 2) | (column >> 1)] = data;
+		color = (plane == 0) ? blue : (plane == 1) ? green : (plane == 2) ? red : 0;
+		color = (color | (color << 4));
+		buf[(plane << 6) | (row << 3) | column] = color;
 	}
 }
 
