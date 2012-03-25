@@ -1,6 +1,11 @@
 #summary CommandMode is a rewrite of the standard command-mode firmware.
 
-CommandMode is a rewrite of the standard command-mode firmware.
+CommandMode is a rewrite of the standard command-mode firmware provided
+for Rainbowduino 2.0. It works only with Rainbowduino 2.0.
+
+!CommandMode3 is similar firmware for Rainbowduino 3.0. It works only
+with Rainbowduino 3.0. !CommandMode3 and original CommandMode use the
+same command format and are compatible with each other.
 
 Commands have the following format:
 
@@ -17,7 +22,8 @@ The following commands are supported:
 || `52 03 0r gb 00` || `SHOW_COLOR` || Displays a solid color. ||
 || `52 04 sr gb ii` || `SHOW_PIXEL` || Sets an individual pixel on the display. ||
 
-CommandMode has all the same restrictions as the standard firmware:
-only five built-in images, only letters and digits, and only the commands
-listed above. The only extra is the `SHOW_PIXEL` command, as it is a common
-modification, and the Rainbowduino is close to useless without it.
+CommandMode and !CommandMode3 have all the same restrictions the standard
+firmware provided for Rainbowduino 2.0 had: only five built-in images,
+only letters and digits, and only the commands listed above. The only
+extra is the `SHOW_PIXEL` command, as it is a common modification, and
+the Rainbowduino is close to useless without it.
