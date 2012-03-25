@@ -36,7 +36,7 @@ not be visible until you send the `SWAP_BUFFER` command.
 || `(no short ver)` || `72 19 00 aa v1 v2 00 00` || `SET_ANIM_DATA_2` || Sets 2 bytes of animation data. See [Animation]. ||
 || `(no short ver)` || `72 1A 00 aa v1 v2 v3 00` || `SET_ANIM_DATA_3` || Sets 3 bytes of animation data. See [Animation]. ||
 || `(no short ver)` || `72 1B 00 aa v1 v2 v3 v4` || `SET_ANIM_DATA_4` || Sets 4 bytes of animation data. See [Animation]. ||
-|| `(no short ver)` || `72 1C 00 ll gg 00 00 00` || `SET_GAMMA` || Sets the gamma for a particular brightness level. ||
+|| `(no short ver)` || `72 1C 00 ll gg 00 00 00` || `SET_GAMMA` || Sets the gamma for a particular brightness level. (Rainbowduino 2.0 only. This command is ignored on Rainbowduino 3.0.) ||
 || `(no short ver)` || `72 1D 00 ff dd ww 00 00` || `SET_BUFFER` || If ff is 1 or 3, sets buffer number dd to be the display buffer. If ff is 2 or 3, sets buffer number ww to be the working buffer. ||
 || `52 1E 00 00 00` || `72 1E 00 00 00 00 00 00` || `COPY_BUFFER` || Copies the display buffer into the working buffer. ||
 || `52 1F 00 00 00` || `72 1F 00 00 00 00 00 00` || `SWAP_BUFFER` || Swaps the display and working buffers. ||
