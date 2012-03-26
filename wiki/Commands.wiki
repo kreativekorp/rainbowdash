@@ -9,11 +9,11 @@ Other commands, however, will not switch buffers, so their effects will
 not be visible until you send the `SWAP_BUFFER` command.
 
 || `52 00 00 00 00` || `72 00 00 00 00 00 00 00` || `NO_OP` || Does nothing. (Command number 0 is guaranteed to be ignored.) ||
-|| `52 01 x0 00 ii` || `72 01 xx yy ii 00 00 00` || `SHOW_IMAGE` || Displays a hard-coded image, with wrap-around. ||
+|| `52 01 x0 00 ii` || `72 01 xx yy ii 00 00 00` || `SHOW_IMAGE` || Displays a hard-coded image, with wrap-around. See [Pictures]. ||
 || `52 02 xr gb ii` || `72 02 xx yy ii rr gg bb` || `SHOW_CHARACTER` || Displays an 8x8 ASCII character (erasing any existing image). ||
 || `52 03 0r gb 00` || `72 03 00 00 cc rr gg bb` || `SHOW_COLOR` || Displays a solid color or pixel value. See PixelFormat. ||
 || `52 04 xr gb yy` || `72 04 xx yy cc rr gg bb` || `SHOW_PIXEL` || Sets an individual pixel on the display. See PixelFormat. ||
-|| `52 05 x0 00 ii` || `72 05 xx yy ii 00 00 00` || `DRAW_IMAGE` || Draws a hard-coded image, without wrap-around. ||
+|| `52 05 x0 00 ii` || `72 05 xx yy ii 00 00 00` || `DRAW_IMAGE` || Draws a hard-coded image, without wrap-around. See [Pictures]. ||
 || `52 06 xr gb ii` || `72 06 xx yy ii rr gg bb` || `DRAW_CHAR_8x8` || Draws an 8x8 ASCII character (on top of an existing image). ||
 || `52 07 xr gb ii` || `72 07 xx yy ii rr gg bb` || `DRAW_CHAR_4x4` || Draws a 4x4 ASCII character (on top of an existing image). ||
 || `52 08 0r gb 00` || `72 08 00 00 cc rr gg bb` || `SET_ALL_COLOR` || Sets the pixel values of all pixels. See PixelFormat. ||
@@ -52,8 +52,8 @@ not be visible until you send the `SWAP_BUFFER` command.
 || `52 29 00 00 00` || `72 29 00 00 00 00 00 00` || `INVERT_BUFFER` || Inverts the display (black becomes white and vice versa). ||
 || `52 2A 00 00 yy` || `72 2A 00 yy 00 00 00 00` || `INVERT_ROW` || Inverts a row (black becomes white and vice versa). ||
 || `52 2B x0 00 00` || `72 2B xx 00 00 00 00 00` || `INVERT_COLUMN` || Inverts a column (black becomes white and vice versa). ||
-|| `(no short ver)` || `72 2C dd ss ii 00 00 00` || `DRAW_IMAGE_ROW` || Draws a single row of a hard-coded image. Row s of the image is drawn on row d. ||
-|| `(no short ver)` || `72 2D dd ss ii 00 00 00` || `DRAW_IMAGE_COLUMN` || Draws a single column of a hard-coded image. Column s of the image is drawn on column d. ||
+|| `(no short ver)` || `72 2C dd ss ii 00 00 00` || `DRAW_IMAGE_ROW` || Draws a single row of a hard-coded image. See [Pictures]. Row s of the image is drawn on row d. ||
+|| `(no short ver)` || `72 2D dd ss ii 00 00 00` || `DRAW_IMAGE_COLUMN` || Draws a single column of a hard-coded image. See [Pictures]. Column s of the image is drawn on column d. ||
 || `(no short ver)` || `72 2E dd ss ii rr gg bb` || `DRAW_CHAR_ROW` || Draws a single row of an 8x8 ASCII character. Row s of the character is drawn on row d. ||
 || `(no short ver)` || `72 2F dd ss ii rr gg bb` || `DRAW_CHAR_COLUMN` || Draws a single column of an 8x8 ASCII character. Column s of the character is drawn on column d. ||
 
@@ -62,5 +62,5 @@ in both 4x4 and 8x8 font sizes, displayed using the `SHOW_CHARACTER`,
 `DRAW_CHAR_8x8`, and `DRAW_CHAR_4x4` commands. It also includes eight built-in
 images displayed using the `SHOW_IMAGE` and `DRAW_IMAGE` commands, the first
 five of which are identical to the built-in images provided by the standard
-firmware. Image number 6 is particularly useful when determining desired
+firmware. See [Pictures]. Image number 6 is particularly useful when determining desired
 gamma levels to be set with the `SET_GAMMA` command.
