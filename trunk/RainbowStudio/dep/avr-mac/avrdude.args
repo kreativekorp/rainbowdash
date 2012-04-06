@@ -1,0 +1,8 @@
+${UPLOADER}
+-C${CONFIG}
+-patmega328p
+-carduino
+-P${DEVICE}
+-b57600
+-D
+-Uflash:w:${FIRMWARE}:i

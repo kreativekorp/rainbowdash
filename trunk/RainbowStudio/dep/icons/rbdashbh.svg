@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.2, SVG Export Plug-In  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+]>
+<svg version="1.1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 x="0px" y="0px" width="288px" height="288px" viewBox="-9 -9.5 288 288"
+	 overflow="visible" enable-background="new -9 -9.5 288 288" xml:space="preserve">
+<defs>
+</defs>
+<path fill="#666666" d="M270,217c0,6.627-5.373,12-12,12H52.5c-6.627,0-12-5.373-12-12V12c0-6.627,5.373-12,12-12H258
+	c6.627,0,12,5.373,12,12V217z"/>
+<path fill="#003300" d="M265.5,216.5c0,4.418-3.582,8-8,8H53c-4.418,0-8-3.582-8-8V12c0-4.418,3.582-8,8-8h204.5
+	c4.418,0,8,3.582,8,8V216.5z"/>
+<polygon fill="#009900" points="270,157 247.5,157 247.5,224.5 270,202 "/>
+<polygon fill="#006600" points="247.5,157 270,157 247.5,179.5 "/>
+<path fill="#CCCCCC" d="M265.5,171.224c0,2.485-2.015,6.19-4.5,8.276s-4.5,1.761-4.5-0.724s2.015-6.19,4.5-8.276
+	S265.5,168.739,265.5,171.224z"/>
+<path fill="#CCCCCC" d="M265.5,184.724c0,2.485-2.015,6.19-4.5,8.276s-4.5,1.761-4.5-0.724s2.015-6.19,4.5-8.276
+	S265.5,182.239,265.5,184.724z"/>
+<path fill="#CCCCCC" d="M265.5,198.224c0,2.485-2.015,6.19-4.5,8.276s-4.5,1.761-4.5-0.724s2.015-6.19,4.5-8.276
+	S265.5,195.739,265.5,198.224z"/>
+<polygon fill="#333333" points="270,112 247.5,112 247.5,170.5 270,148 "/>
+<polygon points="247.5,112 270,112 247.5,134.5 "/>
+<path d="M265.5,135.224c0,7.456-2.015,15.19-4.5,17.276s-4.5-2.268-4.5-9.724s2.015-15.19,4.5-17.276S265.5,127.768,265.5,135.224z"
+	/>
+<path fill="#CCCCCC" d="M262.125,138.056c0,1.864-0.583,3.864-1.301,4.467s-1.301-0.419-1.301-2.284s0.583-3.864,1.301-4.466
+	S262.125,136.191,262.125,138.056z"/>
+<polygon fill="#1A1A1A" points="261,103 247.5,103 247.5,22 270,22 270,94 "/>
+<polygon fill="#333333" points="270,22 261,31 261,103 270,94 "/>
+<polygon points="247.5,22 270,22 261,31 247.5,31 "/>
+<polygon fill="#FFFFFF" points="4.5,44.5 27,22 247.5,22 247.5,242.5 225,265 220.5,265 220.5,49 4.5,49 "/>
+<rect y="44.5" width="225" height="225"/>
+<circle fill="#333333" cx="18" cy="62.5" r="9"/>
+<circle fill="#FFFFFF" cx="45" cy="62.5" r="9"/>
+<circle fill="#333333" cx="72" cy="62.5" r="9"/>
+<circle fill="#333333" cx="99" cy="62.5" r="9"/>
+<circle fill="#333333" cx="126" cy="62.5" r="9"/>
+<circle fill="#333333" cx="153" cy="62.5" r="9"/>
+<circle fill="#333333" cx="180" cy="62.5" r="9"/>
+<circle fill="#FFFFFF" cx="207" cy="62.5" r="9"/>
+<circle fill="#FFFFFF" cx="18" cy="89.5" r="9"/>
+<circle fill="#FFFFFF" cx="45" cy="89.5" r="9"/>
+<circle fill="#333333" cx="72" cy="89.5" r="9"/>
+<circle fill="#FFFFFF" cx="99" cy="89.5" r="9"/>
+<circle fill="#FFFFFF" cx="126" cy="89.5" r="9"/>
+<circle fill="#333333" cx="153" cy="89.5" r="9"/>
+<circle fill="#333333" cx="180" cy="89.5" r="9"/>
+<circle fill="#333333" cx="207" cy="89.5" r="9"/>
+<circle fill="#333333" cx="18" cy="116.5" r="9"/>
+<circle fill="#FFFFFF" cx="45" cy="116.5" r="9"/>
+<circle fill="#333333" cx="72" cy="116.5" r="9"/>
+<circle fill="#FFFFFF" cx="99" cy="116.5" r="9"/>
+<circle fill="#FFFFFF" cx="126" cy="116.5" r="9"/>
+<circle fill="#FFFFFF" cx="153" cy="116.5" r="9"/>
+<circle fill="#333333" cx="180" cy="116.5" r="9"/>
+<circle fill="#FFFFFF" cx="207" cy="116.5" r="9"/>
+<circle fill="#333333" cx="18" cy="143.5" r="9"/>
+<circle fill="#333333" cx="45" cy="143.5" r="9"/>
+<circle fill="#333333" cx="72" cy="143.5" r="9"/>
+<circle fill="#333333" cx="99" cy="143.5" r="9"/>
+<circle fill="#333333" cx="126" cy="143.5" r="9"/>
+<circle fill="#333333" cx="153" cy="143.5" r="9"/>
+<circle fill="#333333" cx="180" cy="143.5" r="9"/>
+<circle fill="#333333" cx="207" cy="143.5" r="9"/>
+<circle fill="#333333" cx="18" cy="170.5" r="9"/>
+<circle fill="#333333" cx="45" cy="170.5" r="9"/>
+<circle fill="#333333" cx="72" cy="170.5" r="9"/>
+<circle fill="#00FF00" cx="99" cy="170.5" r="9"/>
+<circle fill="#333333" cx="126" cy="170.5" r="9"/>
+<circle fill="#333333" cx="153" cy="170.5" r="9"/>
+<circle fill="#333333" cx="180" cy="170.5" r="9"/>
+<circle fill="#333333" cx="207" cy="170.5" r="9"/>
+<circle fill="#333333" cx="18" cy="197.5" r="9"/>
+<circle fill="#333333" cx="45" cy="197.5" r="9"/>
+<circle fill="#333333" cx="72" cy="197.5" r="9"/>
+<circle fill="#00FF00" cx="99" cy="197.5" r="9"/>
+<circle fill="#333333" cx="126" cy="197.5" r="9"/>
+<circle fill="#333333" cx="153" cy="197.5" r="9"/>
+<circle fill="#9900FF" cx="180" cy="197.5" r="9"/>
+<circle fill="#333333" cx="207" cy="197.5" r="9"/>
+<circle fill="#333333" cx="18" cy="224.5" r="9"/>
+<circle fill="#FF9900" cx="45" cy="224.5" r="9"/>
+<circle fill="#333333" cx="72" cy="224.5" r="9"/>
+<circle fill="#00FF00" cx="99" cy="224.5" r="9"/>
+<circle fill="#00FFFF" cx="126" cy="224.5" r="9"/>
+<circle fill="#333333" cx="153" cy="224.5" r="9"/>
+<circle fill="#9900FF" cx="180" cy="224.5" r="9"/>
+<circle fill="#333333" cx="207" cy="224.5" r="9"/>
+<circle fill="#FF0000" cx="18" cy="251.5" r="9"/>
+<circle fill="#FF9900" cx="45" cy="251.5" r="9"/>
+<circle fill="#FFFF00" cx="72" cy="251.5" r="9"/>
+<circle fill="#00FF00" cx="99" cy="251.5" r="9"/>
+<circle fill="#00FFFF" cx="126" cy="251.5" r="9"/>
+<circle fill="#0000FF" cx="153" cy="251.5" r="9"/>
+<circle fill="#9900FF" cx="180" cy="251.5" r="9"/>
+<circle fill="#FF00FF" cx="207" cy="251.5" r="9"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="124.875" y1="24.25" x2="124.875" y2="44.5">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#CCCCCC"/>
+</linearGradient>
+<polygon fill="url(#SVGID_1_)" points="9,44.5 29.25,24.25 240.75,24.25 220.5,44.5 "/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="245.25" y1="144.625" x2="225" y2="144.625">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#CCCCCC"/>
+</linearGradient>
+<polygon fill="url(#SVGID_2_)" points="225,49 245.25,28.75 245.25,240.25 225,260.5 "/>
+<polygon fill="#CCCCCC" points="0,44.5 27,17.5 252,17.5 252,242.5 225,269.5 225,260.5 245.25,240.25 245.25,28.75 225,49 
+	225,44.5 220.5,44.5 240.75,24.25 29.25,24.25 9,44.5 "/>
+</svg>
