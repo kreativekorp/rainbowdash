@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<string>true</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>RainbowStudio</string>
+	<key>CFBundleGetInfoString</key>
+	<string>RainbowStudio 1.0 © 2012 Kreative Software</string>
+	<key>CFBundleIconFile</key>
+	<string>rbdashb.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.kreative.rainbowstudio</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>RainbowStudio</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>NiJi</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>Java</key>
+	<dict>
+		<key>ClassPath</key>
+		<array>
+			<string>$JAVAROOT/RainbowStudio.jar</string>
+			<string>$JAVAROOT/RXTXcomm.jar</string>
+			<string>$JAVAROOT/librxtxSerial.jnilib</string>
+		</array>
+		<key>JVMVersion</key>
+		<string>1.5+</string>
+		<key>MainClass</key>
+		<string>com.kreative.rainbowstudio.main.RainbowStudio</string>
+		<key>Properties</key>
+		<dict>
+			<key>apple.laf.useScreenMenuBar</key>
+			<string>true</string>
+		</dict>
+		<key>VMOptions</key>
+		<string>-Xmx1024M</string>
+		<key>WorkingDirectory</key>
+		<string>$APP_PACKAGE/Contents/Resources</string>
+	</dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>rbd</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>RainbowDashboard Command File</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>RBDf</string>
+				<string>RBDd</string>
+				<string>RBD </string>
+			</array>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>rbdfile</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+	</array>
+</dict>
+</plist>
