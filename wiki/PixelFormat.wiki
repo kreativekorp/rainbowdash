@@ -55,7 +55,7 @@ determines the green values, and the lower half of the blue channel
 determines the blue values.
 
 The value of the field is divided by (base^digit) and then displayed as
-a 4x4 character with background color r0g0b0 and foreground color r1g1b1.
+a 4x4 character with background color r0g0b0 and foreground color r1g1b1. See [Fonts].
 
 The same pixel value must be applied to a 4x4 area in the upper left,
 upper right, lower left, or lower right to get the whole display.
@@ -75,7 +75,7 @@ determines the green values, and the lower half of the blue channel
 determines the blue values.
 
 The value of the field is divided by (base^digit) and then displayed as
-an 8x8 character with background color r0g0b0 and foreground color r1g1b1.
+an 8x8 character with background color r0g0b0 and foreground color r1g1b1. See [Fonts].
 
 The same pixel value must be applied to the entire 8x8 LED matrix to
 get the whole display.
