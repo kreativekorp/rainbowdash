@@ -1,0 +1,20 @@
+#!/bin/bash
+case "$#" in
+	0)
+		echo 'Usage: rainbowdisplay <file> [-<delay> | <file>] ...'
+		;;
+	1)
+		cp "$1" "$RAINBOWD_PIPE"
+		;;
+	*)
+		while true; do
+			for arg in "$@"; do
+				if [[ $arg == -* ]]; then
+					sleep "${arg:1}"
+				else
+					cp "$arg" "$RAINBOWD_PIPE"
+				fi
+			done
+		done
+		;;
+esac
