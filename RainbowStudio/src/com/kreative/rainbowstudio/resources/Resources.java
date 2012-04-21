@@ -33,6 +33,11 @@ public class Resources {
 	public static final Image ACTIVITY_CLOCKTEST = TK.createImage(Resources.class.getResource("aclock.png"));
 	public static final Image ACTIVITY_PROTOTEST = TK.createImage(Resources.class.getResource("aproto.png"));
 	public static final Image ACTIVITY_GENERIC = TK.createImage(Resources.class.getResource("activity.png"));
+
+	public static final Image ADD_ICON = TK.createImage(Resources.class.getResource("add.png"));
+	public static final Image DELETE_ICON = TK.createImage(Resources.class.getResource("del.png"));
+	public static final Image MOVE_UP_ICON = TK.createImage(Resources.class.getResource("up.png"));
+	public static final Image MOVE_DOWN_ICON = TK.createImage(Resources.class.getResource("down.png"));
 	
 	public static final Image MSE_MULTI_1_ICON = TK.createImage(Resources.class.getResource("msem1.png"));
 	public static final Image MSE_MULTI_2_ICON = TK.createImage(Resources.class.getResource("msem2.png"));
