@@ -149,7 +149,7 @@ public class RainbowDisplay implements Activity {
 			durationPanel.add(new JLabel("Duration:"), BorderLayout.LINE_START);
 			durationPanel.add(durationField, BorderLayout.CENTER);
 			
-			JPanel buttonPanel = new JPanel(new GridLayout(1,1));
+			JPanel buttonPanel = new JPanel(new GridLayout(1,0,1,1));
 			buttonPanel.add(addButton);
 			buttonPanel.add(deleteButton);
 			buttonPanel.add(moveUpButton);
