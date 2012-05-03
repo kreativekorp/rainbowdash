@@ -2,6 +2,10 @@ package com.kreative.rainbowstudio.rainbowdash;
 
 public class Animation {
 	public static final int ANIMATION_COUNT = 64;
+	public static final int AF_ADDRESS = 0;
+	public static final int AF_LENGTH = 1;
+	public static final int AF_OFFSET = 2;
+	public static final int AF_DURATION = 3;
 	
 	private byte[][] animationInfo = new byte[4][ANIMATION_COUNT];
 	private byte[] animationData = new byte[256];

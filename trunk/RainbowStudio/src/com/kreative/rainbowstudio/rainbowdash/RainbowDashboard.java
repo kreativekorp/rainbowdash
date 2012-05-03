@@ -56,6 +56,18 @@ public class RainbowDashboard implements VirtualDevice {
 		responseBuffer = new LinkedList<Byte>();
 	}
 	
+	public Animation getAnimation() {
+		return animation;
+	}
+	
+	public Buffers getBuffers() {
+		return buffers;
+	}
+	
+	public RegisterFile getRegisterFile() {
+		return registerFile;
+	}
+	
 	@Override
 	public synchronized void write(int b) {
 		commandBuffer[commandPointer++] = (byte)b;
