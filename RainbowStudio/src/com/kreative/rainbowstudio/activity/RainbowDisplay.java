@@ -11,8 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -20,17 +22,22 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.kreative.rainbowstudio.arguments.ArgumentParser;
 import com.kreative.rainbowstudio.arguments.Arguments;
+import com.kreative.rainbowstudio.device.Device;
+import com.kreative.rainbowstudio.gui.editor.EditorFrame;
 import com.kreative.rainbowstudio.protocol.ClockProtocol;
 import com.kreative.rainbowstudio.protocol.Protocol;
 import com.kreative.rainbowstudio.resources.Resources;
 import com.kreative.rainbowstudio.utility.Pair;
 
 public class RainbowDisplay implements Activity {
+	private Device device = null;
+	
 	@Override
 	public String getName() {
 		return "Display";
@@ -66,7 +73,7 @@ public class RainbowDisplay implements Activity {
 		return new RainbowDisplayThread(((RainbowDisplayPanel)activityUI).getDisplayFiles(), proto, lat, adj);
 	}
 	
-	private static class RainbowDisplayArgumentParser extends ArgumentParser {
+	private class RainbowDisplayArgumentParser extends ArgumentParser {
 		private List<Pair<File, Double>> displayFiles = new ArrayList<Pair<File, Double>>();
 		
 		public boolean parseFlagArgument(String argument, Arguments arguments) {
@@ -114,11 +121,13 @@ public class RainbowDisplay implements Activity {
 		}
 	}
 	
-	private static class RainbowDisplayRow extends JPanel {
+	private class RainbowDisplayRow extends JPanel {
 		private static final long serialVersionUID = 1L;
 		private RainbowDisplayTable table;
 		private JTextField displayPath;
-		private JButton browseButton;
+		private JButton newButton;
+		private JButton openButton;
+		private JButton editButton;
 		private JTextField durationField;
 		private JButton addButton;
 		private JButton deleteButton;
@@ -130,20 +139,34 @@ public class RainbowDisplay implements Activity {
 			this.table = table;
 			displayPath = new JTextField(initial ? new File(new File("Examples"), "test.rbd").getAbsolutePath() : "");
 			displayPath.setPreferredSize(displayPath.getMinimumSize());
-			browseButton = new JButton("Browse...");
+			newButton = square(new JButton(new ImageIcon(Resources.FILE_NEW_ICON_SMALL)));
+			newButton.setToolTipText("New...");
+			openButton = square(new JButton(new ImageIcon(Resources.FILE_OPEN_ICON_SMALL)));
+			openButton.setToolTipText("Open...");
+			editButton = square(new JButton(new ImageIcon(Resources.EDIT_ICON)));
+			editButton.setToolTipText("Edit");
 			durationField = new JTextField("1");
 			durationField.setMinimumSize(new Dimension(60, durationField.getMinimumSize().height));
 			durationField.setPreferredSize(new Dimension(60, durationField.getPreferredSize().height));
 			addButton = square(new JButton(new ImageIcon(Resources.ADD_ICON)));
+			addButton.setToolTipText("Add");
 			deleteButton = square(new JButton(new ImageIcon(Resources.DELETE_ICON)));
+			deleteButton.setToolTipText("Remove");
 			moveUpButton = square(new JButton(new ImageIcon(Resources.MOVE_UP_ICON)));
+			moveUpButton.setToolTipText("Move Up");
 			moveDownButton = square(new JButton(new ImageIcon(Resources.MOVE_DOWN_ICON)));
+			moveDownButton.setToolTipText("Move Down");
 			index = 0;
+			
+			JPanel buttonPanel2 = new JPanel(new GridLayout(1,0,1,1));
+			buttonPanel2.add(newButton);
+			buttonPanel2.add(openButton);
+			buttonPanel2.add(editButton);
 			
 			JPanel pathPanel = new JPanel(new BorderLayout(12,8));
 			pathPanel.add(new JLabel("Display File:"), BorderLayout.LINE_START);
 			pathPanel.add(displayPath, BorderLayout.CENTER);
-			pathPanel.add(browseButton, BorderLayout.LINE_END);
+			pathPanel.add(buttonPanel2, BorderLayout.LINE_END);
 			
 			JPanel durationPanel = new JPanel(new BorderLayout(12,8));
 			durationPanel.add(new JLabel("Duration:"), BorderLayout.LINE_START);
@@ -163,7 +186,27 @@ public class RainbowDisplay implements Activity {
 			add(pathPanel, BorderLayout.CENTER);
 			add(panel1, BorderLayout.LINE_END);
 			
-			browseButton.addActionListener(new ActionListener() {
+			newButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					FileDialog fd = new FileDialog(new Frame(), "Select Display File", FileDialog.SAVE);
+					fd.setVisible(true);
+					if (fd.getDirectory() == null || fd.getFile() == null) return;
+					File f = new File(fd.getDirectory(), fd.getFile());
+					try {
+						OutputStream out = new FileOutputStream(f);
+						out.write(0x72); out.write(0x03);
+						out.write(0); out.write(0);
+						out.write(0); out.write(0);
+						out.write(0); out.write(0);
+						out.close();
+						displayPath.setText(f.getAbsolutePath());
+					} catch (IOException ioe) {
+						JOptionPane.showMessageDialog(RainbowDisplayRow.this, "Could not write to the file.", "Select Display File", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			});
+			openButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					FileDialog fd = new FileDialog(new Frame(), "Select Display File", FileDialog.LOAD);
@@ -171,6 +214,15 @@ public class RainbowDisplay implements Activity {
 					if (fd.getDirectory() == null || fd.getFile() == null) return;
 					File f = new File(fd.getDirectory(), fd.getFile());
 					displayPath.setText(f.getAbsolutePath());
+				}
+			});
+			editButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String s = displayPath.getText();
+					if (s.length() > 0) {
+						EditorFrame.doOpen(new File(s), device);
+					}
 				}
 			});
 			
@@ -234,7 +286,7 @@ public class RainbowDisplay implements Activity {
 		}
 	}
 	
-	private static class RainbowDisplayTable extends JPanel {
+	private class RainbowDisplayTable extends JPanel {
 		private static final long serialVersionUID = 1L;
 		
 		public RainbowDisplayTable() {
@@ -294,7 +346,7 @@ public class RainbowDisplay implements Activity {
 		}
 	}
 	
-	private static class RainbowDisplayPanel extends JPanel {
+	private class RainbowDisplayPanel extends JPanel {
 		private static final long serialVersionUID = 1L;
 		private RainbowDisplayTable table;
 		
@@ -309,7 +361,7 @@ public class RainbowDisplay implements Activity {
 		}
 	}
 	
-	private static class RainbowDisplayThread extends Thread {
+	private class RainbowDisplayThread extends Thread {
 		private List<Pair<File, Double>> display;
 		private Protocol proto;
 		private int clockLat;
@@ -324,6 +376,8 @@ public class RainbowDisplay implements Activity {
 		
 		@Override
 		public void run() {
+			device = proto.getDevice();
+			
 			if (proto instanceof ClockProtocol) {
 				try {
 					GregorianCalendar now = new GregorianCalendar();
@@ -332,6 +386,7 @@ public class RainbowDisplay implements Activity {
 					((ClockProtocol)proto).setClockZoneOffset(now.get(GregorianCalendar.ZONE_OFFSET));
 					((ClockProtocol)proto).setClockDSTOffset(now.get(GregorianCalendar.DST_OFFSET));
 				} catch (IOException ioe) {
+					device = null;
 					return;
 				}
 			}
@@ -362,6 +417,7 @@ public class RainbowDisplay implements Activity {
 								try {
 									Thread.sleep((long)(d.getLatter() * 1000));
 								} catch (InterruptedException e) {
+									device = null;
 									return;
 								}
 							}
@@ -369,6 +425,8 @@ public class RainbowDisplay implements Activity {
 					}
 				}
 			}
+			
+			device = null;
 		}
 		
 		private void runFileCopy(File f) {

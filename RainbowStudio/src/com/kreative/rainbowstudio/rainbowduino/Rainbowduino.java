@@ -29,4 +29,8 @@ public class Rainbowduino extends JPanel {
 		if (thread != null) thread.interrupt();
 		thread = null;
 	}
+	
+	public LEDArray getLEDArray() {
+		return ledArray;
+	}
 }

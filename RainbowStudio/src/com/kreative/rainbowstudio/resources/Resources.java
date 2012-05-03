@@ -38,6 +38,14 @@ public class Resources {
 	public static final Image DELETE_ICON = TK.createImage(Resources.class.getResource("del.png"));
 	public static final Image MOVE_UP_ICON = TK.createImage(Resources.class.getResource("up.png"));
 	public static final Image MOVE_DOWN_ICON = TK.createImage(Resources.class.getResource("down.png"));
+	public static final Image EDIT_ICON = TK.createImage(Resources.class.getResource("edit.png"));
+	
+	public static final Image FILE_NEW_ICON_SMALL = TK.createImage(Resources.class.getResource("new.png"));
+	public static final Image FILE_OPEN_ICON_SMALL = TK.createImage(Resources.class.getResource("open.png"));
+	public static final Image FILE_SAVE_ICON_SMALL = TK.createImage(Resources.class.getResource("save.png"));
+	public static final Image FILE_SAVE_AS_ICON_SMALL = TK.createImage(Resources.class.getResource("saveas.png"));
+	public static final Image FILE_REVERT_ICON_SMALL = TK.createImage(Resources.class.getResource("revert.png"));
+	public static final Image UPLOAD_ICON_SMALL = TK.createImage(Resources.class.getResource("upload2.png"));
 	
 	public static final Image MSE_MULTI_1_ICON = TK.createImage(Resources.class.getResource("msem1.png"));
 	public static final Image MSE_MULTI_2_ICON = TK.createImage(Resources.class.getResource("msem2.png"));
@@ -51,4 +59,14 @@ public class Resources {
 	public static final Image MSE_FOREGROUND_ICON = TK.createImage(Resources.class.getResource("msefg.png"));
 	public static final Image MSE_BACKGROUND_ICON = TK.createImage(Resources.class.getResource("msebg.png"));
 	public static final Image MSE_COLOR_PICKER = TK.createImage(Resources.class.getResource("colors.png"));
+	
+	public static final Image RBD_EDITOR_PENCIL = TK.createImage(Resources.class.getResource("edpencil.png"));
+	public static final Image RBD_EDITOR_LINE = TK.createImage(Resources.class.getResource("edline.png"));
+	public static final Image RBD_EDITOR_RECTANGLE = TK.createImage(Resources.class.getResource("edrect.png"));
+	public static final Image RBD_EDITOR_FILLRECT = TK.createImage(Resources.class.getResource("edrectf.png"));
+	public static final Image RBD_EDITOR_ERASER = TK.createImage(Resources.class.getResource("ederaser.png"));
+	public static final Image RBD_EDITOR_DROPPER = TK.createImage(Resources.class.getResource("eddrop.png"));
+	public static final Image RBD_EDITOR_COLOR = TK.createImage(Resources.class.getResource("edcolor.png"));
+	public static final Image RBD_EDITOR_CLOCK = TK.createImage(Resources.class.getResource("edclock.png"));
+	public static final Image RBD_EDITOR_ANIMATION = TK.createImage(Resources.class.getResource("edanim.png"));
 }
