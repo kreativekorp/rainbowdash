@@ -46,11 +46,9 @@ public class AnimationPanel extends PixelValuePanel {
 	private JComboBox blueSlot;
 	
 	private RainbowDashboard backingStore;
-	private AnimationEditorFrame animationEditor;
 	
 	public AnimationPanel(RainbowDashboard backingStore) {
 		this.backingStore = backingStore;
-		this.animationEditor = null;
 		
 		JLabel redLabel = new JLabel("Red:");
 		redAnimated = new JCheckBox("Animated");
@@ -215,10 +213,7 @@ public class AnimationPanel extends PixelValuePanel {
 		editAnimationDataButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (animationEditor == null) {
-					animationEditor = new AnimationEditorFrame(AnimationPanel.this.backingStore);
-				}
-				animationEditor.setVisible(true);
+				new AnimationEditorFrame(AnimationPanel.this.backingStore).setVisible(true);
 			}
 		});
 	}

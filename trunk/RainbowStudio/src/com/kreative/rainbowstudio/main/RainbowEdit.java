@@ -19,6 +19,7 @@ public class RainbowEdit {
 					}
 				}
 				try { Class.forName("com.kreative.rainbowstudio.gui.mac.EditorOpenFilesHandler").newInstance(); } catch (Exception e) {}
+				try { Class.forName("com.kreative.rainbowstudio.gui.mac.RainbowStudioQuitHandler").newInstance(); } catch (Exception e) {}
 			}
 		});
 	}
