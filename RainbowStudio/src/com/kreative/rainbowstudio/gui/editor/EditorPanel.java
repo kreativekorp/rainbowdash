@@ -58,7 +58,7 @@ public class EditorPanel extends JPanel {
 			}
 		};
 		this.editor = new Rainbowduino(backingStore);
-		this.valuePanel = new ColorPanel();
+		this.valuePanel = new MasterPVPanel();
 		this.uploadDevice = uploadDevice;
 		
 		JButton newButton = new JButton(new ImageIcon(Resources.FILE_NEW_ICON_SMALL));
@@ -144,10 +144,12 @@ public class EditorPanel extends JPanel {
 	
 	public void start() {
 		editor.start();
+		valuePanel.start();
 	}
 	
 	public void stop() {
 		editor.stop();
+		valuePanel.stop();
 	}
 	
 	public File getFile() {

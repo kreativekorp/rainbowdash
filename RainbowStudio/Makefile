@@ -28,6 +28,7 @@ bin:
 	javac -target 1.5 -sourcepath src $(SRCFILES) -d bin
 	cp src/com/kreative/rainbowstudio/firmware/*.hex bin/com/kreative/rainbowstudio/firmware/
 	cp src/com/kreative/rainbowstudio/resources/*.png bin/com/kreative/rainbowstudio/resources/
+	cp src/com/kreative/rainbowstudio/resources/*.ttf bin/com/kreative/rainbowstudio/resources/
 
 osxclean:
 	export COPYFILE_DISABLE=true

@@ -1,5 +1,6 @@
 package com.kreative.rainbowstudio.resources;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -69,4 +70,13 @@ public class Resources {
 	public static final Image RBD_EDITOR_COLOR = TK.createImage(Resources.class.getResource("edcolor.png"));
 	public static final Image RBD_EDITOR_CLOCK = TK.createImage(Resources.class.getResource("edclock.png"));
 	public static final Image RBD_EDITOR_ANIMATION = TK.createImage(Resources.class.getResource("edanim.png"));
+	
+	private static final Font getFont(String name, int size) {
+		try {
+			return Font.createFont(Font.TRUETYPE_FONT, Resources.class.getResourceAsStream(name)).deriveFont((float)size);
+		} catch (Exception e) {
+			return new Font("Monospaced", Font.PLAIN, size);
+		}
+	}
+	public static final Font CLOCK_FONT = getFont("underclocked.ttf", 16);
 }
