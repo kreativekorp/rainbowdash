@@ -2,18 +2,16 @@ package com.kreative.rainbowstudio.gui.editor;
 
 public class SimpleAnimationDataOptimizationStrategy extends LargeToSmallAnimationDataOptimizationStrategy {
 	@Override
-	public int optimizeAnimationData(
+	public void optimizeAnimationData(
 			int slot, byte[] data,
-			int[] address, int[] length, int[] offset,
-			byte[] animationData, int animationDataLength
+			int[] duration, int[] address, int[] length, int[] offset,
+			byte[] animationData, int[] animationDataFreeSpace
 	) throws AnimationTooComplexException {
-		if (animationDataLength + data.length > animationData.length) throw new AnimationTooComplexException();
-		address[slot] = animationDataLength;
-		length[slot] = data.length;
+		if (animationDataFreeSpace[0] + data.length > animationDataFreeSpace[1]) throw new AnimationTooComplexException();
+		address[slot] = animationDataFreeSpace[0];
 		offset[slot] = 0;
 		for (int i = 0; i < data.length; i++) {
-			animationData[animationDataLength++] = data[i];
+			animationData[animationDataFreeSpace[0]++] = data[i];
 		}
-		return animationDataLength;
 	}
 }

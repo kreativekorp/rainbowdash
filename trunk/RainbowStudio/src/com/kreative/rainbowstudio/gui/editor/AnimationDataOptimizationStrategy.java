@@ -6,7 +6,7 @@ import com.kreative.rainbowstudio.utility.Pair;
 public interface AnimationDataOptimizationStrategy {
 	public void optimizeAnimationData(
 			int count, List<Pair<Integer,byte[]>> data,
-			int[] address, int[] length, int[] offset,
+			int[] duration, int[] address, int[] length, int[] offset,
 			byte[] animationData
 	) throws AnimationTooComplexException;
 }
