@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+import com.kreative.rainbowstudio.rainbowdash.RainbowDashboard;
 import com.kreative.rainbowstudio.resources.Resources;
 
 public class MasterPVPanel extends PixelValuePanel {
@@ -17,9 +18,11 @@ public class MasterPVPanel extends PixelValuePanel {
 	
 	private JToggleButton colorButton;
 	private JToggleButton clockFieldButton;
+	private JToggleButton animationButton;
 	
 	private ColorPanel colorPanel;
 	private ClockFieldPanel clockFieldPanel;
+	private AnimationPanel animationPanel;
 	
 	private JPanel mainPanel;
 	private CardLayout mainLayout;
@@ -29,6 +32,7 @@ public class MasterPVPanel extends PixelValuePanel {
 		currentPanel.stop();
 		colorButton.setSelected(true);
 		clockFieldButton.setSelected(false);
+		animationButton.setSelected(false);
 		mainLayout.show(mainPanel, "color");
 		currentPanel = colorPanel;
 		currentPanel.start();
@@ -38,27 +42,43 @@ public class MasterPVPanel extends PixelValuePanel {
 		currentPanel.stop();
 		colorButton.setSelected(false);
 		clockFieldButton.setSelected(true);
+		animationButton.setSelected(false);
 		mainLayout.show(mainPanel, "clock");
 		currentPanel = clockFieldPanel;
 		currentPanel.start();
 	}
 	
-	public MasterPVPanel() {
+	private void showAnimationPanel() {
+		currentPanel.stop();
+		colorButton.setSelected(false);
+		clockFieldButton.setSelected(false);
+		animationButton.setSelected(true);
+		mainLayout.show(mainPanel, "anim");
+		currentPanel = animationPanel;
+		currentPanel.start();
+	}
+	
+	public MasterPVPanel(RainbowDashboard backingStore) {
 		colorButton = new JToggleButton(new ImageIcon(Resources.RBD_EDITOR_COLOR));
 		colorButton.setToolTipText("Fixed Color");
 		clockFieldButton = new JToggleButton(new ImageIcon(Resources.RBD_EDITOR_CLOCK));
 		clockFieldButton.setToolTipText("Clock-Based Color");
+		animationButton = new JToggleButton(new ImageIcon(Resources.RBD_EDITOR_ANIMATION));
+		animationButton.setToolTipText("Animated Color");
 		
 		colorPanel = new ColorPanel();
 		clockFieldPanel = new ClockFieldPanel();
+		animationPanel = new AnimationPanel(backingStore);
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(0,1,1,1));
 		buttonPanel.add(colorButton);
 		buttonPanel.add(clockFieldButton);
+		buttonPanel.add(animationButton);
 		
 		mainPanel = new JPanel(mainLayout = new CardLayout());
 		mainPanel.add(colorPanel, "color");
 		mainPanel.add(clockFieldPanel, "clock");
+		mainPanel.add(animationPanel, "anim");
 		currentPanel = colorPanel;
 		
 		setLayout(new BorderLayout(12,12));
@@ -78,6 +98,12 @@ public class MasterPVPanel extends PixelValuePanel {
 				showClockFieldPanel();
 			}
 		});
+		animationButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showAnimationPanel();
+			}
+		});
 	}
 	
 	@Override
@@ -89,10 +115,14 @@ public class MasterPVPanel extends PixelValuePanel {
 	public void setPixelValue(int value) {
 		if (value < 0) {
 			showClockFieldPanel();
-		} else {
+		} else if (((value >> 24) & 0xFF) == 0) {
 			showColorPanel();
+		} else {
+			showAnimationPanel();
 		}
-		currentPanel.setPixelValue(value);
+		colorPanel.setPixelValue(value);
+		clockFieldPanel.setPixelValue(value);
+		animationPanel.setPixelValue(value);
 	}
 	
 	@Override
