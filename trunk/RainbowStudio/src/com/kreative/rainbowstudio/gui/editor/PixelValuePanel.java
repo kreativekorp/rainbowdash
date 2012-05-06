@@ -7,4 +7,6 @@ public abstract class PixelValuePanel extends JPanel {
 	
 	public abstract int getPixelValue();
 	public abstract void setPixelValue(int value);
+	public void start() {}
+	public void stop() {}
 }

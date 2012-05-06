@@ -2,13 +2,10 @@ package com.kreative.rainbowstudio.gui.editor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -55,8 +52,6 @@ public class ColorPanel extends PixelValuePanel {
 		colorPanel.setOpaque(true);
 		colorPanel.setBackground(Color.white);
 		colorPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		colorPanel.setMinimumSize(new Dimension(48, 48));
-		colorPanel.setPreferredSize(new Dimension(48, 48));
 		
 		ColorPicker picker = new ColorPicker() {
 			private static final long serialVersionUID = 1L;
@@ -69,16 +64,13 @@ public class ColorPanel extends PixelValuePanel {
 			}
 		};
 		
-		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
-		mainPanel.add(slidersPanel);
-		mainPanel.add(Box.createHorizontalStrut(12));
-		mainPanel.add(colorPanel);
-		mainPanel.add(Box.createHorizontalStrut(12));
-		mainPanel.add(picker);
+		JPanel colorsPanel = new JPanel(new BorderLayout(-1, -1));
+		colorsPanel.add(picker, BorderLayout.PAGE_START);
+		colorsPanel.add(colorPanel, BorderLayout.CENTER);
 		
-		setLayout(new BorderLayout());
-		add(mainPanel, BorderLayout.LINE_START);
+		setLayout(new BorderLayout(12,12));
+		add(slidersPanel, BorderLayout.CENTER);
+		add(colorsPanel, BorderLayout.LINE_END);
 		
 		redSlider.addChangeListener(new ChangeListener() {
 			@Override

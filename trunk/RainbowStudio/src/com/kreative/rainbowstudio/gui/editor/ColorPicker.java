@@ -15,17 +15,23 @@ public abstract class ColorPicker extends JLabel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				doIt(e.getX(), e.getY(), false);
+				int bx = (getWidth() - 144) / 2;
+				int by = (getHeight() - 96) / 2;
+				doIt(e.getX() - bx, e.getY() - by, false);
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				doIt(e.getX(), e.getY(), true);
+				int bx = (getWidth() - 144) / 2;
+				int by = (getHeight() - 96) / 2;
+				doIt(e.getX() - bx, e.getY() - by, true);
 			}
 		});
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				doIt(e.getX(), e.getY(), false);
+				int bx = (getWidth() - 144) / 2;
+				int by = (getHeight() - 96) / 2;
+				doIt(e.getX() - bx, e.getY() - by, false);
 			}
 		});
 	}

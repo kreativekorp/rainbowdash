@@ -342,4 +342,12 @@ public class Palettes {
 		int length = PALETTE_INFO[palette % 32][1];
 		return PALETTE_DATA[channel % 3][offset + (value % length)] & 0xFF;
 	}
+	
+	public int getPaletteCount() {
+		return 32;
+	}
+	
+	public int getPaletteColorCount(int palette) {
+		return PALETTE_INFO[palette % 32][1];
+	}
 }

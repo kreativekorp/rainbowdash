@@ -4,13 +4,9 @@ import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
-
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-
 import com.kreative.rainbowstudio.device.Device;
 
 public class EditorFrame extends JFrame {
@@ -64,15 +60,5 @@ public class EditorFrame extends JFrame {
 		} catch (IOException ioe) {
 			JOptionPane.showMessageDialog(frame, "Could not read from the file.", "Open Display File", JOptionPane.ERROR_MESSAGE);
 		}
-	}
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Thread() {
-			@Override
-			public void run() {
-				try { UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName()); } catch (Exception e) {}
-				doNew(null);
-			}
-		});
 	}
 }
