@@ -125,13 +125,16 @@ public class AnimationEditorFrame extends JFrame {
 		
 		for (int i = 0; i < count; i++) {
 			byte[] b = editor.getRowData(i);
-			if (b.length > 0) {
+			if (b.length > animationData.length) {
+				throw new AnimationTooComplexException();
+			} else if (b.length > 0) {
 				data.add(new Pair<Integer, byte[]>(i, b));
 				duration[i] = editor.getRowDuration(i);
+				length[i] = b.length;
 			}
 		}
 		if (!data.isEmpty()) {
-			saveStrategy.optimizeAnimationData(count, data, address, length, offset, animationData);
+			saveStrategy.optimizeAnimationData(count, data, duration, address, length, offset, animationData);
 		}
 		
 		Animation animation = backingStore.getAnimation();
