@@ -19,8 +19,6 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.kreative.rainbowstudio.rainbowdash.RainbowDashboard;
-
 public class AnimationPanel extends PixelValuePanel {
 	private static final long serialVersionUID = 1L;
 	
@@ -46,11 +44,9 @@ public class AnimationPanel extends PixelValuePanel {
 	private JComboBox blueSlot;
 	
 	private EditorPanel parent;
-	private RainbowDashboard backingStore;
 	
-	public AnimationPanel(EditorPanel parent, RainbowDashboard backingStore) {
+	public AnimationPanel(EditorPanel parent) {
 		this.parent = parent;
-		this.backingStore = backingStore;
 		
 		JLabel redLabel = new JLabel("Red:");
 		redAnimated = new JCheckBox("Animated");
@@ -215,7 +211,7 @@ public class AnimationPanel extends PixelValuePanel {
 		editAnimationDataButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new AnimationEditorFrame(AnimationPanel.this.parent, AnimationPanel.this.backingStore).setVisible(true);
+				new AnimationEditorFrame(AnimationPanel.this.parent).setVisible(true);
 			}
 		});
 	}

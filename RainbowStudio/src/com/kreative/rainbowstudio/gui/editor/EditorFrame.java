@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import com.kreative.rainbowstudio.device.Device;
 import com.kreative.rainbowstudio.gui.common.SaveChangesDialog;
+import com.kreative.rainbowstudio.gui.menus.EditorMenuBar;
 
 public class EditorFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +23,7 @@ public class EditorFrame extends JFrame {
 		panel = new EditorPanel(this, uploadDevice);
 		panel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
 		setContentPane(panel);
+		setJMenuBar(new EditorMenuBar(this, panel));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		pack();
