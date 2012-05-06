@@ -58,7 +58,7 @@ public class EditorPanel extends JPanel {
 			}
 		};
 		this.editor = new Rainbowduino(backingStore);
-		this.valuePanel = new MasterPVPanel(backingStore);
+		this.valuePanel = new MasterPVPanel(this, backingStore);
 		this.uploadDevice = uploadDevice;
 		
 		JButton newButton = new JButton(new ImageIcon(Resources.FILE_NEW_ICON_SMALL));
