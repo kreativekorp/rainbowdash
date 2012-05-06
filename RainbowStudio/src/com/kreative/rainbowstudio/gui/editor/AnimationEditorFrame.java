@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.kreative.rainbowstudio.gui.common.SaveChangesDialog;
 import com.kreative.rainbowstudio.rainbowdash.Animation;
 import com.kreative.rainbowstudio.rainbowdash.RainbowDashboard;
 import com.kreative.rainbowstudio.resources.Resources;
@@ -60,7 +63,7 @@ public class AnimationEditorFrame extends JFrame {
 		contentPanel.add(buttonPanel, BorderLayout.PAGE_END);
 		
 		setContentPane(contentPanel);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(480, 320);
 		setLocationRelativeTo(null);
 		load();
@@ -68,23 +71,19 @@ public class AnimationEditorFrame extends JFrame {
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					save();
-				} catch (AnimationTooComplexException ex) {
-					JOptionPane.showMessageDialog(
-							AnimationEditorFrame.this,
-							"<html>The animation data are too complex to fit in the Rainbowduino's memory." +
-							"<br>Try using fewer slots or fewer frames.</html>",
-							"Edit Animations",
-							JOptionPane.ERROR_MESSAGE
-					);
-				}
+				doSave();
 			}
 		});
 		revertButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				load();
+			}
+		});
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				doClose();
 			}
 		});
 	}
@@ -143,5 +142,38 @@ public class AnimationEditorFrame extends JFrame {
 			animation.setAnimationInfo(i, address[i], length[i], offset[i], duration[i]);
 		}
 		setChanged(false);
+	}
+	
+	public void doSave() {
+		try {
+			save();
+		} catch (AnimationTooComplexException ex) {
+			JOptionPane.showMessageDialog(
+					AnimationEditorFrame.this,
+					"<html>The animation data are too complex to fit in the Rainbowduino's memory." +
+					"<br>Try using fewer slots or fewer frames.</html>",
+					"Edit Animations",
+					JOptionPane.ERROR_MESSAGE
+			);
+		}
+	}
+	
+	public void doClose() {
+		if (isChanged()) {
+			switch (new SaveChangesDialog(this, "the animation data").showDialog()) {
+			case CANCEL:
+				return;
+			case DONT_SAVE:
+				dispose();
+				return;
+			case SAVE:
+				doSave();
+				if (!isChanged()) dispose();
+				return;
+			}
+		} else {
+			dispose();
+			return;
+		}
 	}
 }
