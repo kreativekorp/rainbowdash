@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
-import com.kreative.rainbowstudio.rainbowdash.RainbowDashboard;
 import com.kreative.rainbowstudio.resources.Resources;
 
 public class MasterPVPanel extends PixelValuePanel {
@@ -58,7 +57,7 @@ public class MasterPVPanel extends PixelValuePanel {
 		currentPanel.start();
 	}
 	
-	public MasterPVPanel(EditorPanel parent, RainbowDashboard backingStore) {
+	public MasterPVPanel(EditorPanel parent) {
 		colorButton = new JToggleButton(new ImageIcon(Resources.RBD_EDITOR_COLOR));
 		colorButton.setToolTipText("Fixed Color");
 		clockFieldButton = new JToggleButton(new ImageIcon(Resources.RBD_EDITOR_CLOCK));
@@ -68,7 +67,7 @@ public class MasterPVPanel extends PixelValuePanel {
 		
 		colorPanel = new ColorPanel();
 		clockFieldPanel = new ClockFieldPanel();
-		animationPanel = new AnimationPanel(parent, backingStore);
+		animationPanel = new AnimationPanel(parent);
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(0,1,1,1));
 		buttonPanel.add(colorButton);

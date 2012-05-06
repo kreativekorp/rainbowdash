@@ -19,8 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.kreative.rainbowstudio.gui.common.SaveChangesDialog;
+import com.kreative.rainbowstudio.gui.menus.AnimationEditorMenuBar;
 import com.kreative.rainbowstudio.rainbowdash.Animation;
-import com.kreative.rainbowstudio.rainbowdash.RainbowDashboard;
 import com.kreative.rainbowstudio.resources.Resources;
 import com.kreative.rainbowstudio.utility.Pair;
 
@@ -28,15 +28,13 @@ public class AnimationEditorFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private EditorPanel parent;
-	private RainbowDashboard backingStore;
 	private boolean changed;
 	private AnimationEditorPanel editor;
 	private AnimationDataOptimizationStrategy saveStrategy;
 	
-	public AnimationEditorFrame(EditorPanel parent, RainbowDashboard backingStore) {
+	public AnimationEditorFrame(EditorPanel parent) {
 		super("Edit Animations");
 		this.parent = parent;
-		this.backingStore = backingStore;
 		this.changed = false;
 		
 		this.editor = new AnimationEditorPanel(this);
@@ -65,6 +63,7 @@ public class AnimationEditorFrame extends JFrame {
 		contentPanel.add(buttonPanel, BorderLayout.PAGE_END);
 		
 		setContentPane(contentPanel);
+		setJMenuBar(new AnimationEditorMenuBar(this));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(480, 320);
 		setLocationRelativeTo(null);
@@ -100,7 +99,7 @@ public class AnimationEditorFrame extends JFrame {
 	}
 	
 	public void load() {
-		Animation animation = backingStore.getAnimation();
+		Animation animation = parent.getBackingStore().getAnimation();
 		for (int i = 0; i < editor.getRowCount(); i++) {
 			int a = animation.getAnimationInfo(i, Animation.AF_ADDRESS);
 			int l = animation.getAnimationInfo(i, Animation.AF_LENGTH);
@@ -139,7 +138,7 @@ public class AnimationEditorFrame extends JFrame {
 			saveStrategy.optimizeAnimationData(count, data, duration, address, length, offset, animationData);
 		}
 		
-		Animation animation = backingStore.getAnimation();
+		Animation animation = parent.getBackingStore().getAnimation();
 		for (int i = 0; i < 256; i++) {
 			animation.setAnimationData(i, animationData[i]);
 		}

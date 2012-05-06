@@ -23,6 +23,7 @@ import javax.swing.JTextArea;
 import com.kreative.rainbowstudio.device.Device;
 import com.kreative.rainbowstudio.gui.common.DevicePicker;
 import com.kreative.rainbowstudio.gui.common.FirmwarePicker;
+import com.kreative.rainbowstudio.gui.menus.UpdatingJMenuBar;
 import com.kreative.rainbowstudio.resources.Resources;
 import com.kreative.rainbowstudio.utility.FirmwareUploader;
 import com.kreative.rainbowstudio.utility.OSUtils;
@@ -109,20 +110,40 @@ public class UploadPanel extends JPanel {
 		rescanButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				devicePicker.rescan();
+				doRescan();
 			}
 		});
 		
 		uploadButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new UploadThread().start();
+				doUpload();
 			}
 		});
 	}
 	
 	public void setDevice(Device device) {
 		devicePicker.setSelectedItem(device);
+	}
+	
+	public boolean canDoRescan() {
+		return rescanButton.isEnabled();
+	}
+	
+	public void doRescan() {
+		if (rescanButton.isEnabled()) {
+			devicePicker.rescan();
+		}
+	}
+	
+	public boolean canDoUpload() {
+		return uploadButton.isEnabled();
+	}
+	
+	public void doUpload() {
+		if (uploadButton.isEnabled()) {
+			new UploadThread().start();
+		}
 	}
 	
 	private class UploadThread extends Thread {
@@ -132,6 +153,7 @@ public class UploadPanel extends JPanel {
 			uploadButton.setEnabled(false);
 			devicePicker.setEnabled(false);
 			firmwarePicker.setEnabled(false);
+			UpdatingJMenuBar.updateMenus(UploadPanel.this);
 			logTextArea.setText("");
 			progressLayout.show(progressPanel, "bar");
 			
@@ -151,6 +173,7 @@ public class UploadPanel extends JPanel {
 			uploadButton.setEnabled(true);
 			devicePicker.setEnabled(true);
 			firmwarePicker.setEnabled(true);
+			UpdatingJMenuBar.updateMenus(UploadPanel.this);
 		}
 	}
 }

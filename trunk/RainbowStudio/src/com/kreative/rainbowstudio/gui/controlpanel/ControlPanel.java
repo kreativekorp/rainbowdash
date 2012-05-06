@@ -30,6 +30,7 @@ import com.kreative.rainbowstudio.device.Device;
 import com.kreative.rainbowstudio.device.VirtualDevice;
 import com.kreative.rainbowstudio.gui.common.DevicePicker;
 import com.kreative.rainbowstudio.gui.common.ProtocolPicker;
+import com.kreative.rainbowstudio.gui.menus.UpdatingJMenuBar;
 import com.kreative.rainbowstudio.gui.upload.UploadFrame;
 import com.kreative.rainbowstudio.protocol.Protocol;
 import com.kreative.rainbowstudio.rainbowduino.Rainbowduino;
@@ -151,94 +152,136 @@ public class ControlPanel extends JPanel {
 		rescanButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				devicePicker.rescan();
+				doRescan();
 			}
 		});
 		
 		uploadButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UploadFrame frame = new UploadFrame();
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setVisible(true);
-				Device device = devicePicker.getSelectedDevice();
-				if (device != null) frame.setDevice(device);
+				doUpload();
 			}
 		});
 		
 		startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				devicePicker.setEnabled(false);
-				protoPicker.setEnabled(false);
-				latencyField.setEnabled(false);
-				clockAdjustField.setEnabled(false);
-				rescanButton.setEnabled(false);
-				startButton.setEnabled(false);
-				stopButton.setEnabled(true);
-				action = getDefaultCloseOperation();
-				setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				
-				final Device device = devicePicker.getSelectedDevice();
-				if (device instanceof VirtualDevice) {
-					rainbowduino = new Rainbowduino((VirtualDevice)device);
-					frame = new JFrame("Rainbowduino");
-					frame.setContentPane(rainbowduino);
-					frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-					frame.setResizable(false);
-					frame.pack();
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-					rainbowduino.start();
-				} else {
-					rainbowduino = null;
-					frame = null;
-				}
-				
-				final Protocol proto = protoPicker.getSelectedProtocol();
-				final int lat = parseInt(latencyField.getText());
-				final int adj = parseInt(clockAdjustField.getText());
-				new Thread() {
-					@Override
-					public void run() {
-						try { device.reset(); } catch (IOException ioe) {}
-						try { Thread.sleep(3000); } catch (InterruptedException ie) {}
-						activityPanel.setParameters(proto, lat, adj);
-						activityPanel.setVisible(true);
-						pack();
-					}
-				}.start();
+				doStart();
 			}
 		});
 		
 		stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				activityPanel.stopAllActivities();
-				activityPanel.setVisible(false);
-				pack();
-				
-				Device device = devicePicker.getSelectedDevice();
-				try { device.close(); } catch (IOException ioe) {}
-				if (rainbowduino != null) {
-					rainbowduino.stop();
-					rainbowduino = null;
-				}
-				if (frame != null) {
-					frame.dispose();
-					frame = null;
-				}
-				
-				setDefaultCloseOperation(action);
-				devicePicker.setEnabled(true);
-				protoPicker.setEnabled(true);
-				latencyField.setEnabled(true);
-				clockAdjustField.setEnabled(true);
-				rescanButton.setEnabled(true);
-				startButton.setEnabled(true);
-				stopButton.setEnabled(false);
+				doStop();
 			}
 		});
+	}
+	
+	public boolean canDoRescan() {
+		return rescanButton.isEnabled();
+	}
+	
+	public void doRescan() {
+		if (rescanButton.isEnabled()) {
+			devicePicker.rescan();
+		}
+	}
+	
+	public boolean canDoUpload() {
+		return uploadButton.isEnabled();
+	}
+	
+	public void doUpload() {
+		if (uploadButton.isEnabled()) {
+			UploadFrame frame = new UploadFrame();
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame.setVisible(true);
+			Device device = devicePicker.getSelectedDevice();
+			if (device != null) frame.setDevice(device);
+		}
+	}
+	
+	public boolean canDoStart() {
+		return startButton.isEnabled();
+	}
+	
+	public void doStart() {
+		if (startButton.isEnabled()) {
+			devicePicker.setEnabled(false);
+			protoPicker.setEnabled(false);
+			latencyField.setEnabled(false);
+			clockAdjustField.setEnabled(false);
+			rescanButton.setEnabled(false);
+			startButton.setEnabled(false);
+			stopButton.setEnabled(true);
+			UpdatingJMenuBar.updateMenus(this);
+			action = getDefaultCloseOperation();
+			setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			
+			final Device device = devicePicker.getSelectedDevice();
+			if (device instanceof VirtualDevice) {
+				rainbowduino = new Rainbowduino((VirtualDevice)device);
+				frame = new JFrame("Rainbowduino");
+				frame.setContentPane(rainbowduino);
+				frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+				frame.setResizable(false);
+				frame.pack();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				rainbowduino.start();
+			} else {
+				rainbowduino = null;
+				frame = null;
+			}
+			
+			final Protocol proto = protoPicker.getSelectedProtocol();
+			final int lat = parseInt(latencyField.getText());
+			final int adj = parseInt(clockAdjustField.getText());
+			new Thread() {
+				@Override
+				public void run() {
+					try { device.reset(); } catch (IOException ioe) {}
+					try { Thread.sleep(3000); } catch (InterruptedException ie) {}
+					activityPanel.setParameters(proto, lat, adj);
+					activityPanel.setVisible(true);
+					pack();
+				}
+			}.start();
+		}
+	}
+	
+	public boolean canDoStop() {
+		return stopButton.isEnabled();
+	}
+	
+	public void doStop() {
+		if (stopButton.isEnabled()) {
+			activityPanel.stopAllActivities();
+			activityPanel.setVisible(false);
+			pack();
+			
+			Device device = devicePicker.getSelectedDevice();
+			try { device.close(); } catch (IOException ioe) {}
+			if (rainbowduino != null) {
+				rainbowduino.stop();
+				rainbowduino = null;
+			}
+			if (frame != null) {
+				frame.dispose();
+				frame = null;
+			}
+			
+			setDefaultCloseOperation(action);
+			devicePicker.setEnabled(true);
+			protoPicker.setEnabled(true);
+			latencyField.setEnabled(true);
+			clockAdjustField.setEnabled(true);
+			rescanButton.setEnabled(true);
+			startButton.setEnabled(true);
+			stopButton.setEnabled(false);
+			UpdatingJMenuBar.updateMenus(this);
+		}
 	}
 	
 	private int parseInt(String s) {
