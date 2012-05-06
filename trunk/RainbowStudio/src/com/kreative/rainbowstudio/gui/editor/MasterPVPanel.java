@@ -58,7 +58,7 @@ public class MasterPVPanel extends PixelValuePanel {
 		currentPanel.start();
 	}
 	
-	public MasterPVPanel(RainbowDashboard backingStore) {
+	public MasterPVPanel(EditorPanel parent, RainbowDashboard backingStore) {
 		colorButton = new JToggleButton(new ImageIcon(Resources.RBD_EDITOR_COLOR));
 		colorButton.setToolTipText("Fixed Color");
 		clockFieldButton = new JToggleButton(new ImageIcon(Resources.RBD_EDITOR_CLOCK));
@@ -68,7 +68,7 @@ public class MasterPVPanel extends PixelValuePanel {
 		
 		colorPanel = new ColorPanel();
 		clockFieldPanel = new ClockFieldPanel();
-		animationPanel = new AnimationPanel(backingStore);
+		animationPanel = new AnimationPanel(parent, backingStore);
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(0,1,1,1));
 		buttonPanel.add(colorButton);

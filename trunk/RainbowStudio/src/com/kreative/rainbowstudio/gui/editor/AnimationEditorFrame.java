@@ -27,13 +27,15 @@ import com.kreative.rainbowstudio.utility.Pair;
 public class AnimationEditorFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
+	private EditorPanel parent;
 	private RainbowDashboard backingStore;
 	private boolean changed;
 	private AnimationEditorPanel editor;
 	private AnimationDataOptimizationStrategy saveStrategy;
 	
-	public AnimationEditorFrame(RainbowDashboard backingStore) {
+	public AnimationEditorFrame(EditorPanel parent, RainbowDashboard backingStore) {
 		super("Edit Animations");
+		this.parent = parent;
 		this.backingStore = backingStore;
 		this.changed = false;
 		
@@ -41,7 +43,7 @@ public class AnimationEditorFrame extends JFrame {
 		editor.setBorder(BorderFactory.createEmptyBorder(8,8,8,8));
 		JScrollPane editorPane = new JScrollPane(editor, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		this.saveStrategy = new SimpleAnimationDataOptimizationStrategy();
+		this.saveStrategy = new DefaultAnimationDataOptimizationStrategy();
 		
 		JButton saveButton = new JButton("Save");
 		saveButton.setIcon(new ImageIcon(Resources.FILE_SAVE_ICON_SMALL));
@@ -145,6 +147,7 @@ public class AnimationEditorFrame extends JFrame {
 			animation.setAnimationInfo(i, address[i], length[i], offset[i], duration[i]);
 		}
 		setChanged(false);
+		parent.setChanged(true);
 	}
 	
 	public void doSave() {
