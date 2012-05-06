@@ -16,7 +16,8 @@ public class BasePicker extends JComboBox {
 		for (int base : Rainboom.BASES) {
 			addItem(base);
 		}
-		setEditable(false);setRenderer(new DefaultListCellRenderer() {
+		setEditable(false);
+		setRenderer(new DefaultListCellRenderer() {
 			private static final long serialVersionUID = 1L;
 			@Override
 			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
