@@ -1,0 +1,24 @@
+#summary Using RainbowStudio to connect to a Rainbowduino and drive a display.
+
+Using RainbowStudio to connect to a Rainbowduino and drive a display:
+
+  # Select your device from the Device menu. If your device does not appear, press the Rescan button (or select Rescan Devices from the File menu).
+  # Select the command set used by your Rainbowduino's firmware from the Protocol menu. Usually, the name of the protocol matches the name of the firmware.
+  # Enter your Rainbowduino's latency and clock adjustment factor in the Latency and Clock Adjustment fields. (If you don't know the latency or clock adjustment factor, you can leave the fields blank. You can then use the Clock Test activity to discover them.)
+  # Press the Connect button (or select Connect to Device from the File menu). Once the Rainbowduino has finished resetting, the bottom half of the control panel (the activity panel) will open up.
+  # Select an activity (Display, Moodlight, Marquee, External, etc.).
+    * The Display activity displays an RBD file or series of RBD files on the Rainbowduino. It also keeps the Rainbowduino's clock in sync. (It corresponds to the rainbowdisplay or rainbowclock process.)
+    * The Moodlight activity drives a constantly-changing display of random colors on the Rainbowduino. (It corresponds to the rainbowmoodlight process.)
+    * The Marquee activity drives a scrolling message display on the Rainbowduino. (It corresponds to the rainbowmarquee process.)
+    * The External activity creates a named pipe and copies anything written to the pipe to the Rainbowduino. Using the External activity, you can copy files to /tmp/rainbowduino to execute RainbowDashboard commands or create your own programs that write commands to /tmp/rainbowduino. (It corresponds to the rainbowd process.)
+    * The Clock Test activity is used to determine the accuracy of the Rainbowduino's clock. Every 5 seconds, the Clock Test activity will tell you how long it took to send a message and get a response (the latency), and how much the Rainbowduino's clock has shifted relative to the PC's clock (the clock adjustment factor). (It corresponds to the clocktest program.)
+    * The Protocol Test activity is used to test the firmware's implementation of RainbowDashboard commands.
+  # If necessary or desired, adjust any settings for the selected activity.
+    * The Display activity takes a list of RBD files. Its settings panel allows you to add to, remove from, or rearrange this list. You can also open the RBD editor from this panel.
+    * The Marquee activity takes a message. Its settings panel allows you to edit and format this message.
+    * The External activity takes a path to a named pipe. This defaults to /tmp/rainbowduino, but you can change it here.
+    * The Clock Test activity doesn't have any settings, but displays its output here.
+    * The Moodlight and Protocol Test activities don't have any settings.
+  # Press the Start button to start the activity.
+  # When done, press the Stop button to stop the activity.
+  # Select another activity, or press the Disconnect button (or select Disconnect from Device from the File menu) to disconnect.
