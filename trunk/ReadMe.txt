@@ -11,8 +11,9 @@ RainbowDashboard is a third-party firmware for the Rainbowduino
 by Seeed Studio. Among its features:
 
 * Clean, maintainable code base.
-* Compatible with standard firmware.
+* Compatible with standard firmware from Rainbowduino 2.0.
 * Supports UART mode (no Arduino host needed - talk to Rainbowduino directly).
+* Works with both Rainbowduino 2.0 and Rainbowduino 3.0.
 * Double-buffered graphics operations.
 * Software real-time clock.
 * Animation driven by the Rainbowduino itself.
@@ -870,3 +871,145 @@ utilities. Your shell may require you to escape the backslash itself.
 
 Other escape sequences simply substitute the character
 after the backslash.
+
+
+
+
+RainbowStudio
+
+RainbowStudio is a graphical front-end application for controlling
+Rainbowduinos. Using RainbowStudio, you can upload firmware without
+the Arduino IDE, drive a display, emulate a virtual Rainbowduino,
+and edit RBD (RainbowDashboard command stream) files.
+
+RainbowStudio comes in a standard Mac OS X application bundle,
+accompanied with a standard Windows executable wrapper, or in a
+JAR file, depending on platform. No installation is necessary;
+just launch the appropriate executable.
+
+When you launch RainbowStudio, the RainbowStudio control panel window
+will open. From here, you can do several things:
+
+* Upload any of six included firmwares to a Rainbowduino.
+* Connect to a Rainbowduino and drive a display.
+* Open a virtual Rainbowduino and drive it as you would a real Rainbowduino.
+* Create and edit RBD files and display them on a real or virtual Rainbowduino.
+
+Using RainbowStudio to upload firmware to a Rainbowduino:
+
+1. Press the Upload button (or select Upload Firmware from the File menu).
+   The Upload Firmware window will open.
+
+2. Select your device from the Device menu. If your device does not appear,
+   press the Rescan button (or select Rescan Devices from the File menu).
+
+3. Select the firmware you want to upload from the Firmware menu. The
+   firmware you select must match the device you have (Rainbowduino 2.0
+   or Rainbowduino 3.0) as well as the command set you want.
+
+4. Press the Upload button (or select Upload Firmware from the File menu).
+
+5. Once the firmware upload process finishes, the Upload Firmware window
+   will display whether the process succeeded or failed, as well as the
+   output from the avrdude program.
+
+Using RainbowStudio to connect to a Rainbowduino and drive a display:
+
+1. Select your device from the Device menu. If your device does not appear,
+   press the Rescan button (or select Rescan Devices from the File menu).
+
+2. Select the command set used by your Rainbowduino's firmware from the
+   Protocol menu. Usually, the name of the protocol matches the name of
+   the firmware.
+
+3. Enter your Rainbowduino's latency and clock adjustment factor in the
+   Latency and Clock Adjustment fields. (If you don't know the latency or
+   clock adjustment factor, you can leave the fields blank. You can then
+   use the Clock Test activity to discover them.)
+
+4. Press the Connect button (or select Connect to Device from the File
+   menu). Once the Rainbowduino has finished resetting, the bottom half
+   of the control panel (the activity panel) will open up.
+
+5. Select an activity (Display, Moodlight, Marquee, External, etc.).
+
+   * The Display activity displays an RBD file or series of RBD files
+     on the Rainbowduino. It also keeps the Rainbowduino's clock in sync.
+     (It corresponds to the rainbowdisplay or rainbowclock process.)
+
+   * The Moodlight activity drives a constantly-changing display of random
+     colors on the Rainbowduino. (It corresponds to the rainbowmoodlight
+     process.)
+
+   * The Marquee activity drives a scrolling message display on the
+     Rainbowduino. (It corresponds to the rainbowmarquee process.)
+
+   * The External activity creates a named pipe and copies anything written
+     to the pipe to the Rainbowduino. Using the External activity, you can
+     copy files to /tmp/rainbowduino to execute RainbowDashboard commands
+     or create your own programs that write commands to /tmp/rainbowduino.
+     (It corresponds to the rainbowd process.)
+
+   * The Clock Test activity is used to determine the accuracy of the
+     Rainbowduino's clock. Every 5 seconds, the Clock Test activity will
+     tell you how long it took to send a message and get a response (the
+     latency), and how much the Rainbowduino's clock has shifted relative
+     to the PC's clock (the clock adjustment factor). (It corresponds to
+     the clocktest program.)
+
+   * The Protocol Test activity is used to test the firmware's implementation
+     of RainbowDashboard commands.
+
+6. If necessary or desired, adjust any settings for the selected activity.
+
+   * The Display activity takes a list of RBD files. Its settings panel
+     allows you to add to, remove from, or rearrange this list. You can
+     also open the RBD editor from this panel.
+
+   * The Marquee activity takes a message. Its settings panel allows you
+     to edit and format this message.
+
+   * The External activity takes a path to a named pipe. This defaults to
+     /tmp/rainbowduino, but you can change it here.
+
+   * The Clock Test activity doesn't have any settings, but displays its
+     output here.
+
+   * The Moodlight and Protocol Test activities don't have any settings.
+
+7. Press the Start button to start the activity.
+
+8. When done, press the Stop button to stop the activity.
+
+9. Select another activity, or press the Disconnect button (or select
+   Disconnect from Device from the File menu) to disconnect.
+
+Using RainbowStudio to emulate a virtual Rainbowduino:
+
+1. Select a virtual device from the Device menu. (There is no need to
+   independently select a protocol from the Protocol menu, since the
+   virtual device knows which command set it implements. There is also
+   no need to enter a latency or clock adjustment factor, since the
+   virtual device will simply ignore it.)
+
+2. Press the Connect button (or select Connect to Device from the File
+   menu). The emulator will open in a separate window, then the bottom
+   half of the control panel (the activity panel) will open up.
+
+3. Continue as if the virtual device were a real Rainbowduino.
+
+Using RainbowStudio to create and edit RBD files:
+
+1. Select New RBD File or Open RBD File from the File menu, or, in the
+   Display activity, click the Edit button next to an RBD file in the
+   file list. The RBD editor will open.
+
+2. Use the painting tools on the left and the color selector on the bottom
+   to create or edit your RBD file.
+
+3. If the editor was opened from the Display activity, you can press the
+   Upload button on the right (or select Upload to Device from the File
+   menu) to display your creation on the Rainbowduino.
+
+4. Press the Save button on the right (or select Save from the File menu)
+   to save the RBD file to disk.
