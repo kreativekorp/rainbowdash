@@ -1,8 +1,8 @@
 #summary Using RainbowStudio to create and edit RBD files.
 
-Using RainbowStudio to create and edit RBD files:
+== Using RainbowStudio to create and edit RBD files ==
 
-  # Select New RBD File or Open RBD File from the File menu, or, in the Display activity, click the Edit button next to an RBD file in the file list. The RBD editor will open.
+  # Select *New RBD File* or *Open RBD File* from the *File* menu, or, in the *Display* activity, click the *Edit* button next to an RBD file in the file list. The RBD editor will open.
   # Use the painting tools on the left and the color selector on the bottom to create or edit your RBD file.
-  # If the editor was opened from the Display activity, you can press the Upload button on the right (or select Upload to Device from the File menu) to display your creation on the Rainbowduino.
-  # Press the Save button on the right (or select Save from the File menu) to save the RBD file to disk.
+  # If the editor was opened from the *Display* activity, you can press the *Upload* button on the right (or select *Upload to Device* from the *File* menu) to display your creation on the Rainbowduino.
+  # Press the *Save* button on the right (or select *Save* from the *File* menu) to save the RBD file to disk.
