@@ -1,0 +1,7 @@
+#summary Using RainbowStudio to emulate a virtual Rainbowduino.
+
+Using RainbowStudio to emulate a virtual Rainbowduino:
+
+  # Select a virtual device from the Device menu. (There is no need to independently select a protocol from the Protocol menu, since the virtual device knows which command set it implements. There is also no need to enter a latency or clock adjustment factor, since the virtual device will simply ignore it.)
+  # Press the Connect button (or select Connect to Device from the File menu). The emulator will open in a separate window, then the bottom half of the control panel (the activity panel) will open up.
+  # [RainbowStudioConnect Continue as if the virtual device were a real Rainbowduino.]
