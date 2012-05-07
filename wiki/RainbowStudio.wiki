@@ -1,0 +1,19 @@
+#summary RainbowStudio is a graphical front-end application for controlling Rainbowduinos.
+
+RainbowStudio is a graphical front-end application for controlling
+Rainbowduinos. Using RainbowStudio, you can upload firmware without
+the Arduino IDE, drive a display, emulate a virtual Rainbowduino,
+and edit RBD (RainbowDashboard command stream) files.
+
+RainbowStudio comes in a standard Mac OS X application bundle,
+accompanied with a standard Windows executable wrapper, or in a
+JAR file, depending on platform. No installation is necessary;
+just launch the appropriate executable.
+
+When you launch RainbowStudio, the RainbowStudio control panel window
+will open. From here, you can do several things:
+
+  * [RainbowStudioUpload Upload any of six included firmwares to a Rainbowduino.]
+  * [RainbowStudioConnect Connect to a Rainbowduino and drive a display.]
+  * [RainbowStudioEmulate Open a virtual Rainbowduino and drive it as you would a real Rainbowduino.]
+  * [RainbowStudioEdit Create and edit RBD files and display them on a real or virtual Rainbowduino.]
