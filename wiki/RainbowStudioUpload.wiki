@@ -1,0 +1,9 @@
+#summary Using RainbowStudio to upload firmware to a Rainbowduino.
+
+Using RainbowStudio to upload firmware to a Rainbowduino:
+
+  # Press the Upload button (or select Upload Firmware from the File menu). The Upload Firmware window will open.
+  # Select your device from the Device menu. If your device does not appear, press the Rescan button (or select Rescan Devices from the File menu).
+  # Select the firmware you want to upload from the Firmware menu. The firmware you select must match the device you have (Rainbowduino 2.0 or Rainbowduino 3.0) as well as the command set you want.
+  # Press the Upload button (or select Upload Firmware from the File menu).
+  # Once the firmware upload process finishes, the Upload Firmware window will display whether the process succeeded or failed, as well as the output from the avrdude program.
