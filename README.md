@@ -1,7 +1,7 @@
 RainbowDashboard
 ================
 
-RainbowDashboard is a third-party firmware for the Rainbowduino by Seeed Studio. Among its features:
+[RainbowDashboard](https://github.com/kreativekorp/rainbowdash/wiki/RainbowDashboard) is a third-party firmware for the Rainbowduino by Seeed Studio. Among its features:
 
   * Clean, maintainable code base.
   * Compatible with standard firmware from Rainbowduino 2.0.
@@ -13,4 +13,4 @@ RainbowDashboard is a third-party firmware for the Rainbowduino by Seeed Studio.
   * Full Windows ANSI (CP1252) character set. (Technically [Kreative SuperLatin](http://www.kreativekorp.com/charset/encoding.php?name=Kreative+SuperLatin), a superset.)
   * High-level command set.
 
-The RainbowDashboard project also encompasses RainbowStudio, a graphical front-end application for controlling Rainbowduinos. Using RainbowStudio, you can upload firmware without the Arduino IDE, drive a display, emulate a virtual Rainbowduino, and edit RBD (RainbowDashboard command stream) files.
+The RainbowDashboard project also encompasses [RainbowStudio](https://github.com/kreativekorp/rainbowdash/wiki/RainbowStudio), a graphical front-end application for controlling Rainbowduinos. Using RainbowStudio, you can upload firmware without the Arduino IDE, drive a display, emulate a virtual Rainbowduino, and edit RBD (RainbowDashboard command stream) files.
