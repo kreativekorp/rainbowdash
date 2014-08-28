@@ -14,3 +14,5 @@ RainbowDashboard
   * High-level command set.
 
 The RainbowDashboard project also encompasses [RainbowStudio](https://github.com/kreativekorp/rainbowdash/wiki/RainbowStudio), a graphical front-end application for controlling Rainbowduinos. Using RainbowStudio, you can upload firmware without the Arduino IDE, drive a display, emulate a virtual Rainbowduino, and edit RBD (RainbowDashboard command stream) files.
+
+**[Download Latest Release Here](https://github.com/kreativekorp/rainbowdash/wiki/Downloads)**
