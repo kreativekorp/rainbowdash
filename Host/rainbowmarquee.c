@@ -185,104 +185,97 @@ void mstrcat(mstring * mstr, char * ascii) {
 }
 
 mcolor parsecolor(char * s) {
+	mcolor color = {0, 0, 0};
 	if (s[0] == '#') {
 		if (ishex(s[1]) && ishex(s[2]) && ishex(s[3])) {
 			if (ishex(s[4]) && ishex(s[5]) && ishex(s[6]) && !s[7]) {
-				return (mcolor){
-					(hexval(s[1]) << 4) | hexval(s[2]),
-					(hexval(s[3]) << 4) | hexval(s[4]),
-					(hexval(s[5]) << 4) | hexval(s[6])
-				};
+				color.red = (hexval(s[1]) << 4) | hexval(s[2]);
+				color.green = (hexval(s[3]) << 4) | hexval(s[4]);
+				color.blue = (hexval(s[5]) << 4) | hexval(s[6]);
 			} else if (!s[4]) {
-				return (mcolor){
-					hexval(s[1]) * 0x11,
-					hexval(s[2]) * 0x11,
-					hexval(s[3]) * 0x11
-				};
-			} else {
-				return (mcolor){0, 0, 0};
+				color.red = hexval(s[1]) * 0x11;
+				color.green = hexval(s[2]) * 0x11;
+				color.blue = hexval(s[3]) * 0x11;
 			}
-		} else {
-			return (mcolor){0, 0, 0};
 		}
 	}
-	else if (!strcasecmp(s, "a")) return (mcolor){0x00, 0xFF, 0x80};
-	else if (!strcasecmp(s, "aqua")) return (mcolor){0x00, 0xFF, 0xFF};
-	else if (!strcasecmp(s, "aquamarine")) return (mcolor){0x00, 0xFF, 0x80};
-	else if (!strcasecmp(s, "azure")) return (mcolor){0x00, 0x80, 0xFF};
-	else if (!strcasecmp(s, "b")) return (mcolor){0x00, 0x00, 0xFF};
-	else if (!strcasecmp(s, "black")) return (mcolor){0x00, 0x00, 0x00};
-	else if (!strcasecmp(s, "blonde")) return (mcolor){0xFF, 0xC0, 0x00};
-	else if (!strcasecmp(s, "blue")) return (mcolor){0x00, 0x00, 0xFF};
-	else if (!strcasecmp(s, "brown")) return (mcolor){0x99, 0x66, 0x33};
-	else if (!strcasecmp(s, "c")) return (mcolor){0x00, 0xFF, 0xFF};
-	else if (!strcasecmp(s, "chartreuse")) return (mcolor){0x80, 0xFF, 0x00};
-	else if (!strcasecmp(s, "coral")) return (mcolor){0xFF, 0x80, 0x80};
-	else if (!strcasecmp(s, "corange")) return (mcolor){0xFF, 0xC0, 0x80};
-	else if (!strcasecmp(s, "cream")) return (mcolor){0xFF, 0xEE, 0xCC};
-	else if (!strcasecmp(s, "creme")) return (mcolor){0xFF, 0xEE, 0xCC};
-	else if (!strcasecmp(s, "cyan")) return (mcolor){0x00, 0xFF, 0xFF};
-	else if (!strcasecmp(s, "d")) return (mcolor){0x00, 0x80, 0xFF};
-	else if (!strcasecmp(s, "denim")) return (mcolor){0x00, 0x80, 0xFF};
-	else if (!strcasecmp(s, "e")) return (mcolor){0xFF, 0xC0, 0x00};
-	else if (!strcasecmp(s, "eggplant")) return (mcolor){0x40, 0x00, 0x80};
-	else if (!strcasecmp(s, "f")) return (mcolor){0xFF, 0x40, 0x00};
-	else if (!strcasecmp(s, "fire")) return (mcolor){0xFF, 0x40, 0x00};
-	else if (!strcasecmp(s, "forest")) return (mcolor){0x00, 0x80, 0x00};
-	else if (!strcasecmp(s, "forrest")) return (mcolor){0x00, 0x80, 0x00};
-	else if (!strcasecmp(s, "frost")) return (mcolor){0x80, 0x80, 0xFF};
-	else if (!strcasecmp(s, "fuchsia")) return (mcolor){0xFF, 0x00, 0xFF};
-	else if (!strcasecmp(s, "fuschia")) return (mcolor){0xFF, 0x00, 0xFF};
-	else if (!strcasecmp(s, "g")) return (mcolor){0x00, 0xFF, 0x00};
-	else if (!strcasecmp(s, "gold")) return (mcolor){0xFF, 0xC0, 0x00};
-	else if (!strcasecmp(s, "gray")) return (mcolor){0x80, 0x80, 0x80};
-	else if (!strcasecmp(s, "green")) return (mcolor){0x00, 0xFF, 0x00};
-	else if (!strcasecmp(s, "grey")) return (mcolor){0x80, 0x80, 0x80};
-	else if (!strcasecmp(s, "h")) return (mcolor){0x80, 0xFF, 0x00};
-	else if (!strcasecmp(s, "i")) return (mcolor){0x40, 0x00, 0xFF};
-	else if (!strcasecmp(s, "indigo")) return (mcolor){0x40, 0x00, 0xFF};
-	else if (!strcasecmp(s, "j")) return (mcolor){0xFF, 0xEE, 0xCC};
-	else if (!strcasecmp(s, "k")) return (mcolor){0x00, 0x00, 0x00};
-	else if (!strcasecmp(s, "l")) return (mcolor){0x80, 0xFF, 0x00};
-	else if (!strcasecmp(s, "lavendar")) return (mcolor){0xC0, 0x80, 0xFF};
-	else if (!strcasecmp(s, "lavender")) return (mcolor){0xC0, 0x80, 0xFF};
-	else if (!strcasecmp(s, "lemon")) return (mcolor){0xFF, 0xFF, 0x80};
-	else if (!strcasecmp(s, "lime")) return (mcolor){0x80, 0xFF, 0x80};
-	else if (!strcasecmp(s, "m")) return (mcolor){0xFF, 0x00, 0xFF};
-	else if (!strcasecmp(s, "magenta")) return (mcolor){0xFF, 0x00, 0xFF};
-	else if (!strcasecmp(s, "maroon")) return (mcolor){0x80, 0x00, 0x00};
-	else if (!strcasecmp(s, "n")) return (mcolor){0x99, 0x66, 0x33};
-	else if (!strcasecmp(s, "navy")) return (mcolor){0x00, 0x00, 0x80};
-	else if (!strcasecmp(s, "o")) return (mcolor){0xFF, 0x80, 0x00};
-	else if (!strcasecmp(s, "olive")) return (mcolor){0x80, 0x80, 0x00};
-	else if (!strcasecmp(s, "orange")) return (mcolor){0xFF, 0x80, 0x00};
-	else if (!strcasecmp(s, "p")) return (mcolor){0xC0, 0x00, 0xFF};
-	else if (!strcasecmp(s, "pine")) return (mcolor){0x00, 0x80, 0x00};
-	else if (!strcasecmp(s, "pink")) return (mcolor){0xFF, 0x80, 0xFF};
-	else if (!strcasecmp(s, "plum")) return (mcolor){0x80, 0x00, 0x80};
-	else if (!strcasecmp(s, "purple")) return (mcolor){0xC0, 0x00, 0xFF};
-	else if (!strcasecmp(s, "q")) return (mcolor){0xFF, 0xEE, 0xCC};
-	else if (!strcasecmp(s, "r")) return (mcolor){0xFF, 0x00, 0x00};
-	else if (!strcasecmp(s, "red")) return (mcolor){0xFF, 0x00, 0x00};
-	else if (!strcasecmp(s, "rose")) return (mcolor){0xFF, 0x00, 0x80};
-	else if (!strcasecmp(s, "s")) return (mcolor){0xFF, 0x00, 0x80};
-	else if (!strcasecmp(s, "scarlet")) return (mcolor){0xFF, 0x40, 0x00};
-	else if (!strcasecmp(s, "scarlett")) return (mcolor){0xFF, 0x40, 0x00};
-	else if (!strcasecmp(s, "silver")) return (mcolor){0xC0, 0xC0, 0xC0};
-	else if (!strcasecmp(s, "sky")) return (mcolor){0x80, 0xFF, 0xFF};
-	else if (!strcasecmp(s, "t")) return (mcolor){0x00, 0x00, 0x00};
-	else if (!strcasecmp(s, "teal")) return (mcolor){0x00, 0x80, 0x80};
-	else if (!strcasecmp(s, "u")) return (mcolor){0x80, 0x00, 0xFF};
-	else if (!strcasecmp(s, "umber")) return (mcolor){0x80, 0x40, 0x00};
-	else if (!strcasecmp(s, "v")) return (mcolor){0x80, 0x00, 0xFF};
-	else if (!strcasecmp(s, "violet")) return (mcolor){0x80, 0x00, 0xFF};
-	else if (!strcasecmp(s, "w")) return (mcolor){0xFF, 0xFF, 0xFF};
-	else if (!strcasecmp(s, "white")) return (mcolor){0xFF, 0xFF, 0xFF};
-	else if (!strcasecmp(s, "x")) return (mcolor){0x80, 0x80, 0x80};
-	else if (!strcasecmp(s, "y")) return (mcolor){0xFF, 0xFF, 0x00};
-	else if (!strcasecmp(s, "yellow")) return (mcolor){0xFF, 0xFF, 0x00};
-	else if (!strcasecmp(s, "z")) return (mcolor){0x00, 0x80, 0xFF};
-	else return (mcolor){0, 0, 0};
+	else if (!strcasecmp(s, "a")) { color.red = 0x00; color.green = 0xFF; color.blue = 0x80; }
+	else if (!strcasecmp(s, "aqua")) { color.red = 0x00; color.green = 0xFF; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "aquamarine")) { color.red = 0x00; color.green = 0xFF; color.blue = 0x80; }
+	else if (!strcasecmp(s, "azure")) { color.red = 0x00; color.green = 0x80; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "b")) { color.red = 0x00; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "black")) { color.red = 0x00; color.green = 0x00; color.blue = 0x00; }
+	else if (!strcasecmp(s, "blonde")) { color.red = 0xFF; color.green = 0xC0; color.blue = 0x00; }
+	else if (!strcasecmp(s, "blue")) { color.red = 0x00; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "brown")) { color.red = 0x99; color.green = 0x66; color.blue = 0x33; }
+	else if (!strcasecmp(s, "c")) { color.red = 0x00; color.green = 0xFF; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "chartreuse")) { color.red = 0x80; color.green = 0xFF; color.blue = 0x00; }
+	else if (!strcasecmp(s, "coral")) { color.red = 0xFF; color.green = 0x80; color.blue = 0x80; }
+	else if (!strcasecmp(s, "corange")) { color.red = 0xFF; color.green = 0xC0; color.blue = 0x80; }
+	else if (!strcasecmp(s, "cream")) { color.red = 0xFF; color.green = 0xEE; color.blue = 0xCC; }
+	else if (!strcasecmp(s, "creme")) { color.red = 0xFF; color.green = 0xEE; color.blue = 0xCC; }
+	else if (!strcasecmp(s, "cyan")) { color.red = 0x00; color.green = 0xFF; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "d")) { color.red = 0x00; color.green = 0x80; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "denim")) { color.red = 0x00; color.green = 0x80; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "e")) { color.red = 0xFF; color.green = 0xC0; color.blue = 0x00; }
+	else if (!strcasecmp(s, "eggplant")) { color.red = 0x40; color.green = 0x00; color.blue = 0x80; }
+	else if (!strcasecmp(s, "f")) { color.red = 0xFF; color.green = 0x40; color.blue = 0x00; }
+	else if (!strcasecmp(s, "fire")) { color.red = 0xFF; color.green = 0x40; color.blue = 0x00; }
+	else if (!strcasecmp(s, "forest")) { color.red = 0x00; color.green = 0x80; color.blue = 0x00; }
+	else if (!strcasecmp(s, "forrest")) { color.red = 0x00; color.green = 0x80; color.blue = 0x00; }
+	else if (!strcasecmp(s, "frost")) { color.red = 0x80; color.green = 0x80; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "fuchsia")) { color.red = 0xFF; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "fuschia")) { color.red = 0xFF; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "g")) { color.red = 0x00; color.green = 0xFF; color.blue = 0x00; }
+	else if (!strcasecmp(s, "gold")) { color.red = 0xFF; color.green = 0xC0; color.blue = 0x00; }
+	else if (!strcasecmp(s, "gray")) { color.red = 0x80; color.green = 0x80; color.blue = 0x80; }
+	else if (!strcasecmp(s, "green")) { color.red = 0x00; color.green = 0xFF; color.blue = 0x00; }
+	else if (!strcasecmp(s, "grey")) { color.red = 0x80; color.green = 0x80; color.blue = 0x80; }
+	else if (!strcasecmp(s, "h")) { color.red = 0x80; color.green = 0xFF; color.blue = 0x00; }
+	else if (!strcasecmp(s, "i")) { color.red = 0x40; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "indigo")) { color.red = 0x40; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "j")) { color.red = 0xFF; color.green = 0xEE; color.blue = 0xCC; }
+	else if (!strcasecmp(s, "k")) { color.red = 0x00; color.green = 0x00; color.blue = 0x00; }
+	else if (!strcasecmp(s, "l")) { color.red = 0x80; color.green = 0xFF; color.blue = 0x00; }
+	else if (!strcasecmp(s, "lavendar")) { color.red = 0xC0; color.green = 0x80; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "lavender")) { color.red = 0xC0; color.green = 0x80; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "lemon")) { color.red = 0xFF; color.green = 0xFF; color.blue = 0x80; }
+	else if (!strcasecmp(s, "lime")) { color.red = 0x80; color.green = 0xFF; color.blue = 0x80; }
+	else if (!strcasecmp(s, "m")) { color.red = 0xFF; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "magenta")) { color.red = 0xFF; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "maroon")) { color.red = 0x80; color.green = 0x00; color.blue = 0x00; }
+	else if (!strcasecmp(s, "n")) { color.red = 0x99; color.green = 0x66; color.blue = 0x33; }
+	else if (!strcasecmp(s, "navy")) { color.red = 0x00; color.green = 0x00; color.blue = 0x80; }
+	else if (!strcasecmp(s, "o")) { color.red = 0xFF; color.green = 0x80; color.blue = 0x00; }
+	else if (!strcasecmp(s, "olive")) { color.red = 0x80; color.green = 0x80; color.blue = 0x00; }
+	else if (!strcasecmp(s, "orange")) { color.red = 0xFF; color.green = 0x80; color.blue = 0x00; }
+	else if (!strcasecmp(s, "p")) { color.red = 0xC0; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "pine")) { color.red = 0x00; color.green = 0x80; color.blue = 0x00; }
+	else if (!strcasecmp(s, "pink")) { color.red = 0xFF; color.green = 0x80; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "plum")) { color.red = 0x80; color.green = 0x00; color.blue = 0x80; }
+	else if (!strcasecmp(s, "purple")) { color.red = 0xC0; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "q")) { color.red = 0xFF; color.green = 0xEE; color.blue = 0xCC; }
+	else if (!strcasecmp(s, "r")) { color.red = 0xFF; color.green = 0x00; color.blue = 0x00; }
+	else if (!strcasecmp(s, "red")) { color.red = 0xFF; color.green = 0x00; color.blue = 0x00; }
+	else if (!strcasecmp(s, "rose")) { color.red = 0xFF; color.green = 0x00; color.blue = 0x80; }
+	else if (!strcasecmp(s, "s")) { color.red = 0xFF; color.green = 0x00; color.blue = 0x80; }
+	else if (!strcasecmp(s, "scarlet")) { color.red = 0xFF; color.green = 0x40; color.blue = 0x00; }
+	else if (!strcasecmp(s, "scarlett")) { color.red = 0xFF; color.green = 0x40; color.blue = 0x00; }
+	else if (!strcasecmp(s, "silver")) { color.red = 0xC0; color.green = 0xC0; color.blue = 0xC0; }
+	else if (!strcasecmp(s, "sky")) { color.red = 0x80; color.green = 0xFF; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "t")) { color.red = 0x00; color.green = 0x00; color.blue = 0x00; }
+	else if (!strcasecmp(s, "teal")) { color.red = 0x00; color.green = 0x80; color.blue = 0x80; }
+	else if (!strcasecmp(s, "u")) { color.red = 0x80; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "umber")) { color.red = 0x80; color.green = 0x40; color.blue = 0x00; }
+	else if (!strcasecmp(s, "v")) { color.red = 0x80; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "violet")) { color.red = 0x80; color.green = 0x00; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "w")) { color.red = 0xFF; color.green = 0xFF; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "white")) { color.red = 0xFF; color.green = 0xFF; color.blue = 0xFF; }
+	else if (!strcasecmp(s, "x")) { color.red = 0x80; color.green = 0x80; color.blue = 0x80; }
+	else if (!strcasecmp(s, "y")) { color.red = 0xFF; color.green = 0xFF; color.blue = 0x00; }
+	else if (!strcasecmp(s, "yellow")) { color.red = 0xFF; color.green = 0xFF; color.blue = 0x00; }
+	else if (!strcasecmp(s, "z")) { color.red = 0x00; color.green = 0x80; color.blue = 0xFF; }
+	return color;
 }
 
 /* RAINBOWMARQUEE */

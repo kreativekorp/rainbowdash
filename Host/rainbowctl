@@ -4,7 +4,7 @@ cd "`dirname "$BASH_SOURCE"`"
 start_server() {
 	killall -s rainbowd &> /dev/null
 	if [ $? -ne 0 ]; then
-		./rainbowd &
+		./rainbowd & disown
 		sleep 10
 	fi
 }
@@ -15,6 +15,8 @@ stop_clients() {
 	killall rainbowmarquee 2> /dev/null
 	sleep .1
 	killall rainbowmoodlight 2> /dev/null
+	sleep .1
+	killall rainbowwordclock 2> /dev/null
 	sleep .1
 	killall rainbowclock 2> /dev/null
 	sleep .1
@@ -45,28 +47,33 @@ elif [ "$1" = "display" ]; then
 	stop_clients
 	start_server
 	shift
-	./rainbowdisplay "$@" &
+	./rainbowdisplay "$@" & disown
 elif [ "$1" = "clock" ]; then
 	stop_clients
 	start_server
 	cp "$2" "$RAINBOWD_PIPE"
 	sleep 2
-	./rainbowclock &
+	./rainbowclock & disown
+elif [ "$1" = "wordclock" ]; then
+	stop_clients
+	start_server
+	shift 1
+	./rainbowwordclock "$@" & disown
 elif [ "$1" = "moodlight" ]; then
 	stop_clients
 	start_server
-	./rainbowmoodlight &
+	./rainbowmoodlight & disown
 elif [ "$1" = "marquee" ]; then
 	stop_clients
 	start_server
 	shift 1
-	./rainbowmarquee "$@" &
+	./rainbowmarquee "$@" & disown
 elif [ "$1" = "spectrum" ]; then
 	stop_clients
 	start_server
 	cp spectrum.rbd "$RAINBOWD_PIPE"
 	sleep 2
-	./rainbowspectrum &
+	./rainbowspectrum & disown
 else
-	echo "Usage: rainbowctl (start | restart | stop | display <file> | clock <file> | moodlight | spectrum)"
+	echo "Usage: rainbowctl (start | restart | stop | display <file> | clock <file> | wordclock [-l <lang>] | moodlight | spectrum)"
 fi
