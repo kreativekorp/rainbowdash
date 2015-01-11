@@ -3,6 +3,7 @@ package com.kreative.rainbowstudio.activity;
 import java.util.ArrayList;
 import java.util.List;
 import com.kreative.rainbowstudio.activity.marquee.RainbowMarquee;
+import com.kreative.rainbowstudio.activity.wordclock.RainbowWordClock;
 
 public class Activities {
 	private Activities() {}
@@ -10,6 +11,7 @@ public class Activities {
 	public static List<Activity> getActivities() {
 		List<Activity> activities = new ArrayList<Activity>();
 		activities.add(new RainbowDisplay());
+		activities.add(new RainbowWordClock());
 		activities.add(new RainbowMoodlight());
 		activities.add(new RainbowMarquee());
 		activities.add(new RainbowDaemon());
@@ -25,6 +27,11 @@ public class Activities {
 			|| name.equalsIgnoreCase("rainbowclock")
 			|| name.equalsIgnoreCase("rainbowdisplay")
 			) return new RainbowDisplay();
+		if (name.equalsIgnoreCase("w")
+			|| name.equalsIgnoreCase("wc")
+			|| name.equalsIgnoreCase("wordclock")
+			|| name.equalsIgnoreCase("rainbowwordclock")
+			) return new RainbowWordClock();
 		if (name.equalsIgnoreCase("l")
 			|| name.equalsIgnoreCase("moodlight")
 			|| name.equalsIgnoreCase("rainbowmoodlight")

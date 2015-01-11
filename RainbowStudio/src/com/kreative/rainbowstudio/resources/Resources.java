@@ -28,6 +28,7 @@ public class Resources {
 	
 	public static final Image ACTIVITY_NONE = TK.createImage(Resources.class.getResource("aidle.png"));
 	public static final Image ACTIVITY_DISPLAY = TK.createImage(Resources.class.getResource("adisplay.png"));
+	public static final Image ACTIVITY_WORDCLOCK = TK.createImage(Resources.class.getResource("awclock.png"));
 	public static final Image ACTIVITY_MOODLIGHT = TK.createImage(Resources.class.getResource("amoodlt.png"));
 	public static final Image ACTIVITY_MARQUEE = TK.createImage(Resources.class.getResource("amarquee.png"));
 	public static final Image ACTIVITY_DAEMON = TK.createImage(Resources.class.getResource("adaemon.png"));
