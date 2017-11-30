@@ -1,6 +1,6 @@
 package com.kreative.rainbowstudio.gui.editor;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -337,12 +337,17 @@ public class ClockFieldPickerSegment {
 	private List<Pair<Integer, String>> fields;
 	private Map<Integer, String> fieldMap;
 	
-	private ClockFieldPickerSegment(String name, String prototypeValue, Pair<Integer, String>... fields) {
+	private ClockFieldPickerSegment(String name, String prototypeValue) {
 		this.name = name;
 		this.prototypeValue = prototypeValue;
-		this.fields = Arrays.asList(fields);
+		this.fields = new ArrayList<Pair<Integer, String>>();
 		this.fieldMap = new HashMap<Integer, String>();
+	}
+	
+	private ClockFieldPickerSegment(String name, String prototypeValue, Pair<Integer, String>... fields) {
+		this(name, prototypeValue);
 		for (Pair<Integer, String> field : fields) {
+			this.fields.add(field);
 			this.fieldMap.put(field.getFormer(), field.getLatter());
 		}
 	}

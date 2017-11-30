@@ -70,23 +70,23 @@ public class MarqueeThread extends Thread {
 				MarqueeCharacter ch = message.charAt(0);
 				while (pi < pl && ci < cl && !Thread.interrupted()) {
 					clock.getClock(true, 0);
-					int rpi, rph, rci;
+					int rph, rci;
 					MarqueeCharacter rch;
 					
-					rpi = pi; rph = ph; rci = ci; rch = ch;
+					rph = ph; rci = ci; rch = ch;
 					for (int i = 0; i < (columns << 3); i++) {
 						proto.setColumnColor(i, rch.getBackground());
-						rpi++; rph++; if (rph >= rch.getAdvance()) {
+						rph++; if (rph >= rch.getAdvance()) {
 							rph = 0; rci++; rch = message.charAt(rci % cl);
 						}
 					}
 					
-					rpi = pi; rph = ph; rci = ci; rch = ch;
+					rph = ph; rci = ci; rch = ch;
 					for (int i = 0; i < (columns << 3); i++) {
 						for (int j = 0; j < rch.getMultiplicity(); j++) {
 							proto.drawCharacter8x8(rch.getCharacter(clock), i - rph + j, 0, rch.getForeground());
 						}
-						rpi++; rph++; if (rph >= rch.getAdvance()) {
+						rph++; if (rph >= rch.getAdvance()) {
 							rph = 0; rci++; rch = message.charAt(rci % cl);
 						}
 					}
